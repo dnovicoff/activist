@@ -1,0 +1,29 @@
+
+
+.body  {
+	font-size: 90%;
+}
+
+.container  {
+	clear: both;
+	width: 100%;
+	overflow: hidden;
+	word-wrap: break-word;
+}
+
+.row  {
+	clear: both;
+	width: 100%;
+}
+
+.container .largecol  {
+	float: left;
+	clear: right;
+	width: 60%;
+}
+
+.container .smallcol  {
+	float: left;
+	clear: right;
+	width: 18%;
+}
