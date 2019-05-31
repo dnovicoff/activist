@@ -4,17 +4,13 @@
 	<?php echo form_open('forms/user'); ?>
 		<table width="100%">
 			<tr>
-				<td><label form="username">Name</label></td><td> <input type="text" name="username" /></td>
-			<td>
-				<?php if (!empty(form_error('username')))  {  echo form_error('username');  } ?>
-			</td>
-			</tr><tr>
-			<td><label form="email">Email</label></td><td> <input type="text" name="email" /></td>
+			<td><label form="email">Email</label></td><td> <input type="text" name="email" value="<?php echo set_value('email'); ?>" /></td>
 			<td>
 				<?php if (!empty(form_error('email')))  {  echo form_error('email');  } ?>
 			</td>
 			</tr><tr>
-			<td><label form="email">Confirm Email</label></td><td> <input type="text" name="confirmemail" /></td>
+			<td><label form="email">Confirm Email</label></td><td>
+				<input type="text" name="confirmemail" value="<?php echo set_value('username'); ?>" /></td>
 			<td>
 				<?php if (!empty(form_error('confirmemail')))  {  echo form_error('confirmemail');  } ?>
 			</td>

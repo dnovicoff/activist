@@ -5,8 +5,8 @@ class Activist_model extends CI_Model {
 	{
         	if ($slug === FALSE)
         	{
-                	$query = $this->db->get('email');
-                	return $query->result_array();
+                	## $query = $this->db->get('email');
+                	## return $query->result_array();
         	}
 	
 
@@ -21,6 +21,12 @@ class Activist_model extends CI_Model {
 			return $query->result_array();
 		}
 		return FALSE;
+	}
+
+	public function create_user($inserts)
+	{
+		$sql = "INSERT INTO user (user_email, user_pass, start) VALUES(".$inserts['email'].", ".$inserts['pass'].", Now())";
+		$this->db->query($sql);
 	}
 
         public function __construct()

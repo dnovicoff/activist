@@ -28,15 +28,6 @@ class Forms extends CI_Controller {
 		),
 		"user" => array(
 			array(
-				'field' => 'username',
-				'label' => 'username',
-				'rules' => 'trim|required|min_length[5]|max_length[25]',
-				'errors' => array(
-					'min_length' => 'Name field must be between 5 and 25 characters',
-					'max_length' => 'Name field must be between 5 and 25 characters'				
-				)
-			),
-			array(
 				'field' => 'email',
 				'label' => 'email',
 				'rules' => 'required|valid_email|is_unique[user.user_email]',
@@ -61,9 +52,10 @@ class Forms extends CI_Controller {
 			array(
 				'field' => 'confirmpassword',
 				'label' => 'Password Confirmation',
-				'rules' => 'required|matches[password]',
+				'rules' => 'trim|required|matches[password]|callback_enforce_pass',
 				'errors' => array(
-					'required' => 'You must provide a %s.'
+					'required' => 'You must provide a %s.',
+					'enforce_pass' => 'Password must be at least 8 alphanumeric characters with one uppercase'
 				)
 			)
 		),
@@ -84,16 +76,22 @@ class Forms extends CI_Controller {
                 parent::__construct();
                 $this->load->model('activist_model');
                 $this->load->helper('url_helper');
-		$this->load->helper('url');
         }
 
 	public function check_user($str)
 	{
 		if ($this->activist_model->get_user($str))  {
 			return true;
-		}  else  {
-			return false;
 		}
+		return false;
+	}
+
+	public function enforce_pass($pass)
+	{
+		if (preg_match('/^[a-zA-Z]+[a-zA-Z0-9._]+$/i', $pass))  {
+			return TRUE;
+		}
+		return FALSE;
 	}
 
 	public function generate_form($tmp)
@@ -101,6 +99,12 @@ class Forms extends CI_Controller {
 		$this->load->helper('form');
     		$this->load->library('form_validation');
 		$this->form_validation->set_rules($this->rules[$tmp['data']['door']]);
+
+		$password = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
+		$inputs = array(
+			'email' => $this->input->post('email'),
+			'pass' => $password
+		);
 
 		$this->load->view('templates/header', $tmp);
     		if ($this->form_validation->run() === FALSE)
@@ -110,7 +114,14 @@ class Forms extends CI_Controller {
     		}
     		else
     		{
-        		$this->activist_model->get_user();
+			switch ($tmp['data']['door'])  {
+				case "user":
+					$this->activist_model->create_user($inputs);
+				case "pass":
+					break;
+				case "auth":
+					break;
+			}
         		$this->load->view('auth/index', $tmp);
 		}
         	$this->load->view('templates/footer', $tmp);
@@ -118,9 +129,7 @@ class Forms extends CI_Controller {
 
 	public function index($form = 'auth')
         {
-		$parts = explode('/', uri_string());
-		
-                if (!file_exists(APPPATH.'views/login/index.php') && !in_array($form, $this-authforms))
+                if (!file_exists(APPPATH.'views/auth/index.php') && !in_array($form, $this-authforms))
 		{
                 	// Whoops, we don't have a page for that!
                 	show_404();
@@ -129,8 +138,7 @@ class Forms extends CI_Controller {
 		$tmp = array(
 			"data" => array(
         			"title" => ucfirst($form), // Capitalize the first letter
-				"door" => $form,
-				"method" => $parts[1]
+				"door" => $form
 			)
 		);
 
