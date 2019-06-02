@@ -54,10 +54,13 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['default_controller'] = 'door/view';
 
+/**
 $route['login/newuser'] = 'login/newuser';
 $route['login/returnuser'] = 'login/returnuser';
 $route['login/passworduser'] = 'login/passworduser';
+**/
 
+$route['auth/(:any)'] = 'auth/index/$1';
 $route['forms/(:any)'] = 'forms/index/$1';
 $route['(:any)'] = 'door/view/$1';
 
