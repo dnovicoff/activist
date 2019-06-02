@@ -1,13 +1,15 @@
-<h2><?php echo $data['title']; ?></h2>
+
 
 <div class="container">
 	<div class="smallcol">
-		here is the left small column
+		<a href="">Create new site</a><br />
+		<a href="">Create new campaign</a><br />
 	</div>
 	<div class="largecol">
 		here is the large column
 	</div>
 	<div class="smallcol">
-		here is the right small colun
+		<a href="">Status report</a><br />
+		<a href="">Campaign report</a><br />
 	</div>
 </div
