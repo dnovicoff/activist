@@ -9,12 +9,13 @@ class Forms extends CI_Controller {
 	private $rules = array(
 		"auth" => array(
 			array(
-				'field' => 'user',
-				'label' => 'username',
-				'rules' => 'trim|required|min_length[5]|max_length[25]',
+				'field' => 'email',
+				'label' => 'email',
+				'rules' => 'trim|required|min_length[5]|max_length[25]|callback_check_user',
 				'errors' => array(
 					'min_length' => 'Name field must be between 5 and 25 characters',
-					'max_length' => 'Name field must be between 5 and 25 characters'
+					'max_length' => 'Name field must be between 5 and 25 characters',
+					'check_user' => 'Email does not exist in our system'
 				)
 			),
 			array(
@@ -63,7 +64,7 @@ class Forms extends CI_Controller {
 			array(
 				'field' => 'email',
 				'label' => 'email',
-				'rules' => 'required|valid_email|check_user',
+				'rules' => 'required|valid_email|callback_check_user',
 				'errors' => array(
 					'check_user' => 'does not exist.'
 				)
@@ -78,12 +79,12 @@ class Forms extends CI_Controller {
                 $this->load->helper('url_helper');
         }
 
-	public function check_user($str)
+	public function check_user($email)
 	{
-		if ($this->activist_model->get_user($str))  {
-			return true;
+		if ($results = $this->activist_model->get_user($email))  {
+			return $results;
 		}
-		return false;
+		return FALSE;
 	}
 
 	public function enforce_pass($pass)
@@ -100,11 +101,20 @@ class Forms extends CI_Controller {
     		$this->load->library('form_validation');
 		$this->form_validation->set_rules($this->rules[$tmp['data']['door']]);
 
-		$password = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
-		$inputs = array(
-			'email' => $this->input->post('email'),
-			'pass' => $password
-		);
+		$inputs = array();
+		switch ($tmp['data']['door'])  {
+			case "user":
+				$inputs['email'] = $this->input->post('email');
+				$password = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
+				$inputs['pass'] = $password;
+				break;
+			case "pass":
+				$inputs['email'] = $this->input->post('email');
+				break;
+			case "auth":
+				$inputs = array();
+				break; 
+		}
 
 		$this->load->view('templates/header', $tmp);
     		if ($this->form_validation->run() === FALSE)
@@ -117,12 +127,16 @@ class Forms extends CI_Controller {
 			switch ($tmp['data']['door'])  {
 				case "user":
 					$this->activist_model->create_user($inputs);
+					$this->load->view('auth/index', $tmp);
 				case "pass":
+					$this->activist_model->user_password_change($inputs['email']);
+					$tmp['data']['door'] = "index";
+					$this->load->view('door/index', $tmp);
 					break;
 				case "auth":
+					$this->load->view('auth/index', $tmp);
 					break;
 			}
-        		$this->load->view('auth/index', $tmp);
 		}
         	$this->load->view('templates/footer', $tmp);
 	}

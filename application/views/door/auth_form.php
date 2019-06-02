@@ -1,9 +1,9 @@
 <div class="container">
 	<?php echo form_open('forms/auth'); ?>
 		<table width="100%">
-			<tr>User Name</tr>
-			<tr><input type="text" name="user"></tr>
-			<tr><?php if (!empty(form_error('user')))  {  echo form_error('user');  } ?></tr>
+			<tr>Email</tr>
+			<tr><input type="text" name="email"></tr>
+			<tr><?php if (!empty(form_error('email')))  {  echo form_error('email');  } ?></tr>
 			<tr>Password</tr>
 			<tr><input type="password" name="pass"></tr>
 			<tr><?php if (!empty(form_error('pass')))  {  echo form_error('pass');  } ?></tr>

@@ -18,9 +18,20 @@ class Activist_model extends CI_Model {
 	{
 		if ($email !== FALSE)  {
 			$query = $this->db->get_where('user', array('user_email' => $email), 1, 0);
-			return $query->result_array();
+			if ($query->num_rows() > 0)  {
+				return TRUE;
+			}
 		}
 		return FALSE;
+	}
+
+	public function user_password_change($email)
+	{
+		$this->email->from('root@actifish.com', 'Actifish Support');
+		$this->email->to($email);
+		$this->email->subject('Requested Password Change');
+		$this->email->message('There will be a link here to click to change password.');
+		$this->email->send();
 	}
 
 	public function create_user($inserts)
