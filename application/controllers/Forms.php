@@ -87,6 +87,11 @@ class Forms extends CI_Controller {
 		return FALSE;
 	}
 
+	public function auth_user($email, $pass)
+	{
+		return $this->activist_model->auth_user($email, $pass);
+	}
+
 	public function enforce_pass($pass)
 	{
 		if (preg_match('/^[a-zA-Z]+[a-zA-Z0-9._]+$/i', $pass))  {
@@ -102,6 +107,7 @@ class Forms extends CI_Controller {
 		$this->form_validation->set_rules($this->rules[$tmp['data']['door']]);
 
 		$inputs = array();
+		$auth = FALSE;
 		switch ($tmp['data']['door'])  {
 			case "user":
 				$inputs['email'] = $this->input->post('email');
@@ -112,6 +118,7 @@ class Forms extends CI_Controller {
 				$inputs['email'] = $this->input->post('email');
 				break;
 			case "auth":
+				$auth = $this->auth_user($this->input->post('email'), $this->input->post('pass'));
 				$inputs = array();
 				break; 
 		}
@@ -128,13 +135,18 @@ class Forms extends CI_Controller {
 				case "user":
 					$this->activist_model->create_user($inputs);
 					$this->load->view('auth/index', $tmp);
+					break;
 				case "pass":
 					$this->activist_model->user_password_change($inputs['email']);
 					$tmp['data']['door'] = "index";
 					$this->load->view('door/index', $tmp);
 					break;
 				case "auth":
-					$this->load->view('auth/index', $tmp);
+					if ($auth == TRUE)  {
+						$this->load->view('auth/index', $tmp);
+					}  else  {
+						$this->load->view('door/index', $tmp);
+					}
 					break;
 			}
 		}
