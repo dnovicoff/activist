@@ -19,7 +19,7 @@ class Door extends CI_Controller
 
         public function view($page = 'index')
         {
-		if (!file_exists(APPPATH.'views/door/index.php') && !in_array($page, $this->pages))
+		if (!file_exists(APPPATH.'views/door/index.php') || !in_array($page, $this->pages))
 		{
                 	// Whoops, we don't have a page for that!
                 	show_404();
@@ -31,7 +31,7 @@ class Door extends CI_Controller
 				"door" => $page
 			)
 		);
-
+		
         	$this->load->view('templates/header', $tmp);
        		$this->load->view('door/index', $tmp);
         	$this->load->view('templates/footer', $tmp);
