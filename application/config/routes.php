@@ -54,7 +54,7 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['default_controller'] = 'door/view';
 
-$route['test'] = 'examples/login';
+$route[LOGIN_PAGE] = 'examples/login';
 
 $route['auth/(:any)'] = 'auth/index/$1';
 $route['forms/(:any)'] = 'forms/index/$1';
