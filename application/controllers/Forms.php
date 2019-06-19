@@ -155,7 +155,7 @@ class Forms extends CI_Controller {
 
 	public function index($form = 'auth')
         {
-                if (!file_exists(APPPATH.'views/auth/index.php') && !in_array($form, $this-authforms))
+                if (!file_exists(APPPATH.'views/auth/index.php') || !in_array($form, $this-authforms))
 		{
                 	// Whoops, we don't have a page for that!
                 	show_404();
