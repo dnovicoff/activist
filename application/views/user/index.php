@@ -6,7 +6,9 @@
 		<a href="/user/logout">Logout</a><br />
 	</div>
 	<div class="largecol">
-		CENTER
+		<div class="graph_canvas">
+			CENTER
+		</div>
 	</div>
 	<div class="smallcol">
 		RIGHT
