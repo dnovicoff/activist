@@ -1,0 +1,7 @@
+
+
+.graph_canvas  {
+	width: 100%;
+	overflow-x: scroll;
+	overflow-y: scroll;
+}
