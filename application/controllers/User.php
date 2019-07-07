@@ -10,6 +10,14 @@ class User extends MY_Controller
 		$this->load->helper('form_helper');
 	}
 
+	public function logout()  {
+		$this->authentication->logout();
+
+		$redirect_protocol = USE_SSL ? 'https' : NULL;
+
+		redirect( site_url( LOGIN_PAGE . '?' . AUTH_LOGOUT_PARAM . '=1', $redirect_protocol ) );
+	}
+
         public function index($page = 'index')
         {
 		$tmp = array(

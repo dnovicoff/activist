@@ -65,14 +65,6 @@ class Door extends MY_Controller
 		$this->generate_page();
 	}
 
-	public function logout()  {
-		$this->authentication->logout();
-
-		$redirect_protocol = USE_SSL ? 'https' : NULL;
-
-		redirect( site_url( LOGIN_PAGE . '?' . AUTH_LOGOUT_PARAM . '=1', $redirect_protocol ) );
-	}
-
 	public function login()  {
 		// Method should not be directly accessible
 		if ($this->uri->uri_string() == 'door/login')
