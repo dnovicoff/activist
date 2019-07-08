@@ -50,9 +50,9 @@ class User extends MY_Controller
 		$this->is_logged_in();
 		if (!empty($this->auth_role))  {
 			if ($this->forms->validate($tmp))  {
-        			$this->generate_page($tmp);
-			}  else  {
+        			
 			}
+			$this->generate_page($tmp);
 		}  else  {
 			redirect($this->input->server, 'refresh');
 		}

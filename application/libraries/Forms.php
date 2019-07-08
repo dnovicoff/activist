@@ -103,6 +103,40 @@ class Forms {
 		return $user_rules;
 	}
 
+	private function get_cam_rules()  {
+		$cam_rules = [
+			[
+				'field' => 'start_date',
+				'label' => 'start_date',
+				'rules' => 'trim|required|regex_match[/^\d{4}-\d{2}-\d{2}$/]',
+				'errors' => [
+					'regex_match' => 'Date muse be in form yyyy-mm-dd'
+				]
+			],  [
+				'field' => 'end_date',
+				'label' => 'end_date',
+				'rules' => 'trim|required|regex_match[/^\d{4}-\d{2}-\d{2}$/]',
+				'errors' => [
+					'regex_match' => 'Date muse be in form yyyy-mm-dd'
+				]
+			],  [
+				'field' => 'title',
+				'label' => 'title',
+				'rules' => 'trim|required|alpho_numeric_spaces',
+				'errors' => [
+				]
+			],  [
+				'field' => 'cam_text',
+				'label' => 'cam_text',
+				'rules' => 'trim|required',
+				'errors' => [
+				]
+			]
+		];
+
+		return $cam_rules;
+	}
+
 	public function validate_form($tmp)
 	{
 		$inputs = array();
@@ -119,6 +153,9 @@ class Forms {
 			case "auth":
 				$this->CI->form_validation->set_rules($this->get_auth_rules());
 				break; 
+			case 'cam':
+				$this->CI->form_validation->set_rules($this->get_cam_rules());
+				break;
 		}
 
     		if ($this->CI->form_validation->run() !== FALSE)  {
@@ -127,7 +164,7 @@ class Forms {
 					// $this->activist_model->create_user($inputs);
 					break;
 				case "pass":
-					$this->CI->activist_model->user_password_change($inputs);
+					// $this->CI->activist_model->user_password_change($inputs);
 					break;
 				case "auth":
 					break;
