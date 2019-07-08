@@ -10,6 +10,10 @@ class User extends MY_Controller
 		$this->load->helper('form_helper');
 	}
 
+	public function loc()  {
+
+	}
+
 	public function logout()  {
 		$this->authentication->logout();
 
