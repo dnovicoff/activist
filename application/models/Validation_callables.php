@@ -94,7 +94,15 @@ class Validation_callables extends MY_Model {
 	// --------------------------------------------------------------
 
 	public function _validate_date($date)  {
+		$error = 'Date '.$date.' must be a valid date value';
 
+		$check = strtotime($date);
+		if ($check !== FALSE)  {
+			return TRUE;
+		}
+		$this->form_validation->set_message('validate_date', $error);
+
+		return FALSE;
 	}
 
 }
