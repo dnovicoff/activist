@@ -14,6 +14,10 @@ class User extends MY_Controller
 
 	}
 
+	public function cam()  {
+
+	}
+
 	public function logout()  {
 		$this->authentication->logout();
 
