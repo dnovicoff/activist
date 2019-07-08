@@ -108,14 +108,28 @@ class Forms {
 			[
 				'field' => 'start_date',
 				'label' => 'start_date',
-				'rules' => 'trim|required|regex_match[/^\d{4}-\d{2}-\d{2}$/]',
+				'rules' => [
+					'trim',
+					'required',
+					'regex_match[/^\d{4}-\d{2}-\d{2}$/]',  [
+						'validate_date',
+						[  $this->CI->validation_callables,  '_validate_date'  ]
+					]
+				],
 				'errors' => [
 					'regex_match' => 'Date muse be in form yyyy-mm-dd'
 				]
 			],  [
 				'field' => 'end_date',
 				'label' => 'end_date',
-				'rules' => 'trim|required|regex_match[/^\d{4}-\d{2}-\d{2}$/]',
+				'rules' => [
+					'trim',
+					'required',
+					'regex_match[/^\d{4}-\d{2}-\d{2}$/]',  [
+						'validate_date',
+						[  $this->CI->validation_callables,  '_validate_date'  ]
+					]
+				],
 				'errors' => [
 					'regex_match' => 'Date muse be in form yyyy-mm-dd'
 				]
