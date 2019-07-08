@@ -6,9 +6,22 @@
 		<a href="/user/logout">Logout</a><br />
 	</div>
 	<div class="largecol">
-		<div class="graph_canvas">
-			CENTER
-		</div>
+		<?php
+			$page = $this->uri->segment(2, 0);
+			echo $page;
+			if ($page !== 0)  {
+				switch ($page)  {
+					case 'loc':
+						break;
+					case 'cam':
+						break;
+				}
+			}  else  {
+				echo '<div class="graph_canvas">'.
+					'CENTER'.
+				'</div>';
+			}
+		?>
 	</div>
 	<div class="smallcol">
 		RIGHT
