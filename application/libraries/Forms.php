@@ -122,7 +122,7 @@ class Forms {
 			],  [
 				'field' => 'title',
 				'label' => 'title',
-				'rules' => 'trim|required|alpho_numeric_spaces',
+				'rules' => 'trim|required|alpha_numeric_spaces',
 				'errors' => [
 				]
 			],  [

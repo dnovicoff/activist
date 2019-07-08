@@ -23,6 +23,7 @@ class Validation_callables extends MY_Model {
 		parent::__construct();
 
 		$this->config->load('password_strength');
+		$this->load->helper('date');
 	}
 	
 	// -----------------------------------------------------------------------
@@ -91,6 +92,10 @@ class Validation_callables extends MY_Model {
 	}
 
 	// --------------------------------------------------------------
+
+	public function _validate_date($date)  {
+
+	}
 
 }
 
