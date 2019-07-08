@@ -22,13 +22,13 @@
 				echo form_input($data);
 			?>
 			</td><td>
-				<?php
-					if (!empty(form_error('email')))  {
-						echo '<div style="font-size: 80%; color: red;">'.
-							form_error('email').
-						'</div>';  
-					}
-				?>
+			<?php
+				if (!empty(form_error('email')))  {
+					echo '<div style="font-size: 80%; color: red;">'.
+						form_error('email').
+					'</div>';  
+				}
+			?>
 			</td></tr>
 			<tr><td>
 			<?php
@@ -49,13 +49,13 @@
 				echo form_input($data);
 			?>
 			</td><td>
-				<?php
-					if (!empty(form_error('confirmemail')))  {
-						echo '<div style="font-size: 80%; color: red;">'.
-							form_error('confirmemail').
-						'</div>';
-					}
-				?>
+			<?php
+				if (!empty(form_error('confirmemail')))  {
+					echo '<div style="font-size: 80%; color: red;">'.
+						form_error('confirmemail').
+					'</div>';
+				}
+			?>
 			</td></tr>
 			<tr><td>
 			<?php
@@ -77,13 +77,13 @@
 				echo form_input($data);
 			?>
 			</td><td>
-				<?php
-					if (!empty(form_error('password')))  {
-						echo '<div style="font-size: 80%; color: red;">'.
-							form_error('password').
-						'</div>';
-					}
-				?>
+			<?php
+				if (!empty(form_error('password')))  {
+					echo '<div style="font-size: 80%; color: red;">'.
+						form_error('password').
+					'</div>';
+				}
+			?>
 			</td></tr>
 			<tr><td>
 			<?php
@@ -105,13 +105,13 @@
 				echo form_input($data);
 			?>
 			</td><td>
-				<?php
-					if (!empty(form_error('confirmpassword')))  {
-						echo '<div style="font-size: 80%; color: red;">'.
-							form_error('confirmpassword').
-						'</div>';
-					}
-				?>
+			<?php
+				if (!empty(form_error('confirmpassword')))  {
+					echo '<div style="font-size: 80%; color: red;">'.
+						form_error('confirmpassword').
+					'</div>';
+				}
+			?>
 			</td></tr>
 			<tr><td>
 			<?php
