@@ -13,7 +13,6 @@
 	</div>
 	<div class="largecol">
 		<?php
-			// $page = $this->uri->segment(1, 0);
 			switch ($page)  {
 				case "create":
 					$this->load->view('door/user_form');
