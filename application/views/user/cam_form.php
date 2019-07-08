@@ -94,7 +94,7 @@
 			</td><td>
 			<?php
 				$data = array(
-					'name' => 'cam_test',
+					'name' => 'cam_text',
 					'id' => '',
 					'value' => set_value('cam_text'),
 					'class' => '',
