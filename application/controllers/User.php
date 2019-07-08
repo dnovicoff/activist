@@ -8,6 +8,17 @@ class User extends MY_Controller
 		parent::__construct();
 		$this->load->helper('url');
 		$this->load->helper('form_helper');
+		$this->load->library('user_agent');
+	}
+
+	private function generate_page($tmp = array())  {
+		$this->setup_login_form();
+
+        	$html = $this->load->view('templates/header', $tmp, TRUE);
+       		$html .= $this->load->view('user/index', $tmp, TRUE);
+        	$html .= $this->load->view('templates/footer', $tmp, TRUE);
+
+		echo $html;
 	}
 
 	public function loc()  {
@@ -29,14 +40,19 @@ class User extends MY_Controller
 	public function cam()  {
 		$tmp = array(
 			'data' => array(
+        			"title" => ucfirst("cam"), // Capitalize the first letter
+				"door" => "cam"
 			)
 		);
 
+		$this->load->library('forms');
+
 		$this->is_logged_in();
 		if (!empty($this->auth_role))  {
-        		$this->load->view('templates/header', $tmp);
-       			$this->load->view('user/index', $tmp);
-        		$this->load->view('templates/footer', $tmp);
+			if ($this->forms->validate($tmp))  {
+        			$this->generate_page($tmp);
+			}  else  {
+			}
 		}  else  {
 			redirect($this->input->server, 'refresh');
 		}
