@@ -58,8 +58,10 @@ $route['creator'] = 'key_creator';
 $route['(about)'] = 'door/index/$1';
 $route['pass'] = 'door/pass';
 $route['create'] = 'door/create';
-// $route['auth/(user|pass|auth)'] = 'auth/index/$1';
 $route['user'] = 'user';
+$route['user/loc/(:any)'] = 'user/loc/$1';
+
+
 $route[LOGIN_PAGE] = 'door/login';
 
 
