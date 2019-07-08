@@ -11,11 +11,35 @@ class User extends MY_Controller
 	}
 
 	public function loc()  {
+		$tmp = array(
+			'data' => array(
+			)
+		);
 
+		$this->is_logged_in();
+		if (!empty($this->auth_role))  {
+        		$this->load->view('templates/header', $tmp);
+       			$this->load->view('user/index', $tmp);
+        		$this->load->view('templates/footer', $tmp);
+		}  else  {
+			redirect($this->input->server, 'refresh');
+		}
 	}
 
 	public function cam()  {
+		$tmp = array(
+			'data' => array(
+			)
+		);
 
+		$this->is_logged_in();
+		if (!empty($this->auth_role))  {
+        		$this->load->view('templates/header', $tmp);
+       			$this->load->view('user/index', $tmp);
+        		$this->load->view('templates/footer', $tmp);
+		}  else  {
+			redirect($this->input->server, 'refresh');
+		}
 	}
 
 	public function logout()  {
@@ -48,7 +72,7 @@ class User extends MY_Controller
        			$this->load->view('user/index', $tmp);
         		$this->load->view('templates/footer', $tmp);
 		}  else  {
-			redirect('/', 'refresh');
+			redirect($this->input->server, 'refresh');
 		}
 	}
 }
