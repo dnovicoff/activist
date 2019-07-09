@@ -105,6 +105,19 @@ class Validation_callables extends MY_Model {
 		return FALSE;
 	}
 
+	public function _date_greater_than($start, $end)  {
+		$error = 'Date '.$end.' must be after '.$start.' date.';
+
+ 		$check_start = strtotime($start);
+		$check_end = strtotime($end);
+		if ($check_start <= $check_end)  {
+			return TRUE;
+		}
+		$this->form_validation->set_message('date_greater_than', $error);
+
+		return FALSE;
+	}
+
 }
 
 /* End of file Validaton_callables.php */
