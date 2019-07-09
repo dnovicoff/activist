@@ -128,6 +128,9 @@ class Forms {
 					'regex_match[/^\d{4}-\d{2}-\d{2}$/]',  [
 						'validate_date',
 						[  $this->CI->validation_callables,  '_validate_date'  ]
+					],  [
+						'date_greater_than',
+						[  $this->CI->validation_callables,  '_date_greater_than'  ]
 					]
 				],
 				'errors' => [
@@ -142,8 +145,9 @@ class Forms {
 			],  [
 				'field' => 'cam_text',
 				'label' => 'cam_text',
-				'rules' => 'trim|required',
+				'rules' => 'trim|required|regex_match[/^[a-zA-Z0-9\s\.\?!\']+$/]',
 				'errors' => [
+					'regex_match' => 'Only alpha numeric, spaces, and punctuation characters are allowed'
 				]
 			]
 		];
