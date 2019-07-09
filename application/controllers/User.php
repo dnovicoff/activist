@@ -22,7 +22,7 @@ class User extends MY_Controller
 		echo $html;
 	}
 
-	public function loc()  {
+	public function loc($loc_id = NULL)  {
 		$tmp = array(
 			'data' => array(
 			)
@@ -38,7 +38,7 @@ class User extends MY_Controller
 		}
 	}
 
-	public function cam()  {
+	public function cam($cam_id = NULL)  {
 		$tmp = array(
 			'data' => array(
         			"title" => ucfirst("cam"), // Capitalize the first letter
@@ -51,9 +51,18 @@ class User extends MY_Controller
 		$this->is_logged_in();
 		if (!empty($this->auth_role))  {
 			if ($this->forms->validate($tmp))  {
-        			$user_data = [
-
+        			$cam_data = [
+					'cam_id' => $cam_id,
+					'user_id' => $this->auth_user_id,
+					'created_at' => date('Y-m-d H:i:s'),
+					'start_time' => $this->input->post('start_date').' 00:00:01',
+					'end_time' => $this->input->post('end_date').' 23:59:59',
+					'title' => $this->input->post('title'),
+					'text' => $this->input->post('cam_text')
 				];
+				
+				$this->activist_model->create_campaign($cam_data);
+				exit();
 			}
 			$this->generate_page($tmp);
 		}  else  {

@@ -47,10 +47,8 @@ class Activist_model extends CI_Model {
 		$this->email->send();
 	}
 
-	public function create_user($inserts)
-	{
-		$sql = "INSERT INTO user (user_email, user_pass, start) VALUES('".$inserts['email']."', '".$inserts['pass']."', Now())";
-		$this->db->query($sql);
+	public function create_campaign($cam_data)  {
+
 	}
 
         public function __construct()
