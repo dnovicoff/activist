@@ -60,8 +60,16 @@ class User extends MY_Controller
 					'title' => $this->input->post('title'),
 					'text' => $this->input->post('cam_text')
 				];
+
+				if (is_null($cam_data['cam_id']))  {
+					$this->activist_model->insert_campaign($cam_data);
+				}  else if ($cam_data['cam_id'] == -1)  {
+					$this->activist_model->delete_campaign($cam_data);
+				}  else  {
+					$this->activist_model->update_campaign($cam_data);
+				}
 				
-				$this->activist_model->create_campaign($cam_data);
+				
 				exit();
 			}
 			$this->generate_page($tmp);

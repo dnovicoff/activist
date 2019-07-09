@@ -60,7 +60,6 @@ $route['pass'] = 'door/pass';
 $route['create'] = 'door/create';
 $route['user'] = 'user';
 $route['user/(loc|cam)/(:num)'] = 'user/$1/$2';
-// $route['user/cam/(:num)'] = 'user/cam/$1';
 
 
 $route[LOGIN_PAGE] = 'door/login';

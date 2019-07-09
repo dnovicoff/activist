@@ -47,7 +47,16 @@ class Activist_model extends CI_Model {
 		$this->email->send();
 	}
 
-	public function create_campaign($cam_data)  {
+	public function insert_campaign($cam_data)  {
+		var_dump($cam_data);
+		$this->db->insert('campaign', $cam_data);
+	}
+
+	public function update_campaign($cam_data)  {
+
+	}
+
+	public function delete_campaign($cam_data)  {
 
 	}
 
