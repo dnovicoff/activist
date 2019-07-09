@@ -130,7 +130,17 @@ class Forms {
 						[  $this->CI->validation_callables,  '_validate_date'  ]
 					],  [
 						'date_greater_than',
-						[  $this->CI->validation_callables,  '_date_greater_than'  ]
+						function ($end)  {
+ 							$check_start = strtotime($this->CI->input->post('start_date'));
+							$check_end = strtotime($end);
+							if ($check_start <= $check_end)  {
+								return TRUE;
+							}
+							$error = 'Date '.$end.' must be after '.$this->CI->input->post('start_date').' date.';
+							$this->CI->form_validation->set_message('date_greater_than', $error);
+							
+							return FALSE;
+						}
 					]
 				],
 				'errors' => [
