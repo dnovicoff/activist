@@ -9,6 +9,7 @@ class User extends MY_Controller
 		$this->load->helper('url');
 		$this->load->helper('form_helper');
 		$this->load->library('user_agent');
+		$this->load->model('activist_model');
 	}
 
 	private function generate_page($tmp = array())  {
@@ -50,7 +51,9 @@ class User extends MY_Controller
 		$this->is_logged_in();
 		if (!empty($this->auth_role))  {
 			if ($this->forms->validate($tmp))  {
-        			
+        			$user_data = [
+
+				];
 			}
 			$this->generate_page($tmp);
 		}  else  {
