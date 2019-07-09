@@ -3,8 +3,8 @@
 	<div class="smallcol">
 		<?php
 			$pages = array('create', 'pass', 'about');
-			$page = $this->uri_segment(1, 0);
-			if (!in_array($page, $pages))  {
+			$current = $this->uri->segment(1);
+			if (!in_array($current, $pages))  {
 				$this->load->view('door/auth_form');
 			}  else  {
 				echo "Pertitent info";
@@ -13,7 +13,7 @@
 	</div>
 	<div class="largecol">
 		<?php
-			switch ($page)  {
+			switch ($current)  {
 				case "create":
 					$this->load->view('door/user_form');
 					break;
@@ -30,7 +30,7 @@
 	</div>
 	<div class="smallcol">
 		<?php
-			if (!in_array($page, $pages)  {
+			if (!in_array($current, $pages))  {
 				echo "We hope to become your one stop shop for activism neds.";
 			}  else  {
 				echo "Not sure what to do with the right. Social stuff maybe.";
