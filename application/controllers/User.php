@@ -13,7 +13,13 @@ class User extends MY_Controller
 	}
 
 	private function generate_page($tmp = array())  {
-		$this->setup_login_form();
+		// $this->setup_login_form();
+		// $loc_data = $this->activist_model->get_location_data($tmp['data']['user_id']);
+		$loc_data = FALSE;
+		$cam_data = $this->activist_model->get_campaign_data($tmp['data']['user_id']);
+
+		$tmp['data']['loc_data'] = $loc_data;
+		$tmp['data']['cam_data'] = $cam_data;
 
         	$html = $this->load->view('templates/header', $tmp, TRUE);
        		$html .= $this->load->view('user/index', $tmp, TRUE);
@@ -25,35 +31,35 @@ class User extends MY_Controller
 	public function loc($loc_id = NULL)  {
 		$tmp = array(
 			'data' => array(
+        			'title' => ucfirst("loc"), // Capitalize the first letter
+				'door' => 'loc',
+				'user_id' => $this->auth_user_id
 			)
 		);
 
 		$this->is_logged_in();
 		if (!empty($this->auth_role))  {
-        		$this->load->view('templates/header', $tmp);
-       			$this->load->view('user/index', $tmp);
-        		$this->load->view('templates/footer', $tmp);
+			$this->generate_page($tmp);
 		}  else  {
 			redirect($this->input->server, 'refresh');
 		}
 	}
 
 	public function cam($cam_id = NULL)  {
+		$this->is_logged_in();
 		$tmp = array(
 			'data' => array(
-        			"title" => ucfirst("cam"), // Capitalize the first letter
-				"door" => "cam"
+        			'title' => ucfirst("cam"), // Capitalize the first letter
+				'door' => 'cam',
+				'user_id' => $this->auth_user_id
 			)
 		);
 
 		$this->load->library('forms');
-
-		$this->is_logged_in();
 		if (!empty($this->auth_role))  {
 			if ($this->forms->validate($tmp))  {
         			$cam_data = [
-					'cam_id' => $cam_id,
-					'user_id' => $this->auth_user_id,
+					'user_id' => intval($this->auth_user_id),
 					'created_at' => date('Y-m-d H:i:s'),
 					'start_time' => $this->input->post('start_date').' 00:00:01',
 					'end_time' => $this->input->post('end_date').' 23:59:59',
@@ -61,16 +67,16 @@ class User extends MY_Controller
 					'text' => $this->input->post('cam_text')
 				];
 
-				if (is_null($cam_data['cam_id']))  {
-					$this->activist_model->insert_campaign($cam_data);
+				if (is_null($cam_id))  {
+					$id = $this->activist_model->insert_campaign($cam_data);
+					$cam_data['cam_id'] = $id;
 				}  else if ($cam_data['cam_id'] == -1)  {
+					$cam_data['cam_id'] = $cam_id;
 					$this->activist_model->delete_campaign($cam_data);
 				}  else  {
+					$cam_data['cam_id'] = $cam_id;
 					$this->activist_model->update_campaign($cam_data);
 				}
-				
-				
-				exit();
 			}
 			$this->generate_page($tmp);
 		}  else  {
@@ -88,10 +94,12 @@ class User extends MY_Controller
 
         public function index($page = 'index')
         {
+		$this->is_logged_in();
 		$tmp = array(
-			"data" => array(
-        			"title" => ucfirst($page), // Capitalize the first letter
-				"door" => $page
+			'data' => array(
+        			'title' => ucfirst($page), // Capitalize the first letter
+				'door' => $page,
+				'user_id' => $this->auth_user_id
 			)
 		);
 
@@ -102,11 +110,8 @@ class User extends MY_Controller
                 	show_404();
 		}
 		
-		$this->is_logged_in();
 		if (!empty($this->auth_role))  {
-        		$this->load->view('templates/header', $tmp);
-       			$this->load->view('user/index', $tmp);
-        		$this->load->view('templates/footer', $tmp);
+			$this->generate_page($tmp);
 		}  else  {
 			redirect($this->input->server, 'refresh');
 		}

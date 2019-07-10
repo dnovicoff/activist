@@ -1,4 +1,45 @@
 
+.wrap_collapsable  {
+	background-color: rgb(255, 255, 255);
+	padding: 0px 30px;
+	/* border-bottom: 3px solid #CDE700; */
+	box-shadow: 1px 2px 3px rgba(0,0,0,0.2);
+}
+.wrap_collapsable ul  {
+	list-style-type: none;
+	padding: 0;
+}
+.wrap_collapsable a  {
+	display: block;
+	padding: 10px;
+	font-size: 70%;
+	text-decoration: none;
+}
+.wrap_collapsable label  {
+	font-family: 'Sedgwick Ave Display', cursive;
+	/*  font-size: 56px;  */
+	/*  display: block;  */
+	cursor: pointer;
+}
+
+.collapsable_content  {
+	font-family: 'oswald', sans-serif;
+	padding: 0 0 0 0px;
+
+	max-height: 0;
+	overflow: hidden;
+}
+input:checked ~ .collapsable_content  {
+	max-height: 100%;
+}
+
+input#loc_collapsable  {
+	display: none;
+}
+
+input#cam_collapsable  {
+	display: none;
+}
 
 .graph_canvas  {
 	width: 100%;

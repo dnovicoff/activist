@@ -1,6 +1,36 @@
 
 <div class="container">
 	<div class="smallcol">
+		<div class="wrap_collapsable">
+			<input id="loc_collapsable" type="checkbox">
+			<label for="loc_collapsable">Locations</label>
+			<div class="collapsable_content">
+				<ul>
+				<?php
+					if (!is_bool($data['loc_data']))  {
+						foreach ($data['loc_data'] as $row)  {
+
+						}
+					}
+				?>
+				</ul>
+			</div>
+		</div><br />
+		<div class="wrap_collapsable">
+			<input id="cam_collapsable" type="checkbox">
+			<label for="cam_collapsable">Campaigns</label>
+			<div class="collapsable_content">
+				<ul>
+				<?php
+					if (!is_bool($data['cam_data']))  {
+						foreach ($data['cam_data'] as $row)  {
+							echo '<li><a href="/user/cam/'.$row['cam_id'].'">'.$row['title'].'</a></li>';
+						}
+					}
+				?>
+				</ul>	
+			</div>
+		</div><br /><br />
 		<a href="/user">Data</a><br />
 		<a href="/user/loc">Create Location</a><br />
 		<a href="/user/cam">Create Campaign</a><br />
