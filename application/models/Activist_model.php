@@ -48,8 +48,8 @@ class Activist_model extends CI_Model {
 	}
 
 	public function insert_campaign($cam_data)  {
-		var_dump($cam_data);
-		$this->db->insert('campaign', $cam_data);
+		$this->db->set($cam_data)->insert('campaign');
+		return $this->db->insert_id();
 	}
 
 	public function update_campaign($cam_data)  {
@@ -58,6 +58,32 @@ class Activist_model extends CI_Model {
 
 	public function delete_campaign($cam_data)  {
 
+	}
+
+	public function get_campaign_data($id)  {
+		if (!is_null($id))  {
+			$query = $this->db->select('*')->from('campaign')
+				->where('user_id =', $id)
+				->get();
+
+			if ($query->num_rows() > 0)  {
+				return $query->result_array();
+			}
+		}
+		return FALSE;
+	}
+
+	public function get_location_data($id)  {
+		if (!is_null($id))  {
+			$this->db->select('*')->from('location')
+				->where('user_id =', $id)
+				->get();
+
+			if ($query->num_rows() > 0)  {
+				return $query->result_array();
+			}
+		}
+		return FALSE;
 	}
 
         public function __construct()
