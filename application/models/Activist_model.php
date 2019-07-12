@@ -60,10 +60,19 @@ class Activist_model extends CI_Model {
 
 	}
 
-	public function get_campaign_data($id)  {
-		if (!is_null($id))  {
+	public function get_campaign_data($user_id, $cam_id = NULL)  {
+		if (!is_null($user_id) && !is_null($cam_id))  {
 			$query = $this->db->select('*')->from('campaign')
-				->where('user_id =', $id)
+				->where('user_id =', $user_id)
+				->where('cam_id =', $cam_id)
+				->get();
+
+			if ($query->num_rows() > 0)  {
+				return $query->result_array();
+			}
+		}  else if  (!is_null($user_id))  {
+			$query = $this->db->select('*')->from('campaign')
+				->where('user_id =', $user_id)
 				->get();
 
 			if ($query->num_rows() > 0)  {
