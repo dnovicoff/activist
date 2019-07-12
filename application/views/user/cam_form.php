@@ -1,7 +1,24 @@
 
+<?php
+	$readonly = '';
+	$sd = '';
+	$ed = '';
+	$ttle = '';
+	$txt = '';
+	if (isset($cam_detail))  {
+		$spl = explode(" ", $cam_detail[0]['start_time']);
+		$sd = $spl[0];
+		$spl = explode(" ", $cam_detail[0]['end_time']);
+		$ed = $spl[0];
+		$ttle = $cam_detail[0]['title'];
+		$txt = $cam_detail[0]['text'];
+		$readonly = 'readonly';
+		
+	}
+?>
 
 <div class="container">
-	<?php echo form_open('user/cam'); ?>
+	<?php echo form_open('user/cam', '', $hidden_data); ?>
 		<table width="100%">
 			<tr><td>
 			<?php
@@ -15,10 +32,13 @@
 				$data = array(
 					'name' => 'start_date',
 					'id' => '',
-					'value' => set_value('start_date'),
+					'value' => set_value('start_date', $sd),
 					'class' => '',
 					'placeholder' => 'yyyy-mm-dd'
 				);
+				if (isset($cam_detail))  {
+					$data['readonly'] = $readonly;
+				}
 				echo form_input($data);
 			?>
 			</td><td>
@@ -42,10 +62,13 @@
 				$data = array(
 					'name' => 'end_date',
 					'id' => '',
-					'value' => set_value('end_date'),
+					'value' => set_value('end_date', $ed),
 					'class' => '',
 					'placeholder' => 'yyyy-mm-dd'
 				);
+				if (isset($cam_detail))  {
+					$data['readonly'] = $readonly;
+				}
 				echo form_input($data);
 			?>
 			</td><td>
@@ -69,10 +92,13 @@
 				$data = array(
 					'name' => 'title',
 					'id' => '',
-					'value' => set_value('title'),
+					'value' => set_value('title', $ttle),
 					'class' => '',
 					'placeholder' => ''
 				);
+				if (isset($cam_detail))  {
+					$data['readonly'] = $readonly;
+				}
 				echo form_input($data);
 			?>
 			</td><td>
@@ -96,10 +122,13 @@
 				$data = array(
 					'name' => 'cam_text',
 					'id' => '',
-					'value' => set_value('cam_text'),
+					'value' => set_value('cam_text', $txt),
 					'class' => '',
 					'placeholder' => 'Campaign description ...'
 				);
+				if (isset($cam_detail))  {
+					$data['readonly'] = $readonly;
+				}
 				echo form_textarea($data);
 			?>
 			</td><td>
@@ -116,14 +145,22 @@
 				$attributes = array(
 					'class' => ''
 				);
-				echo form_reset("reset", "Reset", $attributes);
+				if ($readonly == '')  {
+					echo form_reset("reset", "Reset", $attributes);
+				}  else  {
+					echo '<a href="/user/cam/update/'.$cam_detail[0]['cam_id'].'">Update</a>';
+				}
 			?>
 			</td><td>
 			<?php
 				$attributes = array(
 					'class' => ''
 				);
-				echo form_submit("submit", "Submit", $attributes);
+				if ($readonly == '')  {
+					echo form_submit("submit", "Submit", $attributes);
+				}  else  {
+					echo '<a href="/user/cam/delete/'.$cam_detail[0]['cam_id'].'">Delete</a>';
+				}
 			?>
 			</td></tr>
 		</table>
