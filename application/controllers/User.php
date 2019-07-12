@@ -14,7 +14,7 @@ class User extends MY_Controller
 
 	private function generate_page($tmp = array())  {
 		// $this->setup_login_form();
-		// $loc_data = $this->activist_model->get_location_data($tmp['data']['user_id']);
+		// $loc_data = $this->activist_model->get_loc	ation_data($tmp['data']['user_id']);
 		$loc_data = FALSE;
 		$cam_data = $this->activist_model->get_campaign_data($tmp['data']['user_id']);
 
@@ -45,13 +45,16 @@ class User extends MY_Controller
 		}
 	}
 
-	public function cam($cam_id = NULL)  {
+	public function cam($cam_method = NULL, $cam_id = NULL)  {
+		$status = (!is_null($cam_method) ? $cam_method : 'insert');
+
 		$this->is_logged_in();
 		$tmp = array(
 			'data' => array(
         			'title' => ucfirst("cam"), // Capitalize the first letter
 				'door' => 'cam',
-				'user_id' => $this->auth_user_id
+				'user_id' => $this->auth_user_id,
+				'hidden_data' => array('status' => $cam_method)
 			)
 		);
 
@@ -70,12 +73,25 @@ class User extends MY_Controller
 				if (is_null($cam_id))  {
 					$id = $this->activist_model->insert_campaign($cam_data);
 					$cam_data['cam_id'] = $id;
-				}  else if ($cam_data['cam_id'] == -1)  {
-					$cam_data['cam_id'] = $cam_id;
-					$this->activist_model->delete_campaign($cam_data);
+					$tmp['data']['hidden_data'] = array('form_edit' => FALSE);
 				}  else  {
 					$cam_data['cam_id'] = $cam_id;
 					$this->activist_model->update_campaign($cam_data);
+				}
+			}
+			if (!is_null($cam_method) && !is_null($cam_id))  {
+				switch ($cam_method)  {
+					case "display":
+						$tmp['cam_detail'] = $this->activist_model->get_campaign_data($this->auth_user_id, $cam_id);
+						break;
+					case "update":
+						$tmp['cam_detail'] = $this->activist_model->get_campaign_data($this->auth_user_id, $cam_id);
+						break;
+					case "delete":
+						$tmp['cam_detail'] = $this->activist_model->delete_campaign($this->auth_user_id, $cam_id);
+						break;
+					case "data":
+						break;
 				}
 			}
 			$this->generate_page($tmp);
