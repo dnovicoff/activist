@@ -23,8 +23,12 @@
 				<ul>
 				<?php
 					if (!is_bool($data['cam_data']))  {
-						foreach ($data['cam_data'] as $row)  {
-							echo '<li><a href="/user/cam/display/'.$row['cam_id'].'">'.$row['title'].'</a></li>';
+						if (is_array($data['cam_data']))  {
+							foreach ($data['cam_data'] as $row)  {
+								echo '<li><a href="/user/cam/select/'.$row['cam_id'].'">'.$row['title'].'</a></li>';
+							}
+						}  else  {
+							echo $data['cam_data'];
 						}
 					}
 				?>
