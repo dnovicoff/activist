@@ -55,11 +55,14 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['creator'] = 'key_creator';
 
-$route['(about)'] = 'door/index/$1';
+$route['about'] = 'door/index';
 $route['pass'] = 'door/pass';
 $route['create'] = 'door/create';
+
+$route['user/cam/(display|update|delete)/(\d+)'] = 'user/cam/$1/$2';
+$route['user/(loc|cam)'] = 'user/$1';
 $route['user'] = 'user';
-$route['user/(loc|cam)/(display|update|delete|data)/(:num)'] = 'user/$1/$2/$3';
+
 
 
 $route[LOGIN_PAGE] = 'door/login';
