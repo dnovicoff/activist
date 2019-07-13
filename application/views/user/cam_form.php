@@ -5,7 +5,7 @@
 	$ed = '';
 	$ttle = '';
 	$txt = '';
-	if (isset($cam_detail))  {
+	if (isset($cam_detail) && !empty($cam_detail))  {
 		$spl = explode(" ", $cam_detail[0]['start_time']);
 		$sd = $spl[0];
 		$spl = explode(" ", $cam_detail[0]['end_time']);
@@ -18,6 +18,7 @@
 	}
 ?>
 
+<?php if (($hidden_data['status'] == 'insert' && !isset($hidden_data['cam_id'])) || !empty($cam_detail))  { ?>
 <div class="container">
 	<?php echo form_open('user/cam', '', $hidden_data); ?>
 		<table width="100%">
@@ -167,3 +168,5 @@
 		</table>
 	<?php  echo form_close(); ?>
 </div>
+
+<?php }  else {  echo "Unable to perform desired action and/or locate record<br />";  } ?>
