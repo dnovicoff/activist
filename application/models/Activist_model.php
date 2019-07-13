@@ -48,16 +48,36 @@ class Activist_model extends CI_Model {
 	}
 
 	public function insert_campaign($cam_data)  {
-		$this->db->set($cam_data)->insert('campaign');
-		return $this->db->insert_id();
+		if (isset($cam_data))  {
+			$this->db->set($cam_data)->insert('campaign');
+			return $this->db->insert_id();
+		}
+
+		return FALSE;
 	}
 
 	public function update_campaign($cam_data)  {
+		if (isset($cam_data))  {
+			$this->db->set('start_time', $cam_data['start_date'])
+				->set('end_time', $cam_data['end_date'])
+				->set('title', $cam_data['title'])
+				->set('text', $cam_data['txt'])
+				->where('cam_id', $cam_data['cam_id'])
+				->where('user_id', $cam_data['user_id'])
+				->update('campaign');
 
+			return $this->db->affected_rows();
+		}
+
+		return FALSE;
 	}
 
 	public function delete_campaign($cam_data)  {
+		if (isset($cam_data))  {
 
+		}
+
+		return FALSE;
 	}
 
 	public function get_campaign_data($user_id, $cam_id = NULL)  {
@@ -65,6 +85,7 @@ class Activist_model extends CI_Model {
 			$query = $this->db->select('*')->from('campaign')
 				->where('user_id =', $user_id)
 				->where('cam_id =', $cam_id)
+				->order_by('cam_id', 'DESC')
 				->get();
 
 			if ($query->num_rows() > 0)  {
@@ -73,6 +94,7 @@ class Activist_model extends CI_Model {
 		}  else if  (!is_null($user_id))  {
 			$query = $this->db->select('*')->from('campaign')
 				->where('user_id =', $user_id)
+				->order_by('cam_id', 'DESC')
 				->get();
 
 			if ($query->num_rows() > 0)  {

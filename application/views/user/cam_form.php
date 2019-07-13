@@ -12,8 +12,9 @@
 		$ed = $spl[0];
 		$ttle = $cam_detail[0]['title'];
 		$txt = $cam_detail[0]['text'];
-		$readonly = 'readonly';
-		
+		if ($hidden_data['status'] !== 'update')  {
+			$readonly = 'readonly';
+		}
 	}
 ?>
 
@@ -36,7 +37,7 @@
 					'class' => '',
 					'placeholder' => 'yyyy-mm-dd'
 				);
-				if (isset($cam_detail))  {
+				if ($readonly !== '')  {
 					$data['readonly'] = $readonly;
 				}
 				echo form_input($data);
@@ -66,7 +67,7 @@
 					'class' => '',
 					'placeholder' => 'yyyy-mm-dd'
 				);
-				if (isset($cam_detail))  {
+				if ($readonly !== '')  {
 					$data['readonly'] = $readonly;
 				}
 				echo form_input($data);
@@ -96,7 +97,7 @@
 					'class' => '',
 					'placeholder' => ''
 				);
-				if (isset($cam_detail))  {
+				if ($readonly !== '')  {
 					$data['readonly'] = $readonly;
 				}
 				echo form_input($data);
@@ -126,7 +127,7 @@
 					'class' => '',
 					'placeholder' => 'Campaign description ...'
 				);
-				if (isset($cam_detail))  {
+				if ($readonly !== '')  {
 					$data['readonly'] = $readonly;
 				}
 				echo form_textarea($data);
