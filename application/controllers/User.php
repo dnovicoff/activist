@@ -47,7 +47,7 @@ class User extends MY_Controller
 
 	public function cam($cam_method = NULL, $cam_id = NULL)  {
 		$status = (!is_null($cam_method) ? $cam_method : 'insert');
-		$functions = array('insert', 'display', 'update', 'delete');
+		$functions = array('insert', 'select', 'update', 'delete');
 		if (!in_array($status, $functions))  {
 			show_404();
 		}
@@ -74,27 +74,26 @@ class User extends MY_Controller
 					'text' => $this->input->post('cam_text')
 				];
 
-				if (is_null($cam_id) && $status === 'insert')  {
+				if (is_null($cam_id) && $status == 'insert')  {
 					$id = $this->activist_model->insert_campaign($cam_data);
 					$cam_id = $id;
-				}  else if ($status === 'update' && (!is_null($cam_id) && is_int(intval($cam_id))))  {
+				}  else if ($status == 'update' && !is_null($cam_id) && is_int(intval($cam_id)))  {
 					$cam_data['cam_id'] = $cam_id;
 					$this->activist_model->update_campaign($cam_data);
 				}
 			}
 			if (!is_null($status) && !is_null($cam_id) && is_int(intval($cam_id)))  {
 				switch ($status)  {
-					case 'data':
 					case 'insert':
-					case "display":
+					case "select":
 					case "update":
-						$tmp['cam_detail'] = $this->activist_model->get_campaign_data($this->auth_user_id, $cam_id);
-						$tmp['data']['hidden_data'] = array('status' => $status, 'cam_id' => $cam_id);
+						$tmp['data']['cam_detail'] = $this->activist_model->get_campaign_data($this->auth_user_id, $cam_id);
 						break;
 					case "delete":
-						$tmp['cam_detail'] = $this->activist_model->delete_campaign($this->auth_user_id, $cam_id);
+						$tmp['data']['cam_detail'] = $this->activist_model->delete_campaign($this->auth_user_id, $cam_id);
 						break;
 				}
+				$tmp['data']['hidden_data'] = array('status' => $status, 'cam_id' => $cam_id);
 			}
 			$this->generate_page($tmp);
 		}  else  {

@@ -50,6 +50,12 @@ class Activist_model extends CI_Model {
 	public function insert_campaign($cam_data)  {
 		if (isset($cam_data))  {
 			$this->db->set($cam_data)->insert('campaign');
+
+			$errors = $this->db->error();
+			if ($errors['code'] !== 0)  {
+				return 'Error: ['.implode(", ", $this->db->error()).']';
+			}
+
 			return $this->db->insert_id();
 		}
 
@@ -66,15 +72,32 @@ class Activist_model extends CI_Model {
 				->where('user_id', $cam_data['user_id'])
 				->update('campaign');
 
-			return $this->db->affected_rows();
+			if ($this->db->error())  {
+				return 'Error: ['.implode(", ", $this->db->error()).']';
+			}
+
+			if ($this->db->affected_rows() > 0)  {
+				return $this->db->affected_rows();
+			}
 		}
 
 		return FALSE;
 	}
 
-	public function delete_campaign($cam_data)  {
-		if (isset($cam_data))  {
+	public function delete_campaign($user_id, $cam_id)  {
+		if (isset($user_id) && isset($cam_id))  {
+			$this->db->where('user_id', $user_id)
+				->where('cam_id', $cam_id)
+				->delete('campaign');
 
+			$errors = $this->db->error();
+			if ($errors['code'] !== 0)  {
+				return 'Error: ['.implode(", ", $this->db->error()).']';
+			}
+
+			if ($this->db->affected_rows() > 0)  {
+				return $this->db->affected_rows();
+			}
 		}
 
 		return FALSE;
@@ -88,6 +111,11 @@ class Activist_model extends CI_Model {
 				->order_by('cam_id', 'DESC')
 				->get();
 
+			$errors = $this->db->error();
+			if ($errors['code'] !== 0)  {
+				return 'Error: ['.implode(", ", $this->db->error()).']';
+			}
+			
 			if ($query->num_rows() > 0)  {
 				return $query->result_array();
 			}
@@ -97,10 +125,14 @@ class Activist_model extends CI_Model {
 				->order_by('cam_id', 'DESC')
 				->get();
 
-			if ($query->num_rows() > 0)  {
-				return $query->result_array();
+			$errors = $this->db->error();
+			if ($errors['code'] !== 0)  {
+				return 'Error: ['.implode(", ", $this->db->error()).']';
 			}
+			
+			return $query->result_array();
 		}
+
 		return FALSE;
 	}
 
