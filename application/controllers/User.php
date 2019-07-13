@@ -63,7 +63,7 @@ class User extends MY_Controller
 		);
 
 		$this->load->library('forms');
-		if (!empty($this->auth_role))  {
+		if ($this->require_role('admin'))  {
 			if ($this->forms->validate($tmp))  {
         			$cam_data = [
 					'user_id' => intval($this->auth_user_id),
