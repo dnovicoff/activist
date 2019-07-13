@@ -59,7 +59,7 @@ $route['about'] = 'door/index';
 $route['pass'] = 'door/pass';
 $route['create'] = 'door/create';
 
-$route['user/cam/(display|update|delete)/(\d+)'] = 'user/cam/$1/$2';
+$route['user/cam/(select|update|delete)/(\d+)'] = 'user/cam/$1/$2';
 $route['user/(loc|cam)'] = 'user/$1';
 $route['user'] = 'user';
 
