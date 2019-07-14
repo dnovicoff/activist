@@ -1,7 +1,7 @@
 
 
 <div class="container">
-	<?php echo form_open('cam/search'); ?>
+	<?php echo form_open('user/search'); ?>
 		<table width="100%">
 			<tr><td>
 			<?php
@@ -13,7 +13,7 @@
 			</td><td>
 			<?php
 				$options = array(
-					'choose' => ' - select - ',
+					'choose' => 'choose',
 					'national' => 'National',
 					'state' => 'State',
 					'city' => 'City'
