@@ -11,12 +11,10 @@
 				case 'cam':
 					$this->load->view('user/cam_search_form', $data);
 					break;
-				default:
-				echo '<div class="graph_canvas">'.
-						$this->load->view('user/data', $data, TRUE).
-					'</div>';
-					break;
 			}
+			echo '<div class="graph_canvas">'.
+				$this->load->view('user/data', $data, TRUE).
+			'</div>';
 		?>
 	</div>
 	<div class="smallcol">
