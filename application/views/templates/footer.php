@@ -11,7 +11,7 @@
 			<div class="largecol">
 				<a href="/">Home</a> |
 				<a href="/about">About</a> |
-				<a href="/user/cam/">Campaigns</a>
+				<a href="/cam">Campaigns</a>
 				<br />
 			</div>
 			<div class="smallcol">
