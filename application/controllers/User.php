@@ -29,7 +29,7 @@ class User extends MY_Controller
 		);
 
 		$this->load->library('forms');
-		if ($this->forms->validate($tmp))  {
+		if ($this->forms->validate('cam_search'))  {
 			echo "Success my brotha";
 		}  else  {
 			$this->generate_page($tmp);
