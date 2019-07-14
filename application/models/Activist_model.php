@@ -64,15 +64,16 @@ class Activist_model extends CI_Model {
 
 	public function update_campaign($cam_data)  {
 		if (isset($cam_data))  {
-			$this->db->set('start_time', $cam_data['start_date'])
-				->set('end_time', $cam_data['end_date'])
+			$this->db->set('start_time', $cam_data['start_time'])
+				->set('end_time', $cam_data['end_time'])
 				->set('title', $cam_data['title'])
-				->set('text', $cam_data['txt'])
+				->set('text', $cam_data['text'])
 				->where('cam_id', $cam_data['cam_id'])
 				->where('user_id', $cam_data['user_id'])
 				->update('campaign');
 
-			if ($this->db->error())  {
+			$errors = $this->db->error();
+			if ($errors['code'] !== 0)  {
 				return 'Error: ['.implode(", ", $this->db->error()).']';
 			}
 
