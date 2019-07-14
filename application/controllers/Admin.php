@@ -120,7 +120,7 @@ class Admin extends MY_Controller
 			)
 		);
 
-		if (!file_exists(APPPATH.'views/user/index.php'))
+		if (!file_exists(APPPATH.'views/admin/index.php'))
 		{
                 	// Whoops, we don't have a page for that!
 			log_message('ERROR', 'Activist Error '.$page);
