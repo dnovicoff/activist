@@ -82,7 +82,7 @@ class Door extends MY_Controller
 		if ($this->forms->validate($tmp))  {
 			if( strtolower( $_SERVER['REQUEST_METHOD'] ) == 'post' )  {
 				if ($this->require_min_level(1))  {
-					redirect('user', 'refresh');
+					redirect('admin', 'refresh');
 				}
 			}
 		}
@@ -102,7 +102,7 @@ class Door extends MY_Controller
 		if (!$this->verify_min_level(1))  {
 			$this->generate_page();
 		}  else  {
-			redirect('user', 'refresh');
+			redirect('admin', 'refresh');
 		}
 	}
 }

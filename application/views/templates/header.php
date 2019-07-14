@@ -2,7 +2,7 @@
         <head>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/main.css">
 		<?php
-			if ($this->uri->segment(1, 0) == 'user')  {
+			if ($this->uri->segment(1) == 'admin')  {
 				echo '<link rel="stylesheet" type="text/css" href="'.base_url().'css/user.css">';
 			}
 		?>
