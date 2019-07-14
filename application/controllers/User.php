@@ -13,9 +13,6 @@ class User extends MY_Controller
 	}
 
 	private function generate_page($tmp = array())  {
-		// $cam_data = $this->activist_model->get_campaign_data($tmp['data']['user_id']);
-		// $tmp['data']['cam_data'] = $cam_data;
-
         	$html = $this->load->view('templates/header', $tmp, TRUE);
        		$html .= $this->load->view('user/index', $tmp, TRUE);
         	$html .= $this->load->view('templates/footer', $tmp, TRUE);
@@ -31,6 +28,7 @@ class User extends MY_Controller
 			)
 		);
 
+		$this->load->library('forms');
 		$this->generate_page($tmp);
 	}
 
