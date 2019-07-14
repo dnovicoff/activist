@@ -7,6 +7,7 @@
 		<?php
 			$page = $this->uri->segment(1);
 			switch ($page)  {
+				case 'user':
 				case 'cam':
 					$this->load->view('user/cam_search_form', $data);
 					break;
