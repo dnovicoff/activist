@@ -1,7 +1,7 @@
 
 
 <div class="container">
-	<?php echo form_open('user/search'); ?>
+	<?php echo form_open('cam/search'); ?>
 		<table width="100%">
 			<tr><td>
 			<?php
@@ -12,14 +12,17 @@
 			?>
 			</td><td>
 			<?php
-				$data = array(
-					'name' => 'region',
-					'id' => '',
-					'value' => set_value('region'),
-					'class' => '',
-					'placeholder' => '<select>'
+				$options = array(
+					'choose' => ' - select - ',
+					'national' => 'National',
+					'state' => 'State',
+					'city' => 'City'
 				);
-				echo form_input($data);
+				$js = array(
+					'id' => 'region',
+					'onChange' => 'alert(\'Yes\');'
+				);
+				echo form_dropdown('region', $options, 'choose');
 			?>
 			</td><td>
 			<?php
