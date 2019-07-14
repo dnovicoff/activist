@@ -23,12 +23,15 @@ class User extends MY_Controller
 	public function search()  {
 		$tmp = array(
 			'data' => array(
-        			'title' => ucfirst("cam"), // Capitalize the first letter
-				'door' => 'cam'
+        			'title' => ucfirst("cam_search"), // Capitalize the first letter
+				'door' => 'cam_search'
 			)
 		);
 
 		$this->load->library('forms');
+		if ($this->forms->validate($tmp))  {
+
+		}
 		$this->generate_page($tmp);
 	}
 
