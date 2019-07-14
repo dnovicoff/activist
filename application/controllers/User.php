@@ -23,8 +23,7 @@ class User extends MY_Controller
 	public function search($cam_id = NULL)  {
 		$tmp = array(
 			'data' => array(
-        			'title' => ucfirst("cam_search"), // Capitalize the first letter
-				'door' => 'cam_search'
+        			'title' => ucfirst("Campaign search Results") // Capitalize the first letter
 			)
 		);
 
@@ -40,8 +39,7 @@ class User extends MY_Controller
         {
 		$tmp = array(
 			'data' => array(
-        			'title' => ucfirst($page), // Capitalize the first letter
-				'door' => $page
+        			'title' => ucfirst('Campaign Search') // Capitalize the first letter
 			)
 		);
 
