@@ -13,13 +13,8 @@ class User extends MY_Controller
 	}
 
 	private function generate_page($tmp = array())  {
-		// $this->setup_login_form();
-		// $loc_data = $this->activist_model->get_loc	ation_data($tmp['data']['user_id']);
-		$loc_data = FALSE;
-		$cam_data = $this->activist_model->get_campaign_data($tmp['data']['user_id']);
-
-		$tmp['data']['loc_data'] = $loc_data;
-		$tmp['data']['cam_data'] = $cam_data;
+		// $cam_data = $this->activist_model->get_campaign_data($tmp['data']['user_id']);
+		// $tmp['data']['cam_data'] = $cam_data;
 
         	$html = $this->load->view('templates/header', $tmp, TRUE);
        		$html .= $this->load->view('user/index', $tmp, TRUE);
@@ -28,77 +23,15 @@ class User extends MY_Controller
 		echo $html;
 	}
 
-	public function loc($loc_id = NULL)  {
-		$tmp = array(
-			'data' => array(
-        			'title' => ucfirst("loc"), // Capitalize the first letter
-				'door' => 'loc',
-				'user_id' => $this->auth_user_id
-			)
-		);
-
-		$this->is_logged_in();
-		if (!empty($this->auth_role))  {
-			$this->generate_page($tmp);
-		}  else  {
-			redirect($this->input->server, 'refresh');
-		}
-	}
-
-	public function cam($cam_method = NULL, $cam_id = NULL)  {
-		$status = (!is_null($cam_method) ? $cam_method : 'insert');
-		$functions = array('insert', 'select', 'update', 'delete');
-		if (!in_array($status, $functions))  {
-			show_404();
-		}
-
-		$this->is_logged_in();
+	public function search()  {
 		$tmp = array(
 			'data' => array(
         			'title' => ucfirst("cam"), // Capitalize the first letter
-				'door' => 'cam',
-				'user_id' => $this->auth_user_id,
-				'hidden_data' => array('status' => $status)
+				'door' => 'cam'
 			)
 		);
 
-		$this->load->library('forms');
-		if ($this->require_role('admin'))  {
-			if ($this->forms->validate($tmp))  {
-        			$cam_data = [
-					'user_id' => intval($this->auth_user_id),
-					'created_at' => date('Y-m-d H:i:s'),
-					'start_time' => $this->input->post('start_date').' 00:00:01',
-					'end_time' => $this->input->post('end_date').' 23:59:59',
-					'title' => $this->input->post('title'),
-					'text' => $this->input->post('cam_text')
-				];
-
-				if (is_null($cam_id) && $status == 'insert')  {
-					$id = $this->activist_model->insert_campaign($cam_data);
-					$cam_id = $id;
-				}  else if ($status == 'update' && !is_null($cam_id) && is_int(intval($cam_id)))  {
-					$cam_data['cam_id'] = $cam_id;
-					$this->activist_model->update_campaign($cam_data);
-				}
-			}
-			if (!is_null($status) && !is_null($cam_id) && is_int(intval($cam_id)))  {
-				switch ($status)  {
-					case 'insert':
-					case "select":
-					case "update":
-						$tmp['data']['cam_detail'] = $this->activist_model->get_campaign_data($this->auth_user_id, $cam_id);
-						break;
-					case "delete":
-						$tmp['data']['cam_detail'] = $this->activist_model->delete_campaign($this->auth_user_id, $cam_id);
-						break;
-				}
-				$tmp['data']['hidden_data'] = array('status' => $status, 'cam_id' => $cam_id);
-			}
-			$this->generate_page($tmp);
-		}  else  {
-			redirect($this->input->server, 'refresh');
-		}
+		$this->generate_page($tmp);
 	}
 
         public function index($page = 'index')
@@ -110,8 +43,7 @@ class User extends MY_Controller
 			)
 		);
 
-		if (!file_exists(APPPATH.'views/user/index.php'))
-		{
+		if (!file_exists(APPPATH.'views/user/index.php'))  {
                 	// Whoops, we don't have a page for that!
 			log_message('ERROR', 'Activist Error '.$page);
                 	show_404();
