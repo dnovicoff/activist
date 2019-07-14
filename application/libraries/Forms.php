@@ -173,7 +173,7 @@ class Forms {
 				'rules' => [
 					'trim',
 					'required',
-					'regex_match[/!choose/]'
+					'regex_match[/^(?!choose)/]'
 				],
 				'errors' => [
 					'regex_match' => 'Please choose a region to start search'
