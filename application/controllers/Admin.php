@@ -130,7 +130,7 @@ class Admin extends MY_Controller
                 	show_404();
 		}
 		
-		if (!empty($this->auth_role))  {
+		if $this->require_role('admin'))  {
 			$this->generate_page($tmp);
 		}  else  {
 			redirect($this->input->server, 'refresh');
