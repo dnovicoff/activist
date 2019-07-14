@@ -168,11 +168,12 @@ class Forms {
 	private function get_cam_search_rules()  {
 		$cam_search_rules = [
 			[
-				'field' => 'reagon',
+				'field' => 'region',
 				'label' => 'region',
 				'rules' => [
 					'trim',
-					'required'
+					'required',
+					'regex_match[/!choose/]'
 				],
 				'errors' => [
 				]
@@ -182,7 +183,7 @@ class Forms {
 		return $cam_search_rules;
 	}
 
-	public function validate_form($tmp)
+	private function validate_form($tmp)
 	{
 		$inputs = array();
 		switch ($tmp['data']['door'])  {

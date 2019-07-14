@@ -20,7 +20,7 @@ class User extends MY_Controller
 		echo $html;
 	}
 
-	public function search()  {
+	public function search($cam_id = NULL)  {
 		$tmp = array(
 			'data' => array(
         			'title' => ucfirst("cam_search"), // Capitalize the first letter
@@ -30,9 +30,10 @@ class User extends MY_Controller
 
 		$this->load->library('forms');
 		if ($this->forms->validate($tmp))  {
-
+			echo "Success my brotha";
+		}  else  {
+			$this->generate_page($tmp);
 		}
-		$this->generate_page($tmp);
 	}
 
         public function index($page = 'index')

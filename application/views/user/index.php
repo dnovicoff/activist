@@ -6,7 +6,6 @@
 	<div class="largecol">
 		<?php
 			$page = $this->uri->segment(1);
-			var_dump($page);
 			switch ($page)  {
 				case 'cam':
 					$this->load->view('user/cam_search_form', $data);
