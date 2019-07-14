@@ -176,6 +176,25 @@ class Forms {
 					'regex_match[/!choose/]'
 				],
 				'errors' => [
+					'regex_match' => 'Please choose a region to start search'
+				]
+			],  [
+				'field' => 'state',
+				'label' => 'state',
+				'rules' => [
+					'trim',
+					'regex_match[/!choose/]'
+				],
+				'errors' => [
+				]
+			],  [
+				'field' => 'city',
+				'label' => 'city',
+				'rules' => [
+					'trim',
+					'regex_match[/!choose/]'
+				],
+				'errors' => [
 				]
 			]
 		];
@@ -183,10 +202,10 @@ class Forms {
 		return $cam_search_rules;
 	}
 
-	private function validate_form($tmp)
+	private function validate_form($rule)
 	{
 		$inputs = array();
-		switch ($tmp['data']['door'])  {
+		switch ($rule)  {
 			case "user":
 				$inputs['email'] = $this->CI->input->post('email');
 				$inputs['pass'] = password_hash($this->CI->input->post('password'), PASSWORD_DEFAULT);
@@ -208,7 +227,7 @@ class Forms {
 		}
 
     		if ($this->CI->form_validation->run() !== FALSE)  {
-			switch ($tmp['data']['door'])  {
+			switch ($rule)  {
 				case "user":
 					break;
 				case "pass":
@@ -222,15 +241,13 @@ class Forms {
 		return FALSE;
 	}
 
-	public function validate($params = array())
-        {
-                if (!file_exists(APPPATH.'views/user/index.php'))
-		{
+	public function validate($rule = NULL)  {
+                if (!file_exists(APPPATH.'views/user/index.php'))  {
                 	// Whoops, we don't have a page for that!
                 	show_404();
 		}
 
-        	return $this->validate_form($params);
+        	return $this->validate_form($rule);
         }
 
 	public function __construct($params = array())
