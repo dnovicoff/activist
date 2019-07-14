@@ -6,9 +6,16 @@
 	<div class="largecol">
 		<?php
 			$page = $this->uri->segment(1);
-			echo '<div class="graph_canvas">'.
-				$this->load->view('user/data', $data, TRUE).
-			'</div>';
+			switch ($page)  {
+				case 'cam':
+					$this->load->view('user/cam_search_form', $data);
+					break;
+				default:
+				echo '<div class="graph_canvas">'.
+						$this->load->view('user/data', $data, TRUE).
+					'</div>';
+					break;
+			}
 		?>
 	</div>
 	<div class="smallcol">
