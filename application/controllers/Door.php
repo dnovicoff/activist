@@ -29,12 +29,11 @@ class Door extends MY_Controller
 
 		$tmp = array(
 			"data" => array(
-        			"title" => ucfirst("pass"), // Capitalize the first letter
-				"door" => "pass"
+        			"title" => ucfirst("Account reset") // Capitalize the first letter
 			)
 		);
 
-		if ($this->forms->validate($tmp))  {
+		if ($this->forms->validate('pass'))  {
 			if( strtolower( $_SERVER['REQUEST_METHOD'] ) == 'post' )  {
 				echo "Here";
 			}
@@ -51,12 +50,11 @@ class Door extends MY_Controller
 
 		$tmp = array(
 			"data" => array(
-        			"title" => ucfirst("user"), // Capitalize the first letter
-				"door" => "user"
+        			"title" => ucfirst("Create user") // Capitalize the first letter
 			)
 		);
 
-		if ($this->forms->validate($tmp))  {
+		if ($this->forms->validate('user'))  {
 			if( strtolower( $_SERVER['REQUEST_METHOD'] ) == 'post' )  {
 				
 			}
@@ -74,14 +72,13 @@ class Door extends MY_Controller
 
 		$tmp = array(
 			"data" => array(
-        			"title" => ucfirst("auth"), // Capitalize the first letter
-				"door" => "auth"
+        			"title" => ucfirst("Authentication") // Capitalize the first letter
 			)
 		);
 
-		if ($this->forms->validate($tmp))  {
+		if ($this->forms->validate('auth'))  {
 			if( strtolower( $_SERVER['REQUEST_METHOD'] ) == 'post' )  {
-				if ($this->require_min_level(1))  {
+				if ($this->require_min_level(9))  {
 					redirect('admin', 'refresh');
 				}
 			}
@@ -99,7 +96,7 @@ class Door extends MY_Controller
 		}
 		
 		// $this->is_logged_in();
-		if (!$this->verify_min_level(1))  {
+		if (!$this->verify_min_level(9))  {
 			$this->generate_page();
 		}  else  {
 			redirect('admin', 'refresh');
