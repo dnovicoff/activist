@@ -1,5 +1,5 @@
 
 
 <div class="container">
-	This is where the graphs will be shown
+	A listing of campaigns from a form searching for national / state / city
 </div>
