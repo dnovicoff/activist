@@ -101,22 +101,12 @@ class User extends MY_Controller
 		}
 	}
 
-	public function logout()  {
-		$this->authentication->logout();
-
-		$redirect_protocol = USE_SSL ? 'https' : NULL;
-
-		redirect( site_url( LOGIN_PAGE . '?' . AUTH_LOGOUT_PARAM . '=1', $redirect_protocol ) );
-	}
-
         public function index($page = 'index')
         {
-		$this->is_logged_in();
 		$tmp = array(
 			'data' => array(
         			'title' => ucfirst($page), // Capitalize the first letter
-				'door' => $page,
-				'user_id' => $this->auth_user_id
+				'door' => $page
 			)
 		);
 
@@ -127,10 +117,6 @@ class User extends MY_Controller
                 	show_404();
 		}
 		
-		if (!empty($this->auth_role))  {
-			$this->generate_page($tmp);
-		}  else  {
-			redirect($this->input->server, 'refresh');
-		}
+		$this->generate_page($tmp);
 	}
 }
