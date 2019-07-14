@@ -165,6 +165,23 @@ class Forms {
 		return $cam_rules;
 	}
 
+	private function get_cam_search_rules()  {
+		$cam_search_rules = [
+			[
+				'field' => 'reagon',
+				'label' => 'region',
+				'rules' => [
+					'trim',
+					'required'
+				],
+				'errors' => [
+				]
+			]
+		];
+
+		return $cam_search_rules;
+	}
+
 	public function validate_form($tmp)
 	{
 		$inputs = array();
@@ -184,15 +201,16 @@ class Forms {
 			case 'cam':
 				$this->CI->form_validation->set_rules($this->get_cam_rules());
 				break;
+			case 'cam_search':
+				$this->CI->form_validation->set_rules($this->get_cam_search_rules());
+				break;
 		}
 
     		if ($this->CI->form_validation->run() !== FALSE)  {
 			switch ($tmp['data']['door'])  {
 				case "user":
-					// $this->activist_model->create_user($inputs);
 					break;
 				case "pass":
-					// $this->CI->activist_model->user_password_change($inputs);
 					break;
 				case "auth":
 					break;
