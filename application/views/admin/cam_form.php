@@ -5,6 +5,7 @@
 	$ed = '';
 	$ttle = '';
 	$txt = '';
+	$tail = '';
 	if (isset($cam_detail) && !empty($cam_detail))  {
 		$spl = explode(" ", $cam_detail[0]['start_time']);
 		$sd = $spl[0];
@@ -14,13 +15,15 @@
 		$txt = $cam_detail[0]['text'];
 		if ($hidden_data['status'] !== 'update')  {
 			$readonly = 'readonly';
+		}  else  {
+			$tail = '/update/'.$cam_detail[0]['cam_id'];
 		}
 	}
 ?>
 
 <?php if (($hidden_data['status'] == 'insert' && !isset($hidden_data['cam_id'])) || !empty($cam_detail))  { ?>
 <div class="container">
-	<?php echo form_open('admin/cam', '', $hidden_data); ?>
+	<?php echo form_open('admin/cam'.$tail, '', $hidden_data); ?>
 		<table width="100%">
 			<tr><td>
 			<?php

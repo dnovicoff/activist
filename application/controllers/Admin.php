@@ -74,12 +74,15 @@ class Admin extends MY_Controller
 					'text' => $this->input->post('cam_text')
 				];
 
-				if (is_null($cam_id) && $status == 'insert')  {
-					$id = $this->activist_model->insert_campaign($cam_data);
-					$cam_id = $id;
-				}  else if ($status == 'update' && !is_null($cam_id) && is_int(intval($cam_id)))  {
-					$cam_data['cam_id'] = $cam_id;
+				if ($this->input->post('cam_id') !== NULL)  {
+					$cam_data['cam_id'] = $this->input->post('cam_id');
+				}
+
+				if (!isset($cam_data['cam_id']) && $status == "insert")  {
+					$cam_id = $this->activist_model->insert_campaign($cam_data);
+				}  else if ($status == "update" && isset($cam_data['cam_id']))  {
 					$this->activist_model->update_campaign($cam_data);
+					$status = 'select';
 				}
 			}
 			if (!is_null($status) && !is_null($cam_id) && is_int(intval($cam_id)))  {
