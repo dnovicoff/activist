@@ -183,7 +183,7 @@ class Forms {
 				'label' => 'state',
 				'rules' => [
 					'trim',
-					'regex_match[/!choose/]'
+					'regex_match[/^(?!choose)/]'
 				],
 				'errors' => [
 				]
@@ -192,7 +192,7 @@ class Forms {
 				'label' => 'city',
 				'rules' => [
 					'trim',
-					'regex_match[/!choose/]'
+					'regex_match[/*(?!choose)/]'
 				],
 				'errors' => [
 				]

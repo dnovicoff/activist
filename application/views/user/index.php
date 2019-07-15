@@ -5,16 +5,19 @@
 	</div>
 	<div class="largecol">
 		<?php
+			$output = '';
 			$page = $this->uri->segment(1);
 			switch ($page)  {
 				case 'user':
 				case 'cam':
-					$this->load->view('user/cam_search_form', $data);
+					$output = $this->load->view('user/cam_search_form', $data, TRUE);
 					break;
 			}
-			echo '<div class="graph_canvas">'.
+			$output .= '<div class="graph_canvas">'.
 				$this->load->view('user/data', $data, TRUE).
 			'</div>';
+
+			echo $output;
 		?>
 	</div>
 	<div class="smallcol">
