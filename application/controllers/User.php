@@ -23,23 +23,28 @@ class User extends MY_Controller
 	public function search($cam_id = NULL)  {
 		$tmp = array(
 			'data' => array(
-        			'title' => ucfirst("Campaign search Results") // Capitalize the first letter
+        			'title' => ucfirst("Campaign search Results"), // Capitalize the first letter
+				'region' => $this->input->post('region')
 			)
 		);
 
 		$this->load->library('forms');
 		if ($this->forms->validate('cam_search'))  {
-			echo "Success my brotha";
-		}  else  {
-			$this->generate_page($tmp);
+			if (strtolower( $_SERVER['REQUEST_METHOD'] ) == 'post')  {
+				
+			}
 		}
+		$this->generate_page($tmp);
 	}
 
         public function index($page = 'index')
         {
 		$tmp = array(
 			'data' => array(
-        			'title' => ucfirst('Campaign Search') // Capitalize the first letter
+        			'title' => ucfirst('Campaign Search'), // Capitalize the first letter
+				'region' => 'choose',
+				'state' => 'state',
+				'city' => 'city'
 			)
 		);
 
