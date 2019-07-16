@@ -8,34 +8,38 @@
 				$attributes = array(
 					'class' => ''
 				);
-				echo "Region: ";
+				echo "Country: ";
 			?>
 			</td><td>
 			<?php
 				$options = array(
 					'choose' => 'choose',
-					'national' => 'National',
-					'state' => 'State',
-					'city' => 'City'
 				);
 				$js = array(
-					'id' => 'region',
+					'id' => 'country',
 					'onChange' => 'alert(\'Yes\');'
 				);
-				echo form_dropdown('region', $options, $region);
+				if (!is_bool($countries))  {
+					if (is_array($countries))  {
+						foreach ($countries as $row)  {
+							$options[$row['country_id']] = $row['country_name'];
+						}
+					}
+				}
+				echo form_dropdown('country', $options, $country);
 			?>
 			</td><td>
 			<?php
-				if (!empty(form_error('region')))  {
+				if (!empty(form_error('country')))  {
 					echo '<div style="font-size: 80%; color: red;">'.
-						form_error('region').
+						form_error('country').
 					'</div>';  
 				}
 			?>
 			</td></tr>
 
 			<?php
-				if ($region != "choose")  {
+				if ($country != "choose")  {
 			?>
 				<tr><td>
 				<?php
@@ -46,14 +50,21 @@
 				?>
 				</td><td>
 				<?php
-					$data = array(
-						'name' => 'state',
-						'id' => '',
-						'value' => set_value('state'),
-						'class' => '',
-						'placeholder' => '<select>'
+					$options = array(
+						'choose' => 'choose',
 					);
-					echo form_input($data);
+					$js = array(
+						'id' => 'state',
+						'onChange' => 'alert(\'Yes\');'
+					);
+					if (!is_bool($states))  {
+						if (is_array($states))  {
+							foreach ($states as $row)  {
+								$options[$row['state_id']] = $row['state_name'];
+							}
+						}
+					}
+					echo form_dropdown('state', $options, $state);
 				?>
 				</td><td>
 				<?php
@@ -82,7 +93,7 @@
 							'id' => '',
 							'value' => set_value('cam_text'),
 							'class' => '',
-							'placeholder' => '<select>'
+							'placeholder' => 'type city name'
 						);
 						echo form_input($data);
 					?>

@@ -14,6 +14,7 @@ class Activist_model extends CI_Model {
         	return $query->row_array();
 	}
 
+	/**
 	public function get_user($email = FALSE)
 	{
 		if ($email !== FALSE)  {
@@ -37,7 +38,9 @@ class Activist_model extends CI_Model {
 		}
 		return FALSE;
 	}
+	**/
 
+	/**
 	public function user_password_change($email)
 	{
 		$this->email->from('root@actifish.com', 'Actifish Support');
@@ -45,6 +48,40 @@ class Activist_model extends CI_Model {
 		$this->email->subject('Requested Password Change');
 		$this->email->message('There will be a link here to click to change password.');
 		$this->email->send();
+	}
+	**/
+
+	public function get_countries()  {
+		$query = $this->db->select('*')->from('country')
+			->get();
+
+		$errors = $this->db->error();
+		if ($errors['code'] !== 0)  {
+			return 'Error: ['.implode(", ", $this->db->error()).']';
+		}
+		
+		if ($query->num_rows() > 0)  {	
+			return $query->result_array();
+		}
+
+		return FALSE;
+	}
+
+	public function get_states($country_id)  {
+		$query = $this->db->select('*')->from('state')
+			->where('country_id', $country_id)
+			->get();
+
+		$errors = $this->db->error();
+		if ($errors['code'] !== 0)  {
+			return 'Error: ['.implode(", ", $this->db->error()).']';
+		}
+		
+		if ($query->num_rows() > 0)  {	
+			return $query->result_array();
+		}
+
+		return FALSE;
 	}
 
 	public function insert_campaign($cam_data)  {
@@ -135,6 +172,10 @@ class Activist_model extends CI_Model {
 		}
 
 		return FALSE;
+	}
+
+	public function get_campaigns($country_id = NULL, $state_id = NULL, $city_id = NULL)  {
+
 	}
 
 	public function get_location_data($id)  {

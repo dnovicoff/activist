@@ -168,15 +168,15 @@ class Forms {
 	private function get_cam_search_rules()  {
 		$cam_search_rules = [
 			[
-				'field' => 'region',
-				'label' => 'region',
+				'field' => 'country',
+				'label' => 'country',
 				'rules' => [
 					'trim',
 					'required',
 					'regex_match[/^(?!choose)/]'
 				],
 				'errors' => [
-					'regex_match' => 'Please choose a region to start search'
+					'regex_match' => 'Please choose a country to start search'
 				]
 			],  [
 				'field' => 'state',
@@ -186,6 +186,7 @@ class Forms {
 					'regex_match[/^(?!choose)/]'
 				],
 				'errors' => [
+					'regex_match' => 'Choose a state or reset the form to start search over'
 				]
 			],  [
 				'field' => 'city',
