@@ -13,6 +13,11 @@ class User extends MY_Controller
 	}
 
 	private function generate_page($tmp = array())  {
+		$tmp['data']['countries'] = $this->activist_model->get_countries();
+		if (intval($tmp['data']['country']))  {
+			$tmp['data']['states'] = $this->activist_model->get_states($this->input->post('country'));
+		}
+
         	$html = $this->load->view('templates/header', $tmp, TRUE);
        		$html .= $this->load->view('user/index', $tmp, TRUE);
         	$html .= $this->load->view('templates/footer', $tmp, TRUE);
@@ -24,14 +29,19 @@ class User extends MY_Controller
 		$tmp = array(
 			'data' => array(
         			'title' => ucfirst("Campaign search Results"), // Capitalize the first letter
-				'region' => $this->input->post('region')
+				'country' => $this->input->post('country'),
+				'state' => 'choose',
+				'city' => 'choose'
 			)
 		);
 
 		$this->load->library('forms');
 		if ($this->forms->validate('cam_search'))  {
+			## $tmp['data']['national'] = $this->activist_model->get_campaigns();
 			if (strtolower( $_SERVER['REQUEST_METHOD'] ) == 'post')  {
-				
+				if (!is_null($this->input->post('state')))  {
+					$tmp['data']['state'] = $this->input->post('state');
+				}				
 			}
 		}
 		$this->generate_page($tmp);
@@ -42,9 +52,9 @@ class User extends MY_Controller
 		$tmp = array(
 			'data' => array(
         			'title' => ucfirst('Campaign Search'), // Capitalize the first letter
-				'region' => 'choose',
-				'state' => 'state',
-				'city' => 'city'
+				'country' => 'choose',
+				'state' => 'choose',
+				'city' => 'choose'
 			)
 		);
 
