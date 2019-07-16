@@ -35,15 +35,6 @@ CREATE TABLE `acl` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `acl`
---
-
-LOCK TABLES `acl` WRITE;
-/*!40000 ALTER TABLE `acl` DISABLE KEYS */;
-/*!40000 ALTER TABLE `acl` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `acl_actions`
 --
 
@@ -62,15 +53,6 @@ CREATE TABLE `acl_actions` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `acl_actions`
---
-
-LOCK TABLES `acl_actions` WRITE;
-/*!40000 ALTER TABLE `acl_actions` DISABLE KEYS */;
-/*!40000 ALTER TABLE `acl_actions` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `acl_categories`
 --
 
@@ -86,15 +68,6 @@ CREATE TABLE `acl_categories` (
   UNIQUE KEY `category_desc` (`category_desc`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `acl_categories`
---
-
-LOCK TABLES `acl_categories` WRITE;
-/*!40000 ALTER TABLE `acl_categories` DISABLE KEYS */;
-/*!40000 ALTER TABLE `acl_categories` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `address`
@@ -115,15 +88,6 @@ CREATE TABLE `address` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `address`
---
-
-LOCK TABLES `address` WRITE;
-/*!40000 ALTER TABLE `address` DISABLE KEYS */;
-/*!40000 ALTER TABLE `address` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `auth_sessions`
 --
 
@@ -140,16 +104,6 @@ CREATE TABLE `auth_sessions` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `auth_sessions`
---
-
-LOCK TABLES `auth_sessions` WRITE;
-/*!40000 ALTER TABLE `auth_sessions` DISABLE KEYS */;
-INSERT INTO `auth_sessions` VALUES ('ak6qp4uc9aodpuquh5f8b0l1m0d22ik6',3724613466,'2019-07-13 09:46:11','2019-07-13 10:28:01','192.168.122.100','Firefox 60.0 on Linux'),('kr4ionkgnhg96jon1kpge51eqq8mh03l',3724613466,'2019-07-13 16:46:47','2019-07-13 17:22:20','192.168.122.100','Firefox 60.0 on Linux');
-/*!40000 ALTER TABLE `auth_sessions` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `campaign`
@@ -169,18 +123,8 @@ CREATE TABLE `campaign` (
   `text` varchar(1000) DEFAULT NULL,
   PRIMARY KEY (`cam_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `campaign`
---
-
-LOCK TABLES `campaign` WRITE;
-/*!40000 ALTER TABLE `campaign` DISABLE KEYS */;
-INSERT INTO `campaign` VALUES (12,3724613466,'2019-07-13 19:09:00','2019-07-13 19:09:00','2019-07-12 00:00:01','2021-08-15 23:59:59','Save the whales','It is my belief that my big balls should be held every night'),(13,3724613466,'2019-07-13 19:19:37','2019-07-13 19:19:37','2019-07-01 00:00:01','2020-10-01 23:59:59','New Campaign','This campaign will change the course of history.'),(11,3724613466,'2019-07-13 18:08:57','2019-07-13 18:08:57','2019-07-10 00:00:01','2021-07-10 23:59:59','new title','this is a new campaign that Im running to save the whales. Instead we are going to shoot the seals!');
-/*!40000 ALTER TABLE `campaign` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `ci_sessions`
@@ -200,15 +144,6 @@ CREATE TABLE `ci_sessions` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `ci_sessions`
---
-
-LOCK TABLES `ci_sessions` WRITE;
-/*!40000 ALTER TABLE `ci_sessions` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ci_sessions` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `city`
 --
 
@@ -218,20 +153,41 @@ DROP TABLE IF EXISTS `city`;
 CREATE TABLE `city` (
   `city_id` int(11) NOT NULL AUTO_INCREMENT,
   `city` varchar(100) NOT NULL,
-  `fk_state_id` int(11) NOT NULL,
-  PRIMARY KEY (`city_id`),
-  KEY `fk_state_id` (`fk_state_id`)
+  PRIMARY KEY (`city_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=40241 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `city_state`
+--
+
+DROP TABLE IF EXISTS `city_state`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `city_state` (
+  `state_id` int(11) NOT NULL,
+  `city_id` int(11) NOT NULL,
+  KEY `state_id` (`state_id`),
+  KEY `city_id` (`city_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `city`
+-- Table structure for table `city_zip`
 --
 
-LOCK TABLES `city` WRITE;
-/*!40000 ALTER TABLE `city` DISABLE KEYS */;
-/*!40000 ALTER TABLE `city` ENABLE KEYS */;
-UNLOCK TABLES;
+DROP TABLE IF EXISTS `city_zip`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `city_zip` (
+  `city_id` int(11) NOT NULL,
+  `zip_id` int(11) NOT NULL,
+  `type` varchar(10) NOT NULL,
+  `decomm` tinyint(1) NOT NULL DEFAULT '0',
+  KEY `city_id` (`city_id`),
+  KEY `zip_id` (`zip_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `company`
@@ -246,15 +202,6 @@ CREATE TABLE `company` (
   PRIMARY KEY (`co_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `company`
---
-
-LOCK TABLES `company` WRITE;
-/*!40000 ALTER TABLE `company` DISABLE KEYS */;
-/*!40000 ALTER TABLE `company` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `company_address`
@@ -272,13 +219,19 @@ CREATE TABLE `company_address` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `company_address`
+-- Table structure for table `country`
 --
 
-LOCK TABLES `company_address` WRITE;
-/*!40000 ALTER TABLE `company_address` DISABLE KEYS */;
-/*!40000 ALTER TABLE `company_address` ENABLE KEYS */;
-UNLOCK TABLES;
+DROP TABLE IF EXISTS `country`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `country` (
+  `country_id` int(11) NOT NULL AUTO_INCREMENT,
+  `country_abbr` varchar(2) NOT NULL,
+  `country_name` varchar(100) NOT NULL,
+  PRIMARY KEY (`country_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `denied_access`
@@ -297,15 +250,6 @@ CREATE TABLE `denied_access` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `denied_access`
---
-
-LOCK TABLES `denied_access` WRITE;
-/*!40000 ALTER TABLE `denied_access` DISABLE KEYS */;
-/*!40000 ALTER TABLE `denied_access` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `ips_on_hold`
 --
 
@@ -321,15 +265,6 @@ CREATE TABLE `ips_on_hold` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `ips_on_hold`
---
-
-LOCK TABLES `ips_on_hold` WRITE;
-/*!40000 ALTER TABLE `ips_on_hold` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ips_on_hold` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `login_errors`
 --
 
@@ -342,18 +277,8 @@ CREATE TABLE `login_errors` (
   `ip_address` varchar(45) NOT NULL,
   `time` datetime NOT NULL,
   PRIMARY KEY (`ai`)
-) ENGINE=MyISAM AUTO_INCREMENT=72 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=74 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `login_errors`
---
-
-LOCK TABLES `login_errors` WRITE;
-/*!40000 ALTER TABLE `login_errors` DISABLE KEYS */;
-INSERT INTO `login_errors` VALUES (71,'dnovicoff@gmail.com','192.168.122.100','2019-07-13 01:42:08');
-/*!40000 ALTER TABLE `login_errors` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `state`
@@ -364,19 +289,13 @@ DROP TABLE IF EXISTS `state`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `state` (
   `state_id` int(11) NOT NULL AUTO_INCREMENT,
-  `state` varchar(50) NOT NULL,
-  PRIMARY KEY (`state_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `country_id` int(11) NOT NULL,
+  `state_abbr` varchar(2) DEFAULT NULL,
+  `state_name` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`state_id`),
+  KEY `country_id` (`country_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=60 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `state`
---
-
-LOCK TABLES `state` WRITE;
-/*!40000 ALTER TABLE `state` DISABLE KEYS */;
-/*!40000 ALTER TABLE `state` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `user`
@@ -396,15 +315,6 @@ CREATE TABLE `user` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user`
---
-
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `username_or_email_on_hold`
 --
 
@@ -418,15 +328,6 @@ CREATE TABLE `username_or_email_on_hold` (
   PRIMARY KEY (`ai`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `username_or_email_on_hold`
---
-
-LOCK TABLES `username_or_email_on_hold` WRITE;
-/*!40000 ALTER TABLE `username_or_email_on_hold` DISABLE KEYS */;
-/*!40000 ALTER TABLE `username_or_email_on_hold` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `users`
@@ -453,16 +354,6 @@ CREATE TABLE `users` (
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `users`
---
-
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1303719293,'skunkbot','skunkbot@example.com',9,'0','$2y$11$Cu.YrEhiSbN3aJcUdlyxLeig1u/GDv8OS/B5VlyX/32a43EXbHTdu',NULL,NULL,NULL,NULL,'2019-06-19 19:30:47','2019-07-07 18:09:18');
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -484,6 +375,20 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Table structure for table `zip`
+--
+
+DROP TABLE IF EXISTS `zip`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `zip` (
+  `zip_id` int(11) NOT NULL AUTO_INCREMENT,
+  `zip` varchar(10) NOT NULL,
+  PRIMARY KEY (`zip_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=41874 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -494,4 +399,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-07-13 21:02:54
+-- Dump completed on 2019-07-15 21:57:57
