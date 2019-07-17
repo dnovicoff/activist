@@ -182,7 +182,11 @@ class Forms {
 					'integer' => 'Please choose a country',
 					'get_country' => 'Could not find country'
 				]
-			],  [
+			]
+		];
+
+		if ($level > 0)  {
+			$cam_search_rules[] =  [
 				'field' => 'state',
 				'label' => 'state',
 				'rules' => [
@@ -196,37 +200,41 @@ class Forms {
 					'integer' => 'Please choose a state',
 					'get_state' => 'Could not find state'
 				]
-			],  [
-				'field' => 'city',
-				'label' => 'city',
-				'rules' => [
-					'trim',
-					'min_length[3]',
-					'alpha_numeric_spaces',  [
-						'require_city',
-						function ($city)  {
-							if (!is_null($this->CI->input->post('country')) &&
-								intval($this->CI->input->post('country')) &&
-								!is_null($this->CI->input->post('state')) &&
-								intval($this->CI->input->post('state')))  {
-								return TRUE;
-							}
+			];
 
-							return FALSE;
-						}
+			if ($level > 1)  {
+				$cam_search_rules[] =  [
+					'field' => 'city',
+					'label' => 'city',
+					'rules' => [
+						'trim',
+						'min_length[3]',
+						'alpha_numeric_spaces',  [
+							'require_city',
+							function ($city)  {
+								if (!is_null($this->CI->input->post('country')) &&
+									intval($this->CI->input->post('country')) &&
+									!is_null($this->CI->input->post('state')) &&
+									intval($this->CI->input->post('state')))  {
+									return TRUE;
+								}
+
+								return FALSE;
+							}
+						]
+					],
+					'errors' => [
+						'regex_match' => 'Only use alphanumeric characters',
+						'require_city' => 'Alphanumeric characters greater than length 3'
 					]
-				],
-				'errors' => [
-					'regex_match' => 'Only use alphanumeric characters',
-					'require_city' => 'Alphanumeric characters greater than length 3'
-				]
-			]
-		];
+				];
+			}
+		}
 
 		return $cam_search_rules;
 	}
 
-	private function validate_form($rule)
+	private function validate_form($rule, $level)
 	{
 		$inputs = array();
 		switch ($rule)  {
@@ -246,7 +254,7 @@ class Forms {
 				$this->CI->form_validation->set_rules($this->get_cam_rules());
 				break;
 			case 'cam_search':
-				$this->CI->form_validation->set_rules($this->get_cam_search_rules());
+				$this->CI->form_validation->set_rules($this->get_cam_search_rules($level));
 				break;
 		}
 
@@ -271,7 +279,7 @@ class Forms {
                 	show_404();
 		}
 
-        	return $this->validate_form($rule);
+        	return $this->validate_form($rule, $level);
         }
 
 	public function __construct($params = array())
