@@ -21,11 +21,9 @@ class Door extends MY_Controller
 		echo $html;
 	}
 
-	public function pass($user_id = '', $recovery_code = '')  {
+	public function pass()  {
 		if ($this->uri->uri_string() == 'door/pass')
 			show_404();
-
-		$this->load->library('forms');
 
 		$tmp = array(
 			"data" => array(
@@ -33,17 +31,52 @@ class Door extends MY_Controller
 			)
 		);
 
+		$this->load->library('forms');
+		$this->load->model('activist_model');
 		if ($on_hold = $this->authentication->current_hold_status(TRUE))  {
-			$view_data['disabled'] = 1;
+			$tmp['data']['disabled'] = 1;
 		}  else  {
-			if ($this->forms->validate('pass'))  {
-				if( strtolower( $_SERVER['REQUEST_METHOD'] ) == 'post' )  {
-					echo "Here";
+			if (strtolower($_SERVER['REQUEST_METHOD']) == 'post')  {
+				if ($this->forms->validate('pass'))  {
+					if ($this->tokens->match && $this->input->post('email'))  {
+						if ($user_data = $this->activist_model->get_recovery_data($this->input->post('email')))  {
+							if ($user_data->banned == '1')  {
+								$this->authentication->log_error($this->input->post('email', TRUE));
+								$tmp['data']['banned'] = 1;
+							}  else  {
+								$recovery_code = substr( $this->authentication->random_salt() 
+									. $this->authentication->random_salt() 
+									. $this->authentication->random_salt() 
+									. $this->authentication->random_salt(), 0, 72);
+
+								$this->activist_model->update_user_raw_data($user_data->user_id,  [
+									'passwd_recovery_code' => $this->authentication->hash_passwd($recovery_code),
+									'passwd_recovery_date' => date('Y-m-d H:i:s')
+									]
+								);
+
+								$link_protocol = USE_SSL ? 'https' : NULL;
+								$link_uri = 'examples/recovery_verification/'.$user_data->user_id. 
+									'/'.$recovery_code;
+
+								$tmp['data']['special_link'] = anchor( 
+									site_url( $link_uri, $link_protocol ), 
+									site_url( $link_uri, $link_protocol ), 
+									'target ="_blank"' 
+								);
+
+								$tmp['data']['confirmation'] = 1;
+							}
+						}  else  {
+							$this->authentication->log_error($this->input->post('email', TRUE));
+							$tmp['data']['no_match'] = 1;
+						}
+					}
 				}
 			}
 		}
 
-		$this->generate_page();
+		$this->generate_page($tmp);
 	}
 
 	public function create()  {
