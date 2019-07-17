@@ -173,29 +173,57 @@ class Forms {
 				'rules' => [
 					'trim',
 					'required',
-					'regex_match[/^(?!choose)/]'
+					'integer'
 				],
 				'errors' => [
-					'regex_match' => 'Please choose a country to start search'
+					'integer' => 'Please choose a country'
 				]
 			],  [
 				'field' => 'state',
 				'label' => 'state',
 				'rules' => [
 					'trim',
-					'regex_match[/^(?!choose)/]'
+					'integer',
+					'regex_match[/^(?!choose)/]',  [
+						'required_state',
+						function ($state)  {
+							if (!is_null($this->CI->input->post('country')) &&
+								intval($this->CI->input->post('country')))  {
+								return TRUE;
+							}
+
+							return FALSE;
+						}
+					]
 				],
 				'errors' => [
-					'regex_match' => 'Choose a state or reset the form to start search over'
+					'integer' => 'Please choose a state',
+					'required_state' => 'Please choose a state'
+					## 'regex_match' => 'Choose a state or reset the form to start search over'
 				]
 			],  [
 				'field' => 'city',
 				'label' => 'city',
 				'rules' => [
 					'trim',
-					'regex_match[/*(?!choose)/]'
+					'min_length[1]',
+					'alpha_numeric_spaces',
+					'regex_match[/^(\w+)/]',  [
+						'require_city',
+						function ($city)  {
+							if (!is_null($this->CI->input->post('country')) &&
+								intval($this->CI->input->post('country')) &&
+								!is_null($this->CI->input->post('state')) &&
+								intval($this->CI->input->post('state')))  {
+								return TRUE;
+							}
+
+							return FALSE;
+						}
+					]
 				],
 				'errors' => [
+					'regex_match' => 'Only use alphanumeric characters'
 				]
 			]
 		];
