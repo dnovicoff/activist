@@ -29,21 +29,26 @@ class User extends MY_Controller
 		$tmp = array(
 			'data' => array(
         			'title' => ucfirst("Campaign search Results"), // Capitalize the first letter
-				'country' => $this->input->post('country'),
+				'country' => 'choose',
 				'state' => 'choose',
 				'city' => 'choose'
 			)
 		);
 
-		$this->load->library('forms');
-		if ($this->forms->validate('cam_search'))  {
-			## $tmp['data']['national'] = $this->activist_model->get_campaigns();
-			if (strtolower( $_SERVER['REQUEST_METHOD'] ) == 'post')  {
-				if (!is_null($this->input->post('state')))  {
-					$tmp['data']['state'] = $this->input->post('state');
-				}				
+		if (strtolower($_SERVER['REQUEST_METHOD']) == 'post')  {
+			$this->load->library('forms');
+
+			$tmp['data']['country'] = (!is_null($this->input->post('country')) && intval($this->input->post('country')) ? $this->input->post('country') : 'choose');
+			$tmp['data']['state'] = (!is_null($this->input->post('state')) && intval($this->input->post('state')) ? $this->input->post('state') : 'choose');
+			$tmp['data']['city'] = (!is_null($this->input->post('city')) && !empty($this->input->post('city')) ? $this->input->post('city') : 'choose');
+
+			if ($this->forms->validate('cam_search'))  {
+				## $tmp['data']['national'] = $this->activist_model->get_campaigns();
+				
+
 			}
 		}
+		
 		$this->generate_page($tmp);
 	}
 
