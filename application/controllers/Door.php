@@ -21,7 +21,7 @@ class Door extends MY_Controller
 		echo $html;
 	}
 
-	public function pass()  {
+	public function pass($user_id = '', $recovery_code = '')  {
 		if ($this->uri->uri_string() == 'door/pass')
 			show_404();
 
@@ -33,9 +33,13 @@ class Door extends MY_Controller
 			)
 		);
 
-		if ($this->forms->validate('pass'))  {
-			if( strtolower( $_SERVER['REQUEST_METHOD'] ) == 'post' )  {
-				echo "Here";
+		if ($on_hold = $this->authentication->current_hold_status(TRUE))  {
+			$view_data['disabled'] = 1;
+		}  else  {
+			if ($this->forms->validate('pass'))  {
+				if( strtolower( $_SERVER['REQUEST_METHOD'] ) == 'post' )  {
+					echo "Here";
+				}
 			}
 		}
 
