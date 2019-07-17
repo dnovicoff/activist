@@ -84,6 +84,23 @@ class Activist_model extends CI_Model {
 		return FALSE;
 	}
 
+	public function get_cities($country_id = NULL, $state_id = NULL)  {
+		$query = $this->db->select('*')->from('state')
+			->where('country_id', $country_id)
+			->get();
+
+		$errors = $this->db->error();
+		if ($errors['code'] !== 0)  {
+			return 'Error: ['.implode(", ", $this->db->error()).']';
+		}
+		
+		if ($query->num_rows() > 0)  {	
+			return $query->result_array();
+		}
+
+		return FALSE;
+	}
+
 	public function insert_campaign($cam_data)  {
 		if (isset($cam_data))  {
 			$this->db->set($cam_data)->insert('campaign');
