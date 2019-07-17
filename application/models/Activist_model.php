@@ -14,11 +14,13 @@ class Activist_model extends CI_Model {
         	return $query->row_array();
 	}
 
-	/**
-	public function get_user($email = FALSE)
-	{
+	public function get_user($email = FALSE)  {
 		if ($email !== FALSE)  {
-			$query = $this->db->get_where('user', array('user_email' => $email), 1, 0);
+			$query = $this->db->select('*')
+				->from('user')
+				->where('user_email', $email)
+				->get();
+
 			if ($query->num_rows() > 0)  {
 				return TRUE;
 			}
@@ -26,6 +28,38 @@ class Activist_model extends CI_Model {
 		return FALSE;
 	}
 
+	public function get_country($country_id = FALSE)  {
+		if ($country_id !== FALSE)  {
+			$query = $this->db->select("^")
+				->from('country')
+				->where('country_id', $country_id)
+				->get();
+
+			if ($query->num_rows() > 0)  {
+				return TRUE;
+			}
+		}
+
+		return FALSE;
+	}
+
+	public function get_state($state_id = FALSE)  {
+		if ($state_id !== FALSE)  {
+			$query = $this->db->select('*')
+				->from('state')
+				->where('state_id', $state_id)
+				->get();
+
+			if ($query->num_rows() > 0)  {
+				return TRUE;
+			}
+		}
+
+		return FALSE;
+	}
+
+
+	/**
 	public function auth_user($email, $pass)
 	{
 		if (isset($email) && isset($pass))  {

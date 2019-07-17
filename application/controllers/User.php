@@ -38,14 +38,24 @@ class User extends MY_Controller
 		if (strtolower($_SERVER['REQUEST_METHOD']) == 'post')  {
 			$this->load->library('forms');
 
-			$tmp['data']['country'] = (!is_null($this->input->post('country')) && intval($this->input->post('country')) ? $this->input->post('country') : 'choose');
-			$tmp['data']['state'] = (!is_null($this->input->post('state')) && intval($this->input->post('state')) ? $this->input->post('state') : 'choose');
-			$tmp['data']['city'] = (!is_null($this->input->post('city')) && !empty($this->input->post('city')) ? $this->input->post('city') : 'choose');
+			$level = 0;
+			$tmp['data']['country'] = (!is_null($this->input->post('country')) && intval($this->input->post('country')) ? $this->input->post('country') : 'choose'); 
+			if (!is_null($this->input->post('state')) && intval($this->input->post('state')))  {
+				$tmp['data']['state'] = $this->input->post('state');
+				$level++;
+			} 
+			if (!is_null($this->input->post('city')) && !empty($this->input->post('city')))  {
+				$tmp['data']['city'] = $this->input->post('city');
+				$level++;
+			}
 
 			if ($this->forms->validate('cam_search'))  {
+				## National
 				## $tmp['data']['national'] = $this->activist_model->get_campaigns();
-				
-
+				if (!is_null($this->input->post('state')))  {
+					## Cities
+					## $tmp['data']['states'] = $this->activist_model->get_campaigns();
+				}
 			}
 		}
 		
