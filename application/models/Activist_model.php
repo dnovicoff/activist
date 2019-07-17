@@ -30,7 +30,7 @@ class Activist_model extends CI_Model {
 
 	public function get_country($country_id = FALSE)  {
 		if ($country_id !== FALSE)  {
-			$query = $this->db->select("^")
+			$query = $this->db->select("*")
 				->from('country')
 				->where('country_id', $country_id)
 				->get();
