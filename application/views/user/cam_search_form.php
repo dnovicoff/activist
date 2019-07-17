@@ -57,7 +57,7 @@
 						'id' => 'state',
 						'onChange' => 'alert(\'Yes\');'
 					);
-					if (!is_bool($states))  {
+					if (isset($states))  {
 						if (is_array($states))  {
 							foreach ($states as $row)  {
 								$options[$row['state_id']] = $row['state_name'];
@@ -91,7 +91,7 @@
 						$data = array(
 							'name' => 'city',
 							'id' => '',
-							'value' => set_value('cam_text'),
+							'value' => set_value('city'),
 							'class' => '',
 							'placeholder' => 'type city name'
 						);
@@ -117,7 +117,7 @@
 				$attributes = array(
 					'class' => ''
 				);
-				echo form_reset("reset", "Reset", $attributes);
+				echo '<a href="/cam">Reset</a>';
 			?>
 			</td><td>
 			<?php
