@@ -44,16 +44,16 @@ class User extends MY_Controller
 				$tmp['data']['state'] = $this->input->post('state');
 				$level++;
 			} 
-			if (!is_null($this->input->post('city')) && !empty($this->input->post('city')))  {
+			if (!is_null($this->input->post('city')) && !empty($this->input->post('city')) && $level > 0)  {
 				$tmp['data']['city'] = $this->input->post('city');
 				$level++;
 			}
 
-			if ($this->forms->validate('cam_search'))  {
+			if ($this->forms->validate('cam_search', $level))  {
 				## National
 				## $tmp['data']['national'] = $this->activist_model->get_campaigns();
 				if (!is_null($this->input->post('state')))  {
-					## Cities
+					## States
 					## $tmp['data']['states'] = $this->activist_model->get_campaigns();
 				}
 			}
