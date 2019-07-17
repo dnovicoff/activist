@@ -165,7 +165,7 @@ class Forms {
 		return $cam_rules;
 	}
 
-	private function get_cam_search_rules()  {
+	private function get_cam_search_rules($level = 0)  {
 		$cam_search_rules = [
 			[
 				'field' => 'country',
@@ -173,42 +173,36 @@ class Forms {
 				'rules' => [
 					'trim',
 					'required',
-					'integer'
+					'integer',  [
+						'get_country',
+						[  $this->CI->activist_model, 'get_country'  ]
+					]
 				],
 				'errors' => [
-					'integer' => 'Please choose a country'
+					'integer' => 'Please choose a country',
+					'get_country' => 'Could not find country'
 				]
 			],  [
 				'field' => 'state',
 				'label' => 'state',
 				'rules' => [
 					'trim',
-					'integer',
-					'regex_match[/^(?!choose)/]',  [
-						'required_state',
-						function ($state)  {
-							if (!is_null($this->CI->input->post('country')) &&
-								intval($this->CI->input->post('country')))  {
-								return TRUE;
-							}
-
-							return FALSE;
-						}
+					'integer',  [
+						'get_state',
+						[  $this->CI->activist_model, 'get_state'  ]
 					]
 				],
 				'errors' => [
 					'integer' => 'Please choose a state',
-					'required_state' => 'Please choose a state'
-					## 'regex_match' => 'Choose a state or reset the form to start search over'
+					'get_state' => 'Could not find state'
 				]
 			],  [
 				'field' => 'city',
 				'label' => 'city',
 				'rules' => [
 					'trim',
-					'min_length[1]',
-					'alpha_numeric_spaces',
-					'regex_match[/^(\w+)/]',  [
+					'min_length[3]',
+					'alpha_numeric_spaces',  [
 						'require_city',
 						function ($city)  {
 							if (!is_null($this->CI->input->post('country')) &&
@@ -223,7 +217,8 @@ class Forms {
 					]
 				],
 				'errors' => [
-					'regex_match' => 'Only use alphanumeric characters'
+					'regex_match' => 'Only use alphanumeric characters',
+					'require_city' => 'Alphanumeric characters greater than length 3'
 				]
 			]
 		];
@@ -270,8 +265,8 @@ class Forms {
 		return FALSE;
 	}
 
-	public function validate($rule = NULL)  {
-                if (!file_exists(APPPATH.'views/user/index.php'))  {
+	public function validate($rule = FALSE, $level = 0)  {
+                if (!$rule)  {
                 	// Whoops, we don't have a page for that!
                 	show_404();
 		}
