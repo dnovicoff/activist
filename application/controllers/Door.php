@@ -23,7 +23,7 @@ class Door extends MY_Controller
 		echo $html;
 	}
 
-	public function recovery_pass($user_id = '', $recovery_code = '')  {
+	public function recovery($user_id = '', $recovery_code = '')  {
 		$tmp['data']['title'] = 'Password Recovery Stage 2';
 		$tmp['data']['login'] = FALSE;
 
@@ -32,8 +32,8 @@ class Door extends MY_Controller
 		}  else  {
 			$this->load->model('activist_model');
 
-			if (is_numeric( $user_id ) && strlen( $user_id ) <= 10 && strlen( $recovery_code ) == 72 &&
-				$recovery_data = $this->examples_model->get_recovery_verification_data($user_id))  {
+			if (is_numeric($user_id) && strlen( $user_id ) <= 10 && strlen( $recovery_code ) == 72 &&
+				$recovery_data = $this->activist_model->get_recovery_verification_data($user_id))  {
 				
 				if( $recovery_data->passwd_recovery_code ==
 					$this->authentication->check_passwd($recovery_data->passwd_recovery_code, $recovery_code))  {
@@ -50,7 +50,7 @@ class Door extends MY_Controller
 			}
 
 			if ($this->tokens->match)  {
-				$this->examples_model->recovery_password_change();
+				$this->activist_model->recovery_password_change();
 			}
 		}
 		
@@ -93,7 +93,7 @@ class Door extends MY_Controller
 								);
 
 								$link_protocol = USE_SSL ? 'https' : NULL;
-								$link_uri = 'door/recovery_pass/'.$user_data->user_id. 
+								$link_uri = 'recovery/'.$user_data->user_id. 
 									'/'.$recovery_code;
 
 								$tmp['data']['special_link'] = anchor( 
