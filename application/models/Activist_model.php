@@ -30,6 +30,25 @@ class Activist_model extends CI_Model {
 		return FALSE;
 	}
 
+	public function get_recovery_verification_data($user_id = FALSE)  {
+		if ($user_id !== FALSE)  {
+			$recovery_code_expiration = date('Y-m-d H:i:s', time() - config_item('recovery_code_expiration'));
+
+			$query = $this->db->select('username, passwd_recovery_code')
+			->from('users')
+			->where('user_id', $user_id)
+			->where('passwd_recovery_date >', $recovery_code_expiration)
+			->limit(1)
+			->get();
+
+			if ($query->num_rows() == 1)  {
+				return $query->row();
+			}
+		}
+
+		return FALSE;
+	}
+
 	public function update_user_raw_data($the_user, $user_data = [])  {
 		$this->db->where('user_id', $the_user)
 			->update('users', $user_data);

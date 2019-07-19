@@ -34,9 +34,7 @@
 		}  else if (isset($confirmation))  {
 			echo '
 			<div style="border:1px solid green;">
-				<p>
 					Congratulations, you have created an account recovery link.
-				</p>
 				<p>
 					<b>Please note</b>: The account recovery link would normally be placed in an email, 
 					and you would not see it here on the screen. This is to limit the code in the 

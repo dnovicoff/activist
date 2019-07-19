@@ -57,6 +57,7 @@ $route['creator'] = 'key_creator';
 
 $route['about'] = 'door/index';
 $route['pass'] = 'door/pass';
+$route['recovery/(\d+)/(\w+)'] = 'door/recovery/$1/$2';
 $route['create'] = 'door/create';
 
 $route['cam/search/(\d)'] = 'user/search/$1';
