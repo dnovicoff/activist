@@ -9,7 +9,7 @@
                 <title>Activism</title>
         </head>
         <body>
-		<div class="container">
+		<div class="container" style="background: linear-gradient(to bottom right, blue, 10%, white);}">
 			<div class="smallcol">
                 	<h3><a href="/">Actifish</a></h3><br />
 			<?php
