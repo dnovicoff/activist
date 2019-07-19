@@ -5,20 +5,27 @@
         outline: 0;
 }
 
-html,
-body  {
-	margin: 0;
-	padding: 0;
-	height: 100%;
+html, body  {
+	margin: 0px;
+	padding: 0px;
+	border: none;
 	font-size: 80%;
 }
 
 .container  {
 	clear: both;
-	width: 100%;
 	height: 100%;
-	margin: 0;
+	width: 100%;
+	height: 100vh;
+	width: 100vw;
+	margin-left: -50vw;
+	margin-right: -50vw;
+
+	margin: inherit;
+	padding: inherit;
 	overflow: auto;
+	border: inherit;
+	font-size: inherit;
 	word-wrap: break-word;
 }
 
