@@ -1,7 +1,16 @@
+*  {
+	margin: 0;
+        padding: 0;
+        border: 0;
+        outline: 0;
+}
 
-
-.body  {
-	font-size: 90%;
+html,
+body  {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	font-size: 80%;
 }
 
 .container  {
