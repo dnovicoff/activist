@@ -245,6 +245,36 @@ class Activist_model extends CI_Model {
 
 	}
 
+	public function insert_user($user = FALSE)  {
+		if ($user !== FALSE)  {
+			$this->db->set($user)
+				->insert('users');
+			
+			$errors = $this->db->error();
+			if ($errors['code'] !== 0)  {
+				return 'Error: ['.implode(", ", $this->db->error()).']';
+			}
+
+			return $this->db->insert_id();
+		}
+
+		return FALSE;
+	}
+
+	public function get_unused_id()  {
+		$random_unique_int = 2147483648 + mt_rand( -2147482448, 2147483647 );
+
+		$query = $this->db->where( 'user_id', $random_unique_int)
+			->get_where('users');
+
+		if ($query->num_rows() > 0)  {
+			$query->free_result();
+			return $this->get_unused_id();
+		}
+
+		return $random_unique_int;
+	}
+
 	public function get_location_data($id)  {
 		if (!is_null($id))  {
 			$this->db->select('*')->from('location')

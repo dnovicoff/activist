@@ -124,17 +124,32 @@ class Door extends MY_Controller
 
 		$tmp = array(
 			"data" => array(
-        			"title" => ucfirst("Create user") // Capitalize the first letter
+        			"title" => ucfirst("Create user"), // Capitalize the first letter
+				"login" => FALSE
 			)
 		);
 
 		if ($this->forms->validate('user'))  {
-			if( strtolower( $_SERVER['REQUEST_METHOD'] ) == 'post' )  {
-				
+			if (strtolower($_SERVER['REQUEST_METHOD']) == 'post')  {
+				$user_data['email']      = $this->input->post('email');
+				$user_data['auth_level'] = 9;
+				$user_data['passwd']     = $this->authentication->hash_passwd($this->input->post('password'));
+				$user_data['user_id']    = $this->activist_model->get_unused_id();
+				$user_data['created_at'] = date('Y-m-d H:i:s');
+
+				// If username is not used, it must be entered into the record as NULL
+				if (empty($user_data['username']))  {
+					$user_data['username'] = NULL;
+				}
+
+				$id = $this->activist_model->insert_user($user_data);
+				if (is_numeric($id))  {
+					redirect('admin', 'refresh');
+				}
 			}
 		}
 
-		$this->generate_page();
+		$this->generate_page($tmp);
 	}
 
 	public function login()  {
