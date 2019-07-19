@@ -1,7 +1,6 @@
 
 <div classs="container">
 	<?php
-		$showform = 1;
 		if (isset($disabled)) {
 			echo '
 			<div style="border:1px solid red;">
@@ -68,12 +67,10 @@
 			$show_form = 1;
 		}  else  {
 			echo '
-			<p>
 				If you\'ve forgotten your password and/or username, 
 				enter the email address used for your account, 
 				and we will send you an e-mail 
 				with instructions on how to access your account.
-			</p>
 			';
 
 			$show_form = 1;
