@@ -16,7 +16,9 @@ body  {
 .container  {
 	clear: both;
 	width: 100%;
-	overflow: hidden;
+	height: 100%;
+	margin: 0;
+	overflow: auto;
 	word-wrap: break-word;
 }
 
