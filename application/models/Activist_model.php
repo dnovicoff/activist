@@ -28,6 +28,32 @@ class Activist_model extends CI_Model {
 		return FALSE;
 	}
 
+	public function get_recovery_data($email = FALSE)  {
+		if ($email !== FALSE)  {
+			$query = $this->db->select('user_id, email, banned')
+				->from('users')
+				->where('email', strtolower($email))
+				->limit(1)
+				->get();
+
+			if ($query->num_rows() == 1)
+				return $query->row();
+		}
+
+		return FALSE;
+	}
+
+	public function update_user_raw_data($the_user, $user_data = [])  {
+		$this->db->where('user_id', $the_user)
+			->update('users', $user_data);
+
+		if ($this->db->affected_rows() > 0)  {
+			return TRUE;
+		}
+
+		return FALSE;
+	}
+
 	public function get_country($country_id = FALSE)  {
 		if ($country_id !== FALSE)  {
 			$query = $this->db->select("*")
