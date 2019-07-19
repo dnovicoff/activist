@@ -2,7 +2,7 @@
 <div class="container">
 	<div class="smallcol">
 		<?php
-			$pages = array('create', 'pass', 'about');
+			$pages = array('create', 'pass', 'about', 'recovery');
 			$current = $this->uri->segment(1);
 			if (!in_array($current, $pages))  {
 				$this->load->view('door/auth_form');
@@ -22,6 +22,9 @@
 					break;
 				case "about":
 					$this->load->view('door/about');
+					break;
+				case "recovery":
+					$this->load->view('door/choose_pass_form', $data);
 					break;
 				default:
 					echo "Introduction to actifish and a cool looking graphic.";
