@@ -1,19 +1,6 @@
 <?php
 class Activist_model extends CI_Model {
 
-	public function get_activist($slug = FALSE)
-	{
-        	if ($slug === FALSE)
-        	{
-                	## $query = $this->db->get('email');
-                	## return $query->result_array();
-        	}
-	
-
-        	$query = $this->db->get_where('user', array('user_id' => $slug));
-        	return $query->row_array();
-	}
-
 	public function get_user($email = FALSE)  {
 		if ($email !== FALSE)  {
 			$query = $this->db->select('*')
@@ -83,22 +70,6 @@ class Activist_model extends CI_Model {
 
 		return FALSE;
 	}
-
-
-	/**
-	public function auth_user($email, $pass)
-	{
-		if (isset($email) && isset($pass))  {
-			$query = $this->db->get_where('user', array('user_email' => $email), 1, 0);
-			if ($query->num_rows() > 0)  {
-				$result = $query->row_array();
-				$auth = password_verify($pass, $result['user_pass']);
-				return $auth;
-			}
-		}
-		return FALSE;
-	}
-	**/
 
 	/**
 	public function user_password_change($email)

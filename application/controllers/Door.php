@@ -23,6 +23,40 @@ class Door extends MY_Controller
 		echo $html;
 	}
 
+	public function recovery_pass($user_id = '', $recovery_code = '')  {
+		$tmp['data']['title'] = 'Password Recovery Stage 2';
+		$tmp['data']['login'] = FALSE;
+
+		if ($on_hold = $this->authentication->current_hold_status(TRUE))  {
+			$tmp['data']['disabled'] = 1;
+		}  else  {
+			$this->load->model('activist_model');
+
+			if (is_numeric( $user_id ) && strlen( $user_id ) <= 10 && strlen( $recovery_code ) == 72 &&
+				$recovery_data = $this->examples_model->get_recovery_verification_data($user_id))  {
+				
+				if( $recovery_data->passwd_recovery_code ==
+					$this->authentication->check_passwd($recovery_data->passwd_recovery_code, $recovery_code))  {
+					$tmp['data']['user_id']       = $user_id;
+					$tmp['data']['username']     = $recovery_data->username;
+					$tmp['data']['recovery_code'] = $recovery_data->passwd_recovery_code;
+				}  else  {
+					$tmp['data']['recovery_error'] = 1;
+					$this->authentication->log_error('Link is bad '.$recovery_code);
+				}
+			}  else  {
+				$tmp['data']['recovery_error'] = 1;
+				$this->authentication->log_error('Link is bad '.$recovery_code);
+			}
+
+			if ($this->tokens->match)  {
+				$this->examples_model->recovery_password_change();
+			}
+		}
+		
+		$this->generate_page($tmp);
+	}
+
 	public function pass()  {
 		if ($this->uri->uri_string() == 'door/pass')
 			show_404();
@@ -59,7 +93,7 @@ class Door extends MY_Controller
 								);
 
 								$link_protocol = USE_SSL ? 'https' : NULL;
-								$link_uri = 'door/recovery_verification/'.$user_data->user_id. 
+								$link_uri = 'door/recovery_pass/'.$user_data->user_id. 
 									'/'.$recovery_code;
 
 								$tmp['data']['special_link'] = anchor( 
