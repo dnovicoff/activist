@@ -12,7 +12,9 @@ class Door extends MY_Controller
 	}
 
 	private function generate_page($tmp = array())  {
-		$this->setup_login_form();
+		if ($tmp['data']['login'])  {
+			$this->setup_login_form();
+		}
 
         	$html = $this->load->view('templates/header', $tmp, TRUE);
        		$html .= $this->load->view('door/index', $tmp, TRUE);
@@ -27,7 +29,8 @@ class Door extends MY_Controller
 
 		$tmp = array(
 			"data" => array(
-        			"title" => ucfirst("Account reset") // Capitalize the first letter
+        			"title" => ucfirst("Account reset"), // Capitalize the first letter
+				'login' => FALSE
 			)
 		);
 
@@ -56,7 +59,7 @@ class Door extends MY_Controller
 								);
 
 								$link_protocol = USE_SSL ? 'https' : NULL;
-								$link_uri = 'examples/recovery_verification/'.$user_data->user_id. 
+								$link_uri = 'door/recovery_verification/'.$user_data->user_id. 
 									'/'.$recovery_code;
 
 								$tmp['data']['special_link'] = anchor( 
@@ -109,7 +112,8 @@ class Door extends MY_Controller
 
 		$tmp = array(
 			"data" => array(
-        			"title" => ucfirst("Authentication") // Capitalize the first letter
+        			"title" => ucfirst("Authentication"), // Capitalize the first letter
+				'login' => TRUE
 			)
 		);
 
@@ -121,20 +125,20 @@ class Door extends MY_Controller
 			}
 		}
 
-		$this->generate_page();
+		$this->generate_page($tmp);
 	}
 
         public function index($page = 'index')  {
-		if (!file_exists(APPPATH.'views/door/index.php'))
-		{
+		if (!file_exists(APPPATH.'views/door/index.php'))  {
                 	// Whoops, we don't have a page for that!
 			log_message('ERROR', 'Activist Error '.$page);
                 	show_404();
 		}
+		$tmp['data']['login'] = TRUE;
 		
 		// $this->is_logged_in();
 		if (!$this->verify_min_level(9))  {
-			$this->generate_page();
+			$this->generate_page($tmp);
 		}  else  {
 			redirect('admin', 'refresh');
 		}

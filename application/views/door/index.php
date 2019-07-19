@@ -18,7 +18,7 @@
 					$this->load->view('door/user_form');
 					break;
 				case "pass":
-					$this->load->view('door/pass_form');
+					$this->load->view('door/pass_form', $data);
 					break;
 				case "about":
 					$this->load->view('door/about');
