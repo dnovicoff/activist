@@ -6,13 +6,13 @@
 }
 
 html, body  {
-	margin: 0px;
-	padding: 0px;
+	margin: 0;
+	padding: 0;
 	border: none;
 	font-size: 80%;
 }
 
-.container  {
+body .container  {
 	clear: both;
 	height: 100%;
 	width: 100%;
@@ -21,10 +21,7 @@ html, body  {
 	margin-left: -50vw;
 	margin-right: -50vw;
 
-	margin: inherit;
-	padding: inherit;
 	overflow: auto;
-	border: inherit;
 	font-size: inherit;
 	word-wrap: break-word;
 }
@@ -34,13 +31,15 @@ html, body  {
 	width: 100%;
 }
 
-.container .largecol  {
+body .container .largecol  {
+	font-size: inherit;
 	float: left;
 	clear: right;
 	width: 60%;
 }
 
-.container .smallcol  {
+body .container .smallcol  {
+	font-size: inherit;
 	float: left;
 	clear: right;
 	width: 18%;
