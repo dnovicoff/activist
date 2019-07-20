@@ -4,8 +4,8 @@ class Activist_model extends CI_Model {
 	public function get_user($email = FALSE)  {
 		if ($email !== FALSE)  {
 			$query = $this->db->select('*')
-				->from('user')
-				->where('user_email', $email)
+				->from('users')
+				->where('email', $email)
 				->get();
 
 			if ($query->num_rows() > 0)  {
