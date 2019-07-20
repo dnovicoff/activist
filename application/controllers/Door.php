@@ -93,7 +93,7 @@ class Door extends MY_Controller
 								);
 
 								$link_protocol = USE_SSL ? 'https' : NULL;
-								$link_uri = 'recovery/'.$user_data->user_id. 
+								$link_uri = base_url().'recovery/'.$user_data->user_id. 
 									'/'.$recovery_code;
 
 								$tmp['data']['special_link'] = anchor( 
@@ -105,10 +105,10 @@ class Door extends MY_Controller
 								$tmp['data']['confirmation'] = 1;
 
 								$this->load->library('emails');
-								$msg = "Congratulations, you have created an account recovery link.<br /><br />".
-									"This link can be used to reset your password for activist.<br />".
-									"Please note that the like provided will expire in 2 hours.<br />".
-									"In that event just visit activist and generate another link.<br />".
+								$msg = "Account recovery process email verification.<br /><br /> ".
+									"This link can be used to reset your password for activist. ".
+									"Please note that the like provided will expire in 2 hours. ".
+									"In that event just visit activist and generate another link.<br /> ".
 									$link_uri;
 
 								$tmp['data']['email'] = $this->emails->send($this->input->post('email'), $msg);
