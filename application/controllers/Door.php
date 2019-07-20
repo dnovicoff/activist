@@ -103,6 +103,15 @@ class Door extends MY_Controller
 								);
 
 								$tmp['data']['confirmation'] = 1;
+
+								$this->load->library('emails');
+								$msg = "Congratulations, you have created an account recovery link.<br /><br />".
+									"This link can be used to reset your password for activist.<br />".
+									"Please note that the like provided will expire in 2 hours.<br />".
+									"In that event just visit activist and generate another link.<br />".
+									$link_uri;
+
+								$tmp['data']['email'] = $this->emails->send($this->input->post('email'), $msg);
 							}
 						}  else  {
 							$this->authentication->log_error($this->input->post('email', TRUE));
