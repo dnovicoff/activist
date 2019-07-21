@@ -42,20 +42,18 @@
 	</div>
 	<div class="largecol">
 		<?php
-			$page = $this->uri->segment(2, 0);
-			if ($page !== 0)  {
-				switch ($page)  {
-					case 'loc':
-						$this->load->view('admin/loc_form', $data);
-						break;
-					case 'cam':
-						$this->load->view('admin/cam_form', $data);
-						break;
-				}
-			}  else  {
-				echo '<div class="graph_canvas">'.
-					$this->load->view('admin/data', $data, TRUE).
-				'</div>';
+			$page = $this->uri->segment(2);
+			switch ($page)  {
+				case 'loc':
+					$this->load->view('admin/loc_form', $data);
+					break;
+				case 'cam':
+					$this->load->view('admin/cam_form', $data);
+					break;
+				default:
+					echo '<div class="graph_canvas">'.
+						$this->load->view('admin/data', $data, TRUE).
+					'</div>';
 			}
 		?>
 	</div>
