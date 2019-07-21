@@ -69,10 +69,10 @@ body .container .smallcol  {
 }
 
 input[type=text]  {
-	padding: 2px;
-	height: 14px;
+	height: 18px;
+	width: 100%;
 	position: relative;
-	left: 0;
+	/** left: 0; **/
 	outline: none;
 	border: 1px solid #cdcdcd;
 	border-color: rgba(0, 0, 0, .15);
@@ -83,10 +83,10 @@ input[type=text]  {
 }
 
 input[type=password]  {
-	padding: 2px;
-	height: 14px;
+	height: 18px;
+	width: 100%;
 	position: relative;
-	left: 0;
+	/** left: 0;  **/
 	outline: none;
 	border: 1px solid #cdcdcd;
 	border-color: rgba(0, 0, 0, .15);
@@ -101,7 +101,6 @@ textarea  {
 	height: 150px;
 	padding: 0;
 	position: relative;
-	/** left: 0;  **/
 	outline: none;
 	border: 1px solid #cdcdcd;
 	border-color: rgba(0, 0, 0, .15);
