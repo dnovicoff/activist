@@ -13,8 +13,7 @@ class Admin extends MY_Controller
 	}
 
 	private function generate_page($tmp = array())  {
-		// $this->setup_login_form();
-		// $loc_data = $this->activist_model->get_loc	ation_data($tmp['data']['user_id']);
+		// $loc_data = $this->activist_model->get_location_data($tmp['data']['user_id']);
 		$loc_data = FALSE;
 		$cam_data = $this->activist_model->get_campaign_data($tmp['data']['user_id']);
 
@@ -58,7 +57,8 @@ class Admin extends MY_Controller
         			'title' => ucfirst("cam"), // Capitalize the first letter
 				'door' => 'cam',
 				'user_id' => $this->auth_user_id,
-				'hidden_data' => array('status' => $status)
+				'hidden_data' => array('status' => $status),
+				'countries' => $this->activist_model->get_countries()
 			)
 		);
 
@@ -68,6 +68,7 @@ class Admin extends MY_Controller
         			$cam_data = [
 					'user_id' => intval($this->auth_user_id),
 					'created_at' => date('Y-m-d H:i:s'),
+					'country_id' => $this->input->post('country_id'),
 					'start_time' => $this->input->post('start_date').' 00:00:01',
 					'end_time' => $this->input->post('end_date').' 23:59:59',
 					'title' => $this->input->post('title'),
