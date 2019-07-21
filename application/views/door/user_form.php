@@ -23,12 +23,10 @@
 				echo form_input($data);
 			?>
 			</div>
-			<div class="col">
+			<div class="col" style="color: red; font-size: 70%; padding-left: 4px;">
 			<?php
 				if (!empty(form_error('email')))  {
-					echo '<div style="font-size: 80%; color: red;">'.
-						form_error('email').
-					'</div>';  
+					echo form_error('email');  
 				}
 			?>
 			</div>
@@ -54,12 +52,10 @@
 				echo form_input($data);
 			?>
 			</div>
-			<div class="col">
+			<div class="col" style="color: red; font-size: 70%; padding-left: 4px;">
 			<?php
 				if (!empty(form_error('confirmemail')))  {
-					echo '<div style="font-size: 80%; color: red;">'.
-						form_error('confirmemail').
-					'</div>';
+					echo form_error('confirmemail');
 				}
 			?>
 			</div>
@@ -86,12 +82,10 @@
 				echo form_input($data);
 			?>
 			</div>
-			<div class="col">
+			<div class="col" style="color: red; font-size: 70%; padding-left: 4px;">
 			<?php
 				if (!empty(form_error('password')))  {
-					echo '<div style="font-size: 80%; color: red;">'.
-						form_error('password').
-					'</div>';
+					echo form_error('password');
 				}
 			?>
 			</div>
@@ -118,12 +112,10 @@
 				echo form_input($data);
 			?>
 			</div>
-			<div class="col">
+			<div class="col" style="color: red; font-size: 70%; padding-left: 4px;">
 			<?php
 				if (!empty(form_error('confirmpassword')))  {
-					echo '<div style="font-size: 80%; color: red;">'.
-						form_error('confirmpassword').
-					'</div>';
+					echo form_error('confirmpassword');
 				}
 			?>
 			</div>

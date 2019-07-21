@@ -45,17 +45,17 @@ class Validation_callables extends MY_Model {
 			? config_item('max_chars_for_password') 
 			: '';
 		$regex = '(?=.{' . config_item('min_chars_for_password') . ',' . $max . '})';
-		$error = '<li>At least ' . config_item('min_chars_for_password') . ' characters</li>';
+		$error = 'At least ' . config_item('min_chars_for_password') . ' characters<br />';
 
 		if( config_item('max_chars_for_password') > 0 )
-			$error .= '<li>Not more than ' . config_item('max_chars_for_password') . ' characters</li>';
+			$error .= 'Not more than ' . config_item('max_chars_for_password') . ' characters<br />';
 		
 		// Digit(s) required
 		if( config_item('min_digits_for_password') > 0 )
 		{
 			$regex .= '(?=(?:.*[0-9].*){' . config_item('min_digits_for_password') . ',})';
 			$plural = config_item('min_digits_for_password') > 1 ? 's' : '';
-			$error .= '<li>' . config_item('min_digits_for_password') . ' number' . $plural . '</li>';
+			$error .= '' . config_item('min_digits_for_password') . ' number' . $plural . '<br />';
 		}
 		
 		// Lower case letter(s) required
@@ -63,7 +63,7 @@ class Validation_callables extends MY_Model {
 		{
 			$regex .= '(?=(?:.*[a-z].*){' . config_item('min_lowercase_chars_for_password') . ',})';
 			$plural = config_item('min_lowercase_chars_for_password') > 1 ? 's' : '';
-			$error .= '<li>' . config_item('min_lowercase_chars_for_password') . ' lower case letter' . $plural . '</li>';
+			$error .= '' . config_item('min_lowercase_chars_for_password') . ' lower case letter' . $plural . '<br />';
 		}
 		
 		// Upper case letter(s) required
@@ -71,7 +71,7 @@ class Validation_callables extends MY_Model {
 		{
 			$regex .= '(?=(?:.*[A-Z].*){' . config_item('min_uppercase_chars_for_password') . ',})';
 			$plural = config_item('min_uppercase_chars_for_password') > 1 ? 's' : '';
-			$error .= '<li>' . config_item('min_uppercase_chars_for_password') . ' upper case letter' . $plural . '</li>';
+			$error .= '' . config_item('min_uppercase_chars_for_password') . ' upper case letter' . $plural . '<br />';
 		}
 		
 		// Non-alphanumeric char(s) required
@@ -79,7 +79,7 @@ class Validation_callables extends MY_Model {
 		{
 			$regex .= '(?=(?:.*[^a-zA-Z0-9].*){' . config_item('min_non_alphanumeric_chars_for_password') . ',})';
 			$plural = config_item('min_non_alphanumeric_chars_for_password') > 1 ? 's' : '';
-			$error .= '<li>' . config_item('min_non_alphanumeric_chars_for_password') . ' non-alphanumeric character' . $plural . '</li>';
+			$error .= '' . config_item('min_non_alphanumeric_chars_for_password') . ' non-alphanumeric character' . $plural . '<br />';
 		}
 		
 		if( preg_match( '/^' . $regex . '.*$/', $password ) )
