@@ -38,7 +38,7 @@ class Admin extends MY_Controller
 		);
 
 		$this->is_logged_in();
-		if (!empty($this->auth_role))  {
+		if ($this->require_role('admin'))  {
 			$this->generate_page($tmp);
 		}  else  {
 			redirect($this->input->server, 'refresh');
@@ -64,7 +64,7 @@ class Admin extends MY_Controller
 
 		$this->load->library('forms');
 		if ($this->require_role('admin'))  {
-			if ($this->forms->validate($tmp))  {
+			if ($this->forms->validate('cam'))  {
         			$cam_data = [
 					'user_id' => intval($this->auth_user_id),
 					'created_at' => date('Y-m-d H:i:s'),
