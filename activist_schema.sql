@@ -184,6 +184,8 @@ CREATE TABLE `city_zip` (
   `zip_id` int(11) NOT NULL,
   `type` varchar(10) NOT NULL,
   `decomm` tinyint(1) NOT NULL DEFAULT '0',
+  `lat` double(10,7) DEFAULT NULL,
+  `lon` double(10,7) DEFAULT NULL,
   KEY `city_id` (`city_id`),
   KEY `zip_id` (`zip_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -261,7 +263,7 @@ CREATE TABLE `ips_on_hold` (
   `ip_address` varchar(45) NOT NULL,
   `time` datetime NOT NULL,
   PRIMARY KEY (`ai`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -277,7 +279,7 @@ CREATE TABLE `login_errors` (
   `ip_address` varchar(45) NOT NULL,
   `time` datetime NOT NULL,
   PRIMARY KEY (`ai`)
-) ENGINE=MyISAM AUTO_INCREMENT=74 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=85 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -298,23 +300,6 @@ CREATE TABLE `state` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `user`
---
-
-DROP TABLE IF EXISTS `user`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user` (
-  `user_id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_email` varchar(100) NOT NULL,
-  `user_pass` varchar(60) NOT NULL,
-  `start` timestamp NULL DEFAULT NULL,
-  `stop` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`user_id`,`user_email`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Table structure for table `username_or_email_on_hold`
 --
 
@@ -326,7 +311,7 @@ CREATE TABLE `username_or_email_on_hold` (
   `username_or_email` varchar(255) NOT NULL,
   `time` datetime NOT NULL,
   PRIMARY KEY (`ai`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -399,4 +384,4 @@ CREATE TABLE `zip` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-07-15 21:57:57
+-- Dump completed on 2019-07-21  0:46:56
