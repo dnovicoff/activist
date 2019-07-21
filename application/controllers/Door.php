@@ -24,6 +24,9 @@ class Door extends MY_Controller
 	}
 
 	public function recovery($user_id = '', $recovery_code = '')  {
+		if ($this->uri->uri_string() == 'door/recovery')
+			show_404();
+
 		$tmp['data']['title'] = 'Password Recovery Stage 2';
 		$tmp['data']['login'] = FALSE;
 
@@ -42,11 +45,11 @@ class Door extends MY_Controller
 					$tmp['data']['recovery_code'] = $recovery_data->passwd_recovery_code;
 				}  else  {
 					$tmp['data']['recovery_error'] = 1;
-					$this->authentication->log_error('Link is bad '.$recovery_code);
+					$this->authentication->log_error('Link is bad '. $recovery_code);
 				}
 			}  else  {
 				$tmp['data']['recovery_error'] = 1;
-				$this->authentication->log_error('Link is bad '.$recovery_code);
+				$this->authentication->log_error('Link is bad '. $recovery_code);
 			}
 
 			if ($this->tokens->match)  {
