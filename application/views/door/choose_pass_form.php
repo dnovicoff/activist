@@ -122,8 +122,8 @@ if ($showform == 1)  {
 						</div>
 						<div class="col" style="color: red; font-size: 80%;">
 						<?php
-							if (!empty(form_error('passwd_confirm')))  {
-								echo form_error('passwd_confirm');
+							if (!empty(form_error('passwdconfirm')))  {
+								echo form_error('passwdconfirm');
 							}
 						?>
 						</div>

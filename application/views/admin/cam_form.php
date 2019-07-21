@@ -3,6 +3,7 @@
 	$readonly = '';
 	$sd = '';
 	$ed = '';
+	$cid = '';
 	$ttle = '';
 	$txt = '';
 	$tail = '';
@@ -11,6 +12,7 @@
 		$sd = $spl[0];
 		$spl = explode(" ", $cam_detail[0]['end_time']);
 		$ed = $spl[0];
+		$cid = $cam_detail[0]['country_id'];
 		$ttle = $cam_detail[0]['title'];
 		$txt = $cam_detail[0]['text'];
 		if ($hidden_data['status'] !== 'update')  {
@@ -48,12 +50,10 @@
 				echo form_input($data);
 			?>
 			</div>
-			<div class="col">
+			<div class="col" style="color: red; font-size: 80%;">
 			<?php
 				if (!empty(form_error('start_date')))  {
-					echo '<div style="font-size: 80%; color: red;">'.
-						form_error('start_date').
-					'</div>';  
+					echo form_error('start_date');  
 				}
 			?>
 			</div>
@@ -82,12 +82,46 @@
 				echo form_input($data);
 			?>
 			</div>
-			<div class="col">
+			<div class="col" style="color: red; font-size: 80%;">
 			<?php
 				if (!empty(form_error('end_date')))  {
-					echo '<div style="font-size: 80%; color: red;">'.
-						form_error('end_date').
-					'</div>';  
+					echo form_error('end_date');  
+				}
+			?>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+			<?php
+				$attributes = array(
+					'class' => ''
+				);
+				echo "Country: ";
+			?>
+			</div>
+			<div class="col">
+			<?php
+				$options = array(
+					'choose' => 'choose'
+				);
+				$js = array(
+					'id' => 'country_id',
+					'onChange' => 'alert(\'here\');'
+				);
+				if (!is_bool($countries))  {
+					if (is_array($countries))  {
+						foreach ($countries as $row)  {
+							$options[$row['country_id']] = $row['country_name'];
+						}
+					}
+				}
+				echo form_dropdown('country_id', $options, $cid);
+			?>
+			</div>
+			<div class="col" style="color: red; font-size: 80%;">
+			<?php
+				if (!empty(form_error('country_id')))  {
+					echo form_error('country_id');  
 				}
 			?>
 			</div>
@@ -116,12 +150,10 @@
 				echo form_input($data);
 			?>
 			</div>
-			<div class="col">
+			<div class="col" style="color: red; font-size: 80%;">
 			<?php
 				if (!empty(form_error('title')))  {
-					echo '<div style="font-size: 80%; color: red;">'.
-						form_error('title').
-					'</div>';  
+					echo form_error('title');  
 				}
 			?>
 			</div>
@@ -150,12 +182,10 @@
 				echo form_textarea($data);
 			?>
 			</div>
-			<div class="col">
+			<div class="col" style="color: red; font-size: 80%;">
 			<?php
 				if (!empty(form_error('cam_text')))  {
-					echo '<div style="font-size: 80%; color: red;">'.
-						form_error('cam_text').
-					'</div>';  
+					echo form_error('cam_text');  
 				}
 			?>
 			</div>
