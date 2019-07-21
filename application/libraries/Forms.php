@@ -146,6 +146,16 @@ class Forms {
 					'regex_match' => 'Date muse be in form yyyy-mm-dd'
 				]
 			],  [
+				'field' => 'country_id',
+				'label' => 'country_id',
+				'rules' =>  [
+					'trim',
+					'required',
+					'integer'
+				],
+				'errors' =>  [
+				]
+			],  [
 				'field' => 'title',
 				'label' => 'title',
 				'rules' => 'trim|required|alpha_numeric_spaces',
