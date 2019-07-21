@@ -58,7 +58,8 @@ class Admin extends MY_Controller
 				'door' => 'cam',
 				'user_id' => $this->auth_user_id,
 				'hidden_data' => array('status' => $status),
-				'countries' => $this->activist_model->get_countries()
+				'countries' => $this->activist_model->get_countries(),
+				'regions' => $this->activist_model->get_regions()
 			)
 		);
 
