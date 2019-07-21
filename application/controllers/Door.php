@@ -36,25 +36,25 @@ class Door extends MY_Controller
 			$this->load->model('activist_model');
 			$this->load->library('forms');
 
-			if ($this->forms->validate('recovery'))  {
-				if (is_numeric($user_id) && strlen($user_id) <= 10 && strlen($recovery_code) == 72 &&
-					$recovery_data = $this->activist_model->get_recovery_verification_data($user_id))  {
+			if (is_numeric($user_id) && strlen($user_id) <= 10 && strlen($recovery_code) == 72 &&
+				$recovery_data = $this->activist_model->get_recovery_verification_data($user_id))  {
 				
-					if( $recovery_data->passwd_recovery_code ==
-						$this->authentication->check_passwd($recovery_data->passwd_recovery_code, $recovery_code))  {
-						$tmp['data']['user_id']       = $user_id;
-						$tmp['data']['username']     = $recovery_data->username;
-						$tmp['data']['recovery_code'] = $recovery_data->passwd_recovery_code;
-					}  else  {
-						$tmp['data']['recovery_error'] = 1;
-						$this->authentication->log_error('Link is bad '. $recovery_code);
-					}
+				if( $recovery_data->passwd_recovery_code ==
+					$this->authentication->check_passwd($recovery_data->passwd_recovery_code, $recovery_code))  {
+					$tmp['data']['user_id']       = $user_id;
+					$tmp['data']['username']     = $recovery_data->username;
+					$tmp['data']['recovery_code'] = $recovery_data->passwd_recovery_code;
 				}  else  {
 					$tmp['data']['recovery_error'] = 1;
 					$this->authentication->log_error('Link is bad '. $recovery_code);
 				}
+			}  else  {
+				$tmp['data']['recovery_error'] = 1;
+				$this->authentication->log_error('Link is bad '. $recovery_code);
+			}
 
-				if ($this->tokens->match)  {
+			if ($this->tokens->match)  {
+				if ($this->forms->validate('recovery'))  {
 					$this->activist_model->recovery_password_change();
 				}
 			}
