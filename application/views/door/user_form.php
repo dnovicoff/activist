@@ -2,15 +2,16 @@
 
 <div class="container">
 	<?php echo form_open('create'); ?>
-		<table width="100%">
-			<tr><td>
+		<div class="row">
+			<div class="col">
 			<?php
 				$attributes = array(
 					'class' => ''
 				);
 				echo form_label("Email", "email", $attributes);
 			?>
-			</td><td>
+			</div>
+			<div class="col">
 			<?php
 				$data = array(
 					'name' => 'email',
@@ -21,7 +22,8 @@
 				);
 				echo form_input($data);
 			?>
-			</td><td>
+			</div>
+			<div class="col">
 			<?php
 				if (!empty(form_error('email')))  {
 					echo '<div style="font-size: 80%; color: red;">'.
@@ -29,15 +31,18 @@
 					'</div>';  
 				}
 			?>
-			</td></tr>
-			<tr><td>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
 			<?php
 				$attributes = array(
 					'class' => ''
 				);
 				echo form_label("Confirm Email", "email", $attributes);
 			?>
-			</td><td>
+			</div>
+			<div class="col">
 			<?php
 				$data = array(
 					'name' => 'confirmemail',
@@ -48,7 +53,8 @@
 				);
 				echo form_input($data);
 			?>
-			</td><td>
+			</div>
+			<div class="col">
 			<?php
 				if (!empty(form_error('confirmemail')))  {
 					echo '<div style="font-size: 80%; color: red;">'.
@@ -56,15 +62,18 @@
 					'</div>';
 				}
 			?>
-			</td></tr>
-			<tr><td>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
 			<?php
 				$attributes = array(
 					'class' => ''
 				);
 				echo form_label("Password", "password", $attributes);
 			?>
-			</td><td>
+			</div>
+			<div class="col">
 			<?php
 				$data = array(
 					'type' => 'password',
@@ -76,7 +85,8 @@
 				);
 				echo form_input($data);
 			?>
-			</td><td>
+			</div>
+			<div class="col">
 			<?php
 				if (!empty(form_error('password')))  {
 					echo '<div style="font-size: 80%; color: red;">'.
@@ -84,15 +94,18 @@
 					'</div>';
 				}
 			?>
-			</td></tr>
-			<tr><td>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
 			<?php
 				$attributes = array(
 					'class' => ''
 				);
 				echo form_label("Confirm Password", "password", $attributes);
 			?>
-			</td><td>
+			</div>
+			<div class="col">
 			<?php
 				$data = array(
 					'type' => 'password',
@@ -104,7 +117,8 @@
 				);
 				echo form_input($data);
 			?>
-			</td><td>
+			</div>
+			<div class="col">
 			<?php
 				if (!empty(form_error('confirmpassword')))  {
 					echo '<div style="font-size: 80%; color: red;">'.
@@ -112,22 +126,27 @@
 					'</div>';
 				}
 			?>
-			</td></tr>
-			<tr><td>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
 			<?php
 				$attributes = array(
-					'class' => ''
+					'class' => 'btn'
 				);
 				echo form_reset("reset", "Reset", $attributes);
 			?>
-			</td><td>
+			</div>
+			<div class="col">
 			<?php
 				$attributes = array(
-					'class' => ''
+					'class' => 'btn'
 				);
 				echo form_submit("submit", "Submit", $attributes);
 			?>
-			</td></tr>
-		</table>
+			</div>
+			<div class="col">
+			</div>
+		</div>
 	<?php  echo form_close(); ?>
 </div>

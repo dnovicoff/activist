@@ -90,7 +90,7 @@
 					<tr><td>
 					<?php
 						$attributes = array(
-							'class' => ''
+							'class' => 'btn'
 						);
 						echo form_submit("submit", "Submit", $attributes);
 					?>
