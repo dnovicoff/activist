@@ -9,25 +9,17 @@ html, body  {
 	margin: 0;
 	padding: 0;
 	border: none;
-	font-size: 80%;
+	font-size: 100%;
 }
 
 body .container  {
 	clear: both;
-	display: flex;
-	height: 100%;
 	width: 100%;
-	height: 100vh;
-	width: 100vw;
+	/** width: 100vw;  **/
 
-	overflow: auto;
+	overflow: hidden;
 	font-size: inherit;
 	word-wrap: break-word;
-}
-
-.row  {
-	clear: both;
-	width: 100%;
 }
 
 body .container .largecol  {
@@ -41,5 +33,74 @@ body .container .smallcol  {
 	font-size: inherit;
 	float: left;
 	clear: right;
-	width: 18%;
+	width: 19%;
+}
+
+.btn  {
+	/**
+	background: #eb94d0;
+	border-radius: 6px;
+	padding: 6px 8px;
+	**/
+
+	color: white;
+	font-size: 12px;
+	font-family: helvetica;
+	text-decoration: none;
+	border: 2px solid white;
+	border-radius: 20px;
+	transition-duration: .2s;
+	-webkit-transition-duration: .2s;
+	moz-transition-duration: .2s;
+	background-color: black;
+	padding: 4px 10px;
+}
+
+.btn:hover  {
+	/**
+	background: #2079b0;
+	**/
+
+	color: black;
+	background-color: white;
+	transition-duration: .2s;
+	-webkit-transition-duration: .2s;
+	-moz-transition-duration: .2s;
+}
+
+input[type=text]  {
+	padding: 0;
+	height: 14px;
+	position: relative;
+	left: 0;
+	outline: none;
+	border: 1px solid #cdcdcd;
+	border-color: rgba(0, 0, 0, .15);
+	background-color: white;
+	font-size: 10px;
+	box-shadow: -2px 2px 1px grey;
+}
+
+input[type=password]  {
+	padding: 0;
+	height: 14px;
+	position: relative;
+	left: 0;
+	outline: none;
+	border: 1px solid #cdcdcd;
+	border-color: rgba(0, 0, 0, .15);
+	background-color: white;
+	font-size: 10px;
+	box-shadow: -2px 2px 1px grey;
+}
+
+.row  {
+	clear: both;
+	width: 100%;
+}
+
+.col  {
+	float: left;
+	clear: right;
+	width: 32%;
 }
