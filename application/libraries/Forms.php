@@ -94,8 +94,7 @@ class Forms {
 					]
 				],
 				'errors' => [
-					'required' => 'You must provide a %s.',
-					'enforce_pass' => 'Password must be at least 8 alphanumeric characters with one uppercase'
+					'required' => 'You must provide a %s.'
 				]
 			]
 		];
@@ -234,6 +233,36 @@ class Forms {
 		return $cam_search_rules;
 	}
 
+	private function get_choose_pass_rules()  {
+		$choose_pass_rules = [
+			[
+				'field' => 'passwd',
+				'label' => 'passwd',
+				'rules' =>  [
+					'trim',
+					'required',  [
+						'enforce_password_strength',
+						[  $this->CI->validation_callables, '_check_password_strength'  ]
+					]
+				],
+				'errors' =>  [
+				]
+			],  [
+				'field' => 'passwdconfirm',
+				'label' => 'passwdconfirm',
+				'rules' =>  [
+					'trim',
+					'required',
+					'matches[passwd]'
+				],
+				'errors' =>  [
+				]
+			]
+		];
+
+		return $choose_pass_rules;
+	}
+
 	private function validate_form($rule, $level)
 	{
 		$inputs = array();
@@ -244,8 +273,10 @@ class Forms {
 				$this->CI->form_validation->set_rules($this->get_user_rules());
 				break;
 			case "pass":
-				$inputs['email'] = $this->CI->input->post('email');
 				$this->CI->form_validation->set_rules($this->get_pass_rules());
+				break;
+			case "recovery":
+				$this->CI->form_validation->set_rules($this->get_choose_pass_rules());
 				break;
 			case "auth":
 				$this->CI->form_validation->set_rules($this->get_auth_rules());
