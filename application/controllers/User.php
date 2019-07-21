@@ -39,8 +39,8 @@ class User extends MY_Controller
 			$this->load->library('forms');
 
 			$level = 0;
-			$tmp['data']['country'] = (!is_null($this->input->post('country')) && intval($this->input->post('country')) ? $this->input->post('country') : 'choose'); 
-			if (!is_null($this->input->post('state')) && intval($this->input->post('state')))  {
+			$tmp['data']['country'] = (!is_null($this->input->post('country')) && is_numeric($this->input->post('country')) ? $this->input->post('country') : 'choose'); 
+			if (!is_null($this->input->post('state')) && is_numeric($this->input->post('state')))  {
 				$tmp['data']['state'] = $this->input->post('state');
 				$level++;
 			} 

@@ -23,7 +23,7 @@ class Emails {
 
 	public function send($to = FALSE, $msg = FALSE)  {
 		if ($to !== FALSE && $msg !== FALSE)  {
-			$this->CI->email->initialize($this->configure());
+			## $this->CI->email->initialize($this->configure());
 
 			$this->CI->email->to($to);
         		$this->CI->email->from('jo@activist.com');
