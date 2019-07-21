@@ -24,15 +24,16 @@
 <?php if (($hidden_data['status'] == 'insert' && !isset($hidden_data['cam_id'])) || !empty($cam_detail))  { ?>
 <div class="container">
 	<?php echo form_open('admin/cam'.$tail, '', $hidden_data); ?>
-		<table width="100%">
-			<tr><td>
+		<div class="row">
+			<div class="col">
 			<?php
 				$attributes = array(
 					'class' => ''
 				);
 				echo "Start Date: ";
 			?>
-			</td><td>
+			</div>
+			<div class="col">
 			<?php
 				$data = array(
 					'name' => 'start_date',
@@ -46,7 +47,8 @@
 				}
 				echo form_input($data);
 			?>
-			</td><td>
+			</div>
+			<div class="col">
 			<?php
 				if (!empty(form_error('start_date')))  {
 					echo '<div style="font-size: 80%; color: red;">'.
@@ -54,15 +56,18 @@
 					'</div>';  
 				}
 			?>
-			</td></tr>
-			<tr><td>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
 			<?php
 				$attributes = array(
 					'class' => ''
 				);
 				echo "End Date: ";
 			?>
-			</td><td>
+			</div>
+			<div class="col">
 			<?php
 				$data = array(
 					'name' => 'end_date',
@@ -76,7 +81,8 @@
 				}
 				echo form_input($data);
 			?>
-			</td><td>
+			</div>
+			<div class="col">
 			<?php
 				if (!empty(form_error('end_date')))  {
 					echo '<div style="font-size: 80%; color: red;">'.
@@ -84,15 +90,18 @@
 					'</div>';  
 				}
 			?>
-			</td></tr>
-			<tr><td>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
 			<?php
 				$attributes = array(
 					'class' => ''
 				);
 				echo "Title: ";
 			?>
-			</td><td>
+			</div>
+			<div class="col">
 			<?php
 				$data = array(
 					'name' => 'title',
@@ -106,7 +115,8 @@
 				}
 				echo form_input($data);
 			?>
-			</td><td>
+			</div>
+			<div class="col">
 			<?php
 				if (!empty(form_error('title')))  {
 					echo '<div style="font-size: 80%; color: red;">'.
@@ -114,15 +124,18 @@
 					'</div>';  
 				}
 			?>
-			</td></tr>
-			<tr><td>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
 			<?php
 				$attributes = array(
 					'class' => ''
 				);
 				echo "Text ";
 			?>
-			</td><td>
+			</div>
+			<div class="col">
 			<?php
 				$data = array(
 					'name' => 'cam_text',
@@ -136,7 +149,8 @@
 				}
 				echo form_textarea($data);
 			?>
-			</td><td>
+			</div>
+			<div class="col">
 			<?php
 				if (!empty(form_error('cam_text')))  {
 					echo '<div style="font-size: 80%; color: red;">'.
@@ -144,11 +158,13 @@
 					'</div>';  
 				}
 			?>
-			</td></tr>
-			<tr><td>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
 			<?php
 				$attributes = array(
-					'class' => ''
+					'class' => 'btn'
 				);
 				if ($readonly == '')  {
 					echo form_reset("reset", "Reset", $attributes);
@@ -156,10 +172,11 @@
 					echo '<a href="/admin/cam/update/'.$cam_detail[0]['cam_id'].'">Update</a>';
 				}
 			?>
-			</td><td>
+			</div>
+			<div class="col">
 			<?php
 				$attributes = array(
-					'class' => ''
+					'class' => 'btn'
 				);
 				if ($readonly == '')  {
 					echo form_submit("submit", "Submit", $attributes);
@@ -167,8 +184,10 @@
 					echo '<a href="/admin/cam/delete/'.$cam_detail[0]['cam_id'].'">Delete</a>';
 				}
 			?>
-			</td></tr>
-		</table>
+			</div>
+			<div class="col">
+			</div>
+		</div>
 	<?php  echo form_close(); ?>
 </div>
 
