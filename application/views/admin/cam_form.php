@@ -4,6 +4,7 @@
 	$sd = '';
 	$ed = '';
 	$cid = '';
+	$rid = '';
 	$ttle = '';
 	$txt = '';
 	$tail = '';
@@ -13,6 +14,7 @@
 		$spl = explode(" ", $cam_detail[0]['end_time']);
 		$ed = $spl[0];
 		$cid = $cam_detail[0]['country_id'];
+		$rid = $cam_detail[0]['region_id'];
 		$ttle = $cam_detail[0]['title'];
 		$txt = $cam_detail[0]['text'];
 		if ($hidden_data['status'] !== 'update')  {
@@ -105,9 +107,12 @@
 					'choose' => 'choose'
 				);
 				$js = array(
-					'id' => 'country_id',
-					'onChange' => 'alert(\'here\');'
+					'id' => 'country_id'
+					/**  'onChange' => 'alert(\'here\');'  **/
 				);
+				if ($readonly !== '')  {
+					$js['disabled'] = 'disabled';
+				}
 				if (!is_bool($countries))  {
 					if (is_array($countries))  {
 						foreach ($countries as $row)  {
@@ -115,13 +120,51 @@
 						}
 					}
 				}
-				echo form_dropdown('country_id', $options, $cid);
+				echo form_dropdown('country_id', $options, $cid, $js);
 			?>
 			</div>
 			<div class="col" style="color: red; font-size: 80%;">
 			<?php
 				if (!empty(form_error('country_id')))  {
 					echo form_error('country_id');  
+				}
+			?>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+			<?php
+				$attributes = array(
+					'class' => ''
+				);
+				echo "Region: ";
+			?>
+			</div>
+			<div class="col">
+			<?php
+				$options = array(
+					'choose' => 'choose'
+				);
+				$js = array(
+					'id' => 'region_id'
+				);
+				if ($readonly !== '')  {
+					$js['disabled'] = 'disabled';
+				}
+				if (!is_bool($regions))  {
+					if (is_array($regions))  {
+						foreach ($regions as $row)  {
+							$options[$row['region_id']] = $row['region_name'];
+						}
+					}
+				}
+				echo form_dropdown('region_id', $options, $rid, $js);
+			?>
+			</div>
+			<div class="col">
+			<?php
+				if (!empty(form_error('region_id')))  {
+					echo form_error('region_id');  
 				}
 			?>
 			</div>

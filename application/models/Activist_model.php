@@ -101,6 +101,22 @@ class Activist_model extends CI_Model {
 	}
 	**/
 
+	public function get_regions()  {
+		$query = $this->db->select("*")->from('region')
+			->get();
+
+		$errors = $this->db->error();
+		if ($errors['code'] !== 0)  {
+			return 'Error: ['.implode(", ", $this->db->error()).']';
+		}
+
+		if ($query->num_rows() > 0)  {
+			return $query->result_array();
+		}
+
+		return FALSE;
+	}
+
 	public function get_countries()  {
 		$query = $this->db->select('*')->from('country')
 			->get();
