@@ -79,7 +79,7 @@ input[type=text]  {
 	border-radius: 4px;
 	background-color: white;
 	font-size: 10px;
-	box-shadow: -2px 2px 1px grey;
+	box-shadow: -2px 2px 1px rgba(0,0,0,0.2);
 }
 
 input[type=password]  {
@@ -93,7 +93,7 @@ input[type=password]  {
 	border-radius: 4px;
 	background-color: white;
 	font-size: 10px;
-	box-shadow: -2px 2px 1px grey;
+	box-shadow: -2px 2px 1px rgba(0,0,0,0.2);
 }
 
 textarea  {
@@ -107,7 +107,7 @@ textarea  {
 	background-color: white;
 	font-size: 10px;
 	resize: none;
-	box-shadow: -2px 2px 1px grey;
+	box-shadow: -2px 2px 1px rgba(0,0,0,0.2);
 }
 
 select  {
@@ -116,7 +116,7 @@ select  {
 	border: 1px solid #cdcdcd;
 	border-radius: 4px;
 	background-color: white;
-	box-shadow: -2px 2px 1px grey;
+	box-shadow: -2px 2px 1px rgba(0,0,0,0.2);
 }
 
 
