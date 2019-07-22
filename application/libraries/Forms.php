@@ -156,6 +156,25 @@ class Forms {
 				'errors' =>  [
 				]
 			],  [
+				'field' => 'region_id',
+				'label' => 'region_id',
+				'rules' =>  [
+					'trim',
+					'required',
+					'integer'
+				],
+				'errors' =>  [
+				]
+			],  [
+				'field' => 'state_id',
+				'label' => 'state_id',
+				'rules' =>  [
+					'trim',
+					'integer'
+				],
+				'errors' =>  [
+				]
+			],  [
 				'field' => 'title',
 				'label' => 'title',
 				'rules' => 'trim|required|alpha_numeric_spaces',

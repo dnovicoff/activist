@@ -121,8 +121,13 @@ CREATE TABLE `campaign` (
   `end_time` datetime NOT NULL,
   `title` varchar(100) DEFAULT NULL,
   `text` varchar(1000) DEFAULT NULL,
+  `country_id` int(11) NOT NULL,
+  `region_id` int(11) NOT NULL,
+  `table_key` int(11) NOT NULL,
   PRIMARY KEY (`cam_id`),
-  KEY `user_id` (`user_id`)
+  KEY `user_id` (`user_id`),
+  KEY `country_id` (`country_id`),
+  KEY `region_id` (`region_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -263,7 +268,7 @@ CREATE TABLE `ips_on_hold` (
   `ip_address` varchar(45) NOT NULL,
   `time` datetime NOT NULL,
   PRIMARY KEY (`ai`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -279,7 +284,21 @@ CREATE TABLE `login_errors` (
   `ip_address` varchar(45) NOT NULL,
   `time` datetime NOT NULL,
   PRIMARY KEY (`ai`)
-) ENGINE=MyISAM AUTO_INCREMENT=85 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=108 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `region`
+--
+
+DROP TABLE IF EXISTS `region`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `region` (
+  `region_id` int(11) NOT NULL AUTO_INCREMENT,
+  `region_name` varchar(30) NOT NULL,
+  PRIMARY KEY (`region_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -311,7 +330,7 @@ CREATE TABLE `username_or_email_on_hold` (
   `username_or_email` varchar(255) NOT NULL,
   `time` datetime NOT NULL,
   PRIMARY KEY (`ai`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -384,4 +403,4 @@ CREATE TABLE `zip` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-07-21  0:46:56
+-- Dump completed on 2019-07-21 19:36:54
