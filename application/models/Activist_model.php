@@ -150,18 +150,22 @@ class Activist_model extends CI_Model {
 		return FALSE;
 	}
 
-	public function get_cities($country_id = NULL, $state_id = NULL)  {
-		$query = $this->db->select('*')->from('state')
-			->where('country_id', $country_id)
-			->get();
+	public function get_city($state_id = NULL, $city_id = NULL)  {
+		if (is_numeric($state_id) && is_numeric($city_id))  {
+			$query = $this->db->select('*')->from('city')
+				->join('city_state', 'city_state.city_id = city.city_id')
+				->where('city_state.state_id', $state_id)
+				->where('city.city_id', $city_id)
+				->get();
 
-		$errors = $this->db->error();
-		if ($errors['code'] !== 0)  {
-			return 'Error: ['.implode(", ", $this->db->error()).']';
-		}
+			$errors = $this->db->error();
+			if ($errors['code'] !== 0)  {
+				return 'Error: ['.implode(", ", $this->db->error()).']';
+			}
 		
-		if ($query->num_rows() > 0)  {	
-			return $query->result_array();
+			if ($query->num_rows() > 0)  {	
+				return $query->result_array();
+			}
 		}
 
 		return FALSE;
@@ -205,8 +209,8 @@ class Activist_model extends CI_Model {
 		return FALSE;
 	}
 
-	public function delete_campaign($user_id, $cam_id)  {
-		if (isset($user_id) && isset($cam_id))  {
+	public function delete_campaign($user_id = FALSE, $cam_id = FALSE)  {
+		if (is_numeric($user_id) && is_numeric($cam_id))  {
 			$this->db->where('user_id', $user_id)
 				->where('cam_id', $cam_id)
 				->delete('campaign');
@@ -224,7 +228,7 @@ class Activist_model extends CI_Model {
 		return FALSE;
 	}
 
-	public function get_campaign_data($user_id, $cam_id = NULL)  {
+	public function get_campaign_data($user_id = NULL, $cam_id = NULL)  {
 		if (!is_null($user_id) && !is_null($cam_id))  {
 			$query = $this->db->select('*')->from('campaign')
 				->where('user_id =', $user_id)
@@ -240,7 +244,7 @@ class Activist_model extends CI_Model {
 			if ($query->num_rows() > 0)  {
 				return $query->result_array();
 			}
-		}  else if  (!is_null($user_id))  {
+		}  else if  (!is_null($user_id) && is_numeric($user_id))  {
 			$query = $this->db->select('*')->from('campaign')
 				->where('user_id =', $user_id)
 				->order_by('cam_id', 'DESC')

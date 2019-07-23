@@ -7,9 +7,13 @@
 			<div class="collapsable_content">
 				<ul>
 				<?php
-					if (!is_bool($data['loc_data']))  {
-						foreach ($data['loc_data'] as $row)  {
+					if (isset($data['loc_data']))  {
+						if (is_array($data['loc_data']))  {
+							foreach ($data['loc_data'] as $row)  {
 
+							}
+						}  else  {
+							echo $data['loc_data'];
 						}
 					}
 				?>
@@ -22,7 +26,7 @@
 			<div class="collapsable_content">
 				<ul>
 				<?php
-					if (!is_bool($data['cam_data']))  {
+					if (isset($data['cam_data']))  {
 						if (is_array($data['cam_data']))  {
 							foreach ($data['cam_data'] as $row)  {
 								echo '<li><a href="/admin/cam/select/'.$row['cam_id'].'">'.$row['title'].'</a></li>';

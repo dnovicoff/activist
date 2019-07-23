@@ -1,10 +1,11 @@
 
 <?php
-	$readonly = '';
 	$sd = '';
 	$ed = '';
 	$cid = '';
 	$rid = '';
+	$sid = '';
+	$city = '';
 	$ttle = '';
 	$txt = '';
 	$tail = '';
@@ -15,13 +16,15 @@
 		$ed = $spl[0];
 		$cid = $cam_detail[0]['country_id'];
 		$rid = $cam_detail[0]['region_id'];
+		$sid = $cam_detail[0]['state_id'];
+		$city = $cam_detail[0]['city'];
+		$table_key = $cam_detail[0]['table_key'];
 		$ttle = $cam_detail[0]['title'];
 		$txt = $cam_detail[0]['text'];
-		if ($hidden_data['status'] !== 'update')  {
-			$readonly = 'readonly';
-		}  else  {
+		if ($hidden_data['status'] === 'update')  {
 			$tail = '/update/'.$cam_detail[0]['cam_id'];
 		}
+		$level++;
 	}
 ?>
 
@@ -46,8 +49,8 @@
 					'class' => '',
 					'placeholder' => 'yyyy-mm-dd'
 				);
-				if ($readonly !== '')  {
-					$data['readonly'] = $readonly;
+				if ($hidden_data['status'] === 'select')  {
+					$data['disabled'] = 'disabled';
 				}
 				echo form_input($data);
 			?>
@@ -78,8 +81,8 @@
 					'class' => '',
 					'placeholder' => 'yyyy-mm-dd'
 				);
-				if ($readonly !== '')  {
-					$data['readonly'] = $readonly;
+				if ($hidden_data['status'] === 'select')  {
+					$data['disabled'] = 'disabled';
 				}
 				echo form_input($data);
 			?>
@@ -108,9 +111,8 @@
 				);
 				$js = array(
 					'id' => 'country_id'
-					/**  'onChange' => 'alert(\'here\');'  **/
 				);
-				if ($readonly !== '')  {
+				if ($hidden_data['status'] === 'select')  {
 					$js['disabled'] = 'disabled';
 				}
 				if (!is_bool($countries))  {
@@ -120,7 +122,7 @@
 						}
 					}
 				}
-				echo form_dropdown('country_id', $options, $cid, $js);
+				echo form_dropdown('country_id', $options, set_value('country_id', $cid), $js);
 			?>
 			</div>
 			<div class="col" style="color: red; font-size: 80%;">
@@ -148,7 +150,7 @@
 				$js = array(
 					'id' => 'region_id'
 				);
-				if ($readonly !== '')  {
+				if ($hidden_data['status'] === 'select')  {
 					$js['disabled'] = 'disabled';
 				}
 				if (!is_bool($regions))  {
@@ -158,10 +160,10 @@
 						}
 					}
 				}
-				echo form_dropdown('region_id', $options, $rid, $js);
+				echo form_dropdown('region_id', $options, set_value('region_id', $rid), $js);
 			?>
 			</div>
-			<div class="col">
+			<div class="col" style="color: red; font-size: 80%;">
 			<?php
 				if (!empty(form_error('region_id')))  {
 					echo form_error('region_id');  
@@ -169,85 +171,154 @@
 			?>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col">
+
+	<?php
+		if ($level > 0)  {
+	?>
+			<div class="row">
+				<div class="col">
+				<?php
+					$attributes = array(
+						'class' => ''
+					);
+					echo "State: ";
+				?>
+				</div>
+				<div class="col">
+				<?php
+					$options = array(
+						'choose' => 'choose'
+					);
+					$js = array(
+						'id' => 'state_id'
+					);
+					if ($hidden_data['status'] === 'select')  {
+						$js['disabled'] = 'disabled';
+					}
+					if (!is_bool($states))  {
+						if (is_array($states))  {
+							foreach ($states as $row)  {
+								$options[$row['state_id']] = $row['state_name'];
+							}
+						}
+					}
+					echo form_dropdown('state_id', $options, set_value('state_id', $sid), $js);
+				?>
+				</div>
+				<div class="col" style="color: red; font-size: 80%;">
+				<?php
+					if (!empty(form_error('state_id')))  {
+						echo form_error('state_id');  
+					}
+				?>
+				</div>
 			</div>
-			<div class="col">
+			<div class="row">
+				<div class="col">
+				<?php
+					$attributes = array(
+						'class' => ''
+					);
+					echo "City: ";
+				?>
+				</div>
+				<div class="col">
+				<?php
+					$data = array(
+						'name' => 'city',
+						'id' => '',
+						'value' => set_value('city', $city),
+						'class' => '',
+						'placeholder' => ''
+					);
+					if ($hidden_data['status'] === 'select')  {
+						$data['disabled'] = 'disabled';
+					}
+					echo form_input($data);
+				?>
+				</div>
+				<div class="col" style="color: red; font-size: 80%;">
+				<?php
+					if (!empty(form_error('city')))  {
+						echo form_error('city');  
+					}
+				?>
+				</div>
 			</div>
-			<div class="col">
+			<div class="row">
+				<div class="col">
+				<?php
+					$attributes = array(
+						'class' => ''
+					);
+					echo "Title: ";
+				?>
+				</div>
+				<div class="col">
+				<?php
+					$data = array(
+						'name' => 'title',
+						'id' => '',
+						'value' => set_value('title', $ttle),
+						'class' => '',
+						'placeholder' => ''
+					);
+					if ($hidden_data['status'] === 'select')  {
+						$data['disabled'] = 'disabled';
+					}
+					echo form_input($data);
+				?>
+				</div>
+				<div class="col" style="color: red; font-size: 80%;">
+				<?php
+					if (!empty(form_error('title')))  {
+						echo form_error('title');  
+					}
+				?>
+				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col">
-			<?php
-				$attributes = array(
-					'class' => ''
-				);
-				echo "Title: ";
-			?>
+			<div class="row">
+				<div class="col">
+				<?php
+					$attributes = array(
+						'class' => ''
+					);
+					echo "Text ";
+				?>
+				</div>
+				<div class="col">
+				<?php
+					$data = array(
+						'name' => 'cam_text',
+						'id' => '',
+						'value' => set_value('cam_text', $txt),
+						'class' => '',
+						'placeholder' => 'Campaign description ...'
+					);
+					if ($hidden_data['status'] === 'select')  {
+						$data['disabled'] = 'disabled';
+					}
+					echo form_textarea($data);
+				?>
+				</div>
+				<div class="col" style="color: red; font-size: 80%;">
+				<?php
+					if (!empty(form_error('cam_text')))  {
+						echo form_error('cam_text');  
+					}
+				?>
+				</div>
 			</div>
-			<div class="col">
-			<?php
-				$data = array(
-					'name' => 'title',
-					'id' => '',
-					'value' => set_value('title', $ttle),
-					'class' => '',
-					'placeholder' => ''
-				);
-				if ($readonly !== '')  {
-					$data['readonly'] = $readonly;
-				}
-				echo form_input($data);
-			?>
-			</div>
-			<div class="col" style="color: red; font-size: 80%;">
-			<?php
-				if (!empty(form_error('title')))  {
-					echo form_error('title');  
-				}
-			?>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col">
-			<?php
-				$attributes = array(
-					'class' => ''
-				);
-				echo "Text ";
-			?>
-			</div>
-			<div class="col">
-			<?php
-				$data = array(
-					'name' => 'cam_text',
-					'id' => '',
-					'value' => set_value('cam_text', $txt),
-					'class' => '',
-					'placeholder' => 'Campaign description ...'
-				);
-				if ($readonly !== '')  {
-					$data['readonly'] = $readonly;
-				}
-				echo form_textarea($data);
-			?>
-			</div>
-			<div class="col" style="color: red; font-size: 80%;">
-			<?php
-				if (!empty(form_error('cam_text')))  {
-					echo form_error('cam_text');  
-				}
-			?>
-			</div>
-		</div>
+	<?php
+		}
+	?>
 		<div class="row">
 			<div class="col">
 			<?php
 				$attributes = array(
 					'class' => 'btn'
 				);
-				if ($readonly == '')  {
+				if ($hidden_data['status'] !== 'update')  {
 					echo form_reset("reset", "Reset", $attributes);
 				}  else  {
 					echo '<a href="/admin/cam/update/'.$cam_detail[0]['cam_id'].'">Update</a>';
@@ -259,7 +330,7 @@
 				$attributes = array(
 					'class' => 'btn'
 				);
-				if ($readonly == '')  {
+				if ($hidden_data['status'] !== 'update')  {
 					echo form_submit("submit", "Submit", $attributes);
 				}  else  {
 					echo '<a href="/admin/cam/delete/'.$cam_detail[0]['cam_id'].'">Delete</a>';
