@@ -98,8 +98,7 @@ class Admin extends MY_Controller
 					if (is_null($cam_method) && is_null($cam_id) && $status === "insert" &&
 						$statu === $this->input->post('status'))  {
 						$cam_id = $this->activist_model->insert_campaign($cam_data);
-					}  else if ($cam_method === 'update' && $status === "update" &&
-						is_numeric($cam_id) && $cam_id === $this->input->post('cam_id'))  {
+					}  else if ($cam_method === 'update' && $status === $this->input->post('status') && 							is_numeric($cam_id) && $cam_id === $this->input->post('cam_id'))  {
 						$this->activist_model->update_campaign($cam_data);
 						$status = 'select';
 					}
