@@ -49,7 +49,7 @@
 					'class' => '',
 					'placeholder' => 'yyyy-mm-dd'
 				);
-				if ($hidden_data['status'] === 'select')  {
+				if ($hidden_data['status'] === 'select' || $hidden_data['status'] === 'delete')  {
 					$data['disabled'] = 'disabled';
 				}
 				echo form_input($data);
@@ -81,7 +81,7 @@
 					'class' => '',
 					'placeholder' => 'yyyy-mm-dd'
 				);
-				if ($hidden_data['status'] === 'select')  {
+				if ($hidden_data['status'] === 'select' || $hidden_data['status'] === 'delete')  {
 					$data['disabled'] = 'disabled';
 				}
 				echo form_input($data);
@@ -112,7 +112,7 @@
 				$js = array(
 					'id' => 'country_id'
 				);
-				if ($hidden_data['status'] === 'select')  {
+				if ($hidden_data['status'] === 'select' || $hidden_data['status'] === 'delete')  {
 					$js['disabled'] = 'disabled';
 				}
 				if (!is_bool($countries))  {
@@ -150,7 +150,7 @@
 				$js = array(
 					'id' => 'region_id'
 				);
-				if ($hidden_data['status'] === 'select')  {
+				if ($hidden_data['status'] === 'select' || $hidden_data['status'] === 'delete')  {
 					$js['disabled'] = 'disabled';
 				}
 				if (!is_bool($regions))  {
@@ -192,7 +192,7 @@
 					$js = array(
 						'id' => 'state_id'
 					);
-					if ($hidden_data['status'] === 'select')  {
+					if ($hidden_data['status'] === 'select' || $hidden_data['status'] === 'delete')  {
 						$js['disabled'] = 'disabled';
 					}
 					if (!is_bool($states))  {
@@ -231,7 +231,7 @@
 						'class' => '',
 						'placeholder' => ''
 					);
-					if ($hidden_data['status'] === 'select')  {
+					if ($hidden_data['status'] === 'select' || $hidden_data['status'] === 'delete')  {
 						$data['disabled'] = 'disabled';
 					}
 					echo form_input($data);
@@ -263,7 +263,7 @@
 						'class' => '',
 						'placeholder' => ''
 					);
-					if ($hidden_data['status'] === 'select')  {
+					if ($hidden_data['status'] === 'select' || $hidden_data['status'] === 'delete')  {
 						$data['disabled'] = 'disabled';
 					}
 					echo form_input($data);
@@ -295,7 +295,7 @@
 						'class' => '',
 						'placeholder' => 'Campaign description ...'
 					);
-					if ($hidden_data['status'] === 'select')  {
+					if ($hidden_data['status'] === 'select' || $hidden_data['status'] === 'delete')  {
 						$data['disabled'] = 'disabled';
 					}
 					echo form_textarea($data);
@@ -318,7 +318,7 @@
 				$attributes = array(
 					'class' => 'btn'
 				);
-				if ($hidden_data['status'] !== 'update')  {
+				if ($hidden_data['status'] !== 'select' && $hidden_data['status'] !== 'delete')  {
 					echo form_reset("reset", "Reset", $attributes);
 				}  else  {
 					echo '<a href="/admin/cam/update/'.$cam_detail[0]['cam_id'].'">Update</a>';
@@ -330,7 +330,7 @@
 				$attributes = array(
 					'class' => 'btn'
 				);
-				if ($hidden_data['status'] !== 'update')  {
+				if ($hidden_data['status'] !== 'select' && $hidden_data['status'] !== 'delete')  {
 					echo form_submit("submit", "Submit", $attributes);
 				}  else  {
 					echo '<a href="/admin/cam/delete/'.$cam_detail[0]['cam_id'].'">Delete</a>';
