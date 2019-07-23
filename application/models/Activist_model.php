@@ -90,17 +90,6 @@ class Activist_model extends CI_Model {
 		return FALSE;
 	}
 
-	/**
-	public function user_password_change($email)
-	{
-		$this->email->from('root@actifish.com', 'Actifish Support');
-		$this->email->to($email);
-		$this->email->subject('Requested Password Change');
-		$this->email->message('There will be a link here to click to change password.');
-		$this->email->send();
-	}
-	**/
-
 	public function get_regions()  {
 		$query = $this->db->select("*")->from('region')
 			->get();
