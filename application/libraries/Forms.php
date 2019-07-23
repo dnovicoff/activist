@@ -102,7 +102,7 @@ class Forms {
 		return $user_rules;
 	}
 
-	private function get_cam_rules()  {
+	private function get_cam_rules($level = 0)  {
 		$cam_rules = [
 			[
 				'field' => 'start_date',
@@ -154,6 +154,7 @@ class Forms {
 					'integer'
 				],
 				'errors' =>  [
+					'integer' => 'Please select a country'
 				]
 			],  [
 				'field' => 'region_id',
@@ -164,31 +165,47 @@ class Forms {
 					'integer'
 				],
 				'errors' =>  [
-				]
-			],  [
-				'field' => 'state_id',
-				'label' => 'state_id',
-				'rules' =>  [
-					'trim',
-					'integer'
-				],
-				'errors' =>  [
-				]
-			],  [
-				'field' => 'title',
-				'label' => 'title',
-				'rules' => 'trim|required|alpha_numeric_spaces',
-				'errors' => [
-				]
-			],  [
-				'field' => 'cam_text',
-				'label' => 'cam_text',
-				'rules' => 'trim|required|regex_match[/^[a-zA-Z0-9\s\.\?!\']+$/]',
-				'errors' => [
-					'regex_match' => 'Only alpha numeric, spaces, and punctuation characters are allowed'
+					'integer' => 'Please select a region'
 				]
 			]
 		];
+
+		if ($level > 0)  {
+			$cam_rules[] =  [
+				[
+					'field' => 'state_id',
+					'label' => 'state_id',
+					'rules' =>  [
+						'trim',
+						'integer'
+					],
+					'errors' =>  [
+					]
+				],  [
+					'field' => 'city',
+					'label' => 'city',
+					'rules' =>  [
+						'trim',
+						'regex_match[(w+)]'
+					],
+					'errors' =>  [
+					]
+				],  [
+					'field' => 'title',
+					'label' => 'title',
+					'rules' => 'trim|required|alpha_numeric_spaces',
+					'errors' => [
+					]
+				],  [
+					'field' => 'cam_text',
+					'label' => 'cam_text',
+					'rules' => 'trim|required|regex_match[/^[a-zA-Z0-9\s\.\?!\']+$/]',
+					'errors' => [
+						'regex_match' => 'Only alpha numeric, spaces, and punctuation characters are allowed'
+					]
+				]
+			];
+		}
 
 		return $cam_rules;
 	}
