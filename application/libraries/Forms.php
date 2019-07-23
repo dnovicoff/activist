@@ -173,24 +173,6 @@ class Forms {
 		if ($level > 0)  {
 			$cam_rules[] =  [
 				[
-					'field' => 'state_id',
-					'label' => 'state_id',
-					'rules' =>  [
-						'trim',
-						'integer'
-					],
-					'errors' =>  [
-					]
-				],  [
-					'field' => 'city',
-					'label' => 'city',
-					'rules' =>  [
-						'trim',
-						'regex_match[(w+)]'
-					],
-					'errors' =>  [
-					]
-				],  [
 					'field' => 'title',
 					'label' => 'title',
 					'rules' => 'trim|required|alpha_numeric_spaces',
@@ -205,6 +187,36 @@ class Forms {
 					]
 				]
 			];
+
+			if ($level > 1)  {
+				$cam_rules[] =  [
+					'field' => 'state_id',
+					'label' => 'state_id',
+					'rules' =>  [
+						'trim',
+						'integer'
+					],
+					'errors' =>  [
+					]
+				];
+
+				if ($level > 2)  {
+					$cam_rules[] =  [
+						'field' => 'city',
+						'label' => 'city',
+						'rules' =>  [
+							'trim',
+							'regex_match[(w+)]',  [
+								'city_lookup',
+								[  $this->CI->activist_model 'city_lookup'  ]
+							]
+						],
+						'errors' =>  [
+							'city_lookup' => 'Your city was not found in your state'
+						]
+					];
+				}
+			}
 		}
 
 		return $cam_rules;

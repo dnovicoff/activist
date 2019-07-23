@@ -67,6 +67,12 @@ class Admin extends MY_Controller
 
 		$this->load->library('forms');
 		if ($this->require_role('admin'))  {
+			if ($this->input->post('state_id') !== NULL)
+				$level = 1;
+			if ($this->input->post('state_id') !== NULL && is_numeric($this->input->post('state_id')))
+				$level = 2;
+			if ($this->input->post('city') !== NULL && !empty($this->input->post('city')))
+				$level = 3;
 			if ($this->forms->validate('cam', $level))  {
         			$cam_data = [
 					'user_id' => intval($this->auth_user_id),
@@ -76,9 +82,8 @@ class Admin extends MY_Controller
 					'country_id' => $this->input->post('country_id'),
 					'region_id' => $this->input->post('region_id')
 				];
-				var_dump($cam_data);
-				var_dump($cam_method);
-				var_dump($cam_id);
+				var_dump($this->input->post('state_id'));
+				var_dump($level);
 				exit();
 
 				if ($this->input->post('title') !== NULL && $this->input->post('cam_text') !== NULL)  {
