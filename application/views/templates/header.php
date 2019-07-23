@@ -15,7 +15,13 @@
         <body>
 		<div class="container" style="background: linear-gradient(blue, 10%, white);}">
 			<div class="smallcol">
-                	<h3><a href="/">Actifish</a></h3><br />
+			<?php
+				$uri = "/";
+				if (!$data['login'])  {
+					$uri = "/admin";
+				}
+			?>
+                	<h3><a href="<?php echo $uri; ?>">Actifish</a></h3><br />
 			<?php
 				if (!empty($this->auth_role))  {
 					echo "Welcome ".$this->auth_username."<br />";

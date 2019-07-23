@@ -198,6 +198,7 @@ class Door extends MY_Controller
 			log_message('ERROR', 'Activist Error '.$page);
                 	show_404();
 		}
+		$tmp['data']['title'] = ucfirst('Welcome');
 		$tmp['data']['login'] = TRUE;
 		
 		// $this->is_logged_in();
