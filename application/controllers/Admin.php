@@ -74,6 +74,10 @@ class Admin extends MY_Controller
 					'country_id' => $this->input->post('country_id'),
 					'region_id' => $this->input->post('region_id')
 				];
+				var_dump($cam_data);
+				var_dump($cam_method);
+				var_dump($cam_id);
+				exit();
 
 				if ($this->input->post('title') !== NULL && $this->input->post('cam_text') !== NULL)  {
 					if ($this->input->post('state_id') !== NULL)
