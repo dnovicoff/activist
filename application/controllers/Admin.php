@@ -31,7 +31,6 @@ class Admin extends MY_Controller
 		$tmp = array(
 			'data' => array(
         			'title' => ucfirst("loc"), // Capitalize the first letter
-				'door' => 'loc',
 				'user_id' => $this->auth_user_id
 			)
 		);
@@ -45,6 +44,7 @@ class Admin extends MY_Controller
 	}
 
 	public function cam($cam_method = NULL, $cam_id = NULL)  {
+		$level = 0;
 		$status = (!is_null($cam_method) ? $cam_method : 'insert');
 		$functions = array('insert', 'select', 'update', 'delete');
 		if (!in_array($status, $functions))  {
@@ -54,8 +54,8 @@ class Admin extends MY_Controller
 		$this->is_logged_in();
 		$tmp = array(
 			'data' => array(
-        			'title' => ucfirst("cam"), // Capitalize the first letter
-				'door' => 'cam',
+        			'title' => ucfirst("Create Campaign"), // Capitalize the first letter
+				'level' => $level,
 				'user_id' => $this->auth_user_id,
 				'hidden_data' => array('status' => $status),
 				'countries' => $this->activist_model->get_countries(),
@@ -65,34 +65,61 @@ class Admin extends MY_Controller
 
 		$this->load->library('forms');
 		if ($this->require_role('admin'))  {
-			if ($this->forms->validate('cam'))  {
+			if ($this->forms->validate('cam', $level))  {
         			$cam_data = [
 					'user_id' => intval($this->auth_user_id),
 					'created_at' => date('Y-m-d H:i:s'),
-					'country_id' => $this->input->post('country_id'),
 					'start_time' => $this->input->post('start_date').' 00:00:01',
 					'end_time' => $this->input->post('end_date').' 23:59:59',
-					'title' => $this->input->post('title'),
-					'text' => $this->input->post('cam_text')
+					'country_id' => $this->input->post('country_id'),
+					'region_id' => $this->input->post('region_id')
 				];
 
-				if ($this->input->post('cam_id') !== NULL)  {
-					$cam_data['cam_id'] = $this->input->post('cam_id');
-				}
+				if ($this->input->post('title') !== NULL && $this->input->post('cam_text') !== NULL)  {
+					if ($this->input->post('state_id') !== NULL)
+						$cam_data['state_id'] = $this->input->post('state_id');
 
-				if (!isset($cam_data['cam_id']) && $status == "insert")  {
-					$cam_id = $this->activist_model->insert_campaign($cam_data);
-				}  else if ($status == "update" && isset($cam_data['cam_id']))  {
-					$this->activist_model->update_campaign($cam_data);
-					$status = 'select';
+					if ($this->input->post('state_id') !== NULL && $this->input->post('city') !== NULL)
+						$cam_data['city'] = $this->input->post('city');
+
+					$cam_data['title'] = $this->input->post('title');
+					$cam_data['text'] = $this->input->post('cam_text');
+
+					if ($this->input->post('cam_id') !== NULL && is_numeric($this->input->post('cam_id')))  {
+						$cam_data['cam_id'] = $this->input->post('cam_id');
+					}
+
+					if (!isset($cam_data['cam_id']) && $status == "insert")  {
+						$cam_id = $this->activist_model->insert_campaign($cam_data);
+					}  else if ($status == "update" && isset($cam_data['cam_id']))  {
+						$this->activist_model->update_campaign($cam_data);
+						$status = 'select';
+					}
 				}
+				$level++;
+				$tmp['data']['level'] = $level;
+				$tmp['data']['states'] = $this->activist_model->get_states($this->input->post('country_id'));
 			}
-			if (!is_null($status) && !is_null($cam_id) && is_int(intval($cam_id)))  {
+			if (!is_null($status) && !is_null($cam_id) && is_numeric($cam_id))  {
 				switch ($status)  {
 					case 'insert':
 					case "select":
 					case "update":
 						$tmp['data']['cam_detail'] = $this->activist_model->get_campaign_data($this->auth_user_id, $cam_id);
+						if ($tmp['data']['cam_detail'][0]['table_key'] !== "0")  {
+							if (preg_match('/(\d{1,2})-(\d{1,5})/',
+								$tmp['data']['cam_detail'][0]['table_key'], $matches))  {
+								$tmp['data']['cam_detail'][0]['state_id'] = $matches[1];
+								$tmp['data']['cam_detail'][0]['city'] =
+									$this->activist_model->get_city($matches[1], $matches[2]);
+								$tmp['data']['cam_detail'][0]['city'] =
+									$tmp['data']['cam_detail'][0]['city'][0]['city'];
+							}  else  {
+								$tmp['data']['cam_detail'][0]['sid'] = $tmp['data']['cam_detail'][0]['table_key'];
+							}
+						}
+						$tmp['data']['states'] = $this->activist_model
+							->get_states($tmp['data']['cam_detail'][0]['country_id']);
 						break;
 					case "delete":
 						$tmp['data']['cam_detail'] = $this->activist_model->delete_campaign($this->auth_user_id, $cam_id);
