@@ -56,7 +56,6 @@ class Admin extends MY_Controller
 		$tmp = array(
 			'data' => array(
         			'title' => ucfirst("Create Campaign"), // Capitalize the first letter
-				'level' => $level,
 				'user_id' => $this->auth_user_id,
 				'login' => FALSE,
 				'hidden_data' => array('status' => $status),
@@ -82,15 +81,12 @@ class Admin extends MY_Controller
 					'country_id' => $this->input->post('country_id'),
 					'region_id' => $this->input->post('region_id')
 				];
-				var_dump($this->input->post('state_id'));
-				var_dump($level);
-				exit();
 
 				if ($this->input->post('title') !== NULL && $this->input->post('cam_text') !== NULL)  {
-					if ($this->input->post('state_id') !== NULL)
+					if ($this->input->post('state_id') !== NULL && is_numeric($this->input->post('state_id')))
 						$cam_data['state_id'] = $this->input->post('state_id');
 
-					if ($this->input->post('state_id') !== NULL && $this->input->post('city') !== NULL)
+					if (is_numeric($this->input->post('state_id')) && $this->input->post('city') !== NULL)
 						$cam_data['city'] = $this->input->post('city');
 
 					$cam_data['title'] = $this->input->post('title');
@@ -101,18 +97,23 @@ class Admin extends MY_Controller
 					}
 
 					if (is_null($cam_method) && is_null($cam_id) && $status === "insert" &&
-						$statu === $this->input->post('status'))  {
-						$cam_id = $this->activist_model->insert_campaign($cam_data);
+						$status === $this->input->post('status'))  {
+						## $cam_id = $this->activist_model->insert_campaign($cam_data);
+						var_dump($cam_data);
+						var_dump($level);
+						exit();
 					}  else if ($cam_method === 'update' && $status === $this->input->post('status') && 							is_numeric($cam_id) && $cam_id === $this->input->post('cam_id'))  {
 						$this->activist_model->update_campaign($cam_data);
 						$status = 'select';
 					}
 				}
 				$level++;
-				$tmp['data']['level'] = $level;
+				$tmp['data']['states'] = $this->activist_model->get_states($this->input->post('country_id'));
+			}  else  {
 				$tmp['data']['states'] = $this->activist_model->get_states($this->input->post('country_id'));
 			}
-			if (!is_null($status) && !is_null($cam_id) && is_numeric($cam_id))  {
+
+			if (!is_null($cam_method) && !is_null($cam_id) && is_numeric($cam_id))  {
 				switch ($status)  {
 					case 'insert':
 					case "select":
@@ -139,6 +140,7 @@ class Admin extends MY_Controller
 				}
 				$tmp['data']['hidden_data'] = array('status' => $status, 'cam_id' => $cam_id);
 			}
+			$tmp['data']['level'] = $level;
 			$this->generate_page($tmp);
 		}  else  {
 			redirect($this->input->server, 'refresh');
