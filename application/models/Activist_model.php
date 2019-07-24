@@ -140,6 +140,7 @@ class Activist_model extends CI_Model {
 	}
 
 	public function verify_state($sid = FALSE, $rid = FALSE, $cid = FALSE)  {
+		$count = 0;
 		if ($sid !== FALSE && $rid !== FALSE && $cid !== FALSE)  {
 			$query = $this->db->select('*')
 				->from('region')
@@ -152,7 +153,26 @@ class Activist_model extends CI_Model {
 				return 'Error: ['.implode(", ", $this->db->error()).']';;
 			}
 
-			if ($query->num_rows() > 0)  {
+			if ($query->num_rows() === 0)  {
+				$query = $this->db->select('*')
+					->from('region')
+					->where('region_id', $rid)
+					->where('region_name', 'City')
+					->get();
+
+				$errors = $this->db->error();
+				if ($errors['code'] !== 0)  {
+					return 'Error: ['.implode(", ", $this->db->error()).']';;
+				}
+
+				if ($query->num_rows() > 0)  {
+					$count = $query->num_rows();
+				}
+			}  else  {
+				$count = $query->num_rows();
+			}
+
+			if ($count > 0)  {
 				$query = $this->db->select('*')
 					->from('country')
 					->join('state', 'country.country_id = state.country_id')
@@ -171,7 +191,7 @@ class Activist_model extends CI_Model {
 					return 'Error: your chosen state was not found within your country';
 				}
 			}  else  {
-				return 'Error: you chose a state but did not choose a state for the region';
+				return 'Error: your region choice does not match the rest of the form';
 			}
 		}
 
