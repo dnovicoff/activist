@@ -45,21 +45,22 @@ class User extends MY_Controller
 
 			$level = 0;
 			$tmp['data']['country'] = (!is_null($this->input->post('country')) && is_numeric($this->input->post('country')) ? $this->input->post('country') : 'choose'); 
-			if (!is_null($this->input->post('state')) && is_numeric($this->input->post('state')))  {
+			if ($this->input->post('state') !== NULL && is_numeric($this->input->post('state')))  {
 				$tmp['data']['state'] = $this->input->post('state');
 				$level++;
 			} 
-			if (!is_null($this->input->post('city')) && !empty($this->input->post('city')) && $level > 0)  {
+			if ($this->input->post('city') !== NULL && !empty($this->input->post('city')) && $level > 0)  {
 				$tmp['data']['city'] = $this->input->post('city');
 				$level++;
 			}
 
 			if ($this->forms->validate('cam_search', $level))  {
 				## National
-				$tmp['data']['national'] = $this->activist_model->get_campaigns($this->input->post('country'));
-				if (!is_null($this->input->post('state')))  {
+				$tmp['data']['national_campaigns'] = $this->activist_model->get_campaigns($this->input->post('country'));
+				if ($this->input->post('state') !== NULL)  {
 					## States
-					## $tmp['data']['states'] = $this->activist_model->get_campaigns();
+						$tmp['data']['state_campaigns'] = $this->activist_model
+							->get_campaigns($this->input->post('country'), $this->input->post('state'));
 				}
 			}
 		}
