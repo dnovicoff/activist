@@ -139,6 +139,88 @@ class Activist_model extends CI_Model {
 		return FALSE;
 	}
 
+	public function verify_state($sid = FALSE, $rid = FALSE, $cid = FALSE)  {
+		if ($sid !== FALSE && $rid !== FALSE && $cid !== FALSE)  {
+			$query = $this->db->select('*')
+				->from('region')
+				->where('region_id', $rid)
+				->where('region_name', 'State')
+				->get();
+
+			$errors = $this->db->error();
+			if ($errors['code'] !== 0)  {
+				return 'Error: ['.implode(", ", $this->db->error()).']';;
+			}
+
+			if ($query->num_rows() > 0)  {
+				$query = $this->db->select('*')
+					->from('country')
+					->join('state', 'country.country_id = state.country_id')
+					->where('country.country_id', $cid)
+					->where('state.state_id', $sid)
+					->get();
+
+				$errors = $this->db->error();
+				if ($errors['code'] !== 0)  {
+					return 'Error: ['.implode(", ", $this->db->error()).']';
+				}
+
+				if ($query->num_rows() > 0)  {
+					return TRUE;
+				}  else  {
+					return 'Error: your chosen state was not found within your country';
+				}
+			}  else  {
+				return 'Error: you chose a state but did not choose a state for the region';
+			}
+		}
+
+		return FALSE;
+	}
+
+	public function verify_city($cid = FALSE, $rid = FALSE, $sid = FALSE, $city = FALSE)  {
+		if ($cid !== FALSE && $rid !== FALSE && $sid !== FALSE && $city !== FALSE)  {
+			$query = $this->db->select('*')
+				->from('region')
+				->where('region_id', $rid)
+				->where('region_name', 'City')
+				->get();
+
+			$errors = $this->db->error();
+			if ($errors['code'] !== 0)  {
+				return 'Error: ['.implode(", ", $this->db->error()).']';;
+			}
+
+			if ($query->num_rows() > 0)  {
+				$query = $this->db->select('*')
+					->from('city')
+					->join('city_state', 'city.city_id = city_state.city_id')
+					->join('state', 'city_state.state_id = state.state_id')
+					->join('country', 'state.country_id = country.country_id')
+					->where('country.country_id', $cid)
+					->where('state.state_id', $sid)
+					->like('city', $city)
+					->get();
+
+				$errors = $this->db->error();
+				if ($errors['code'] !== 0)  {
+					return 'Error: ['.implode(", ", $this->db->error()).']';
+				}
+
+				if ($query->num_rows() > 0)  {
+					return TRUE;
+				}  else  {
+					return 'Error: your chosen city was not found within your state';
+				}
+					
+			}  else  {
+				return 'Error: you chose a city but did not choose a city for your region';
+			}
+		}
+
+		return FALSE;
+	}
+
 	public function get_city($state_id = NULL, $city_id = NULL)  {
 		if (is_numeric($state_id) && is_numeric($city_id))  {
 			$query = $this->db->select('*')->from('city')
