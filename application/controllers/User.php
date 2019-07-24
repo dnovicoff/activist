@@ -31,9 +31,14 @@ class User extends MY_Controller
         			'title' => ucfirst("Campaign search Results"), // Capitalize the first letter
 				'country' => 'choose',
 				'state' => 'choose',
-				'city' => 'choose'
+				'city' => 'choose',
+				'login' => FALSE
 			)
 		);
+
+		if ($this->verify_min_level(9))  {
+			$tmp['data']['login'] = TRUE;
+		}
 
 		if (strtolower($_SERVER['REQUEST_METHOD']) == 'post')  {
 			$this->load->library('forms');
@@ -51,7 +56,7 @@ class User extends MY_Controller
 
 			if ($this->forms->validate('cam_search', $level))  {
 				## National
-				## $tmp['data']['national'] = $this->activist_model->get_campaigns();
+				$tmp['data']['national'] = $this->activist_model->get_campaigns($this->input->post('country'));
 				if (!is_null($this->input->post('state')))  {
 					## States
 					## $tmp['data']['states'] = $this->activist_model->get_campaigns();
@@ -70,7 +75,7 @@ class User extends MY_Controller
 				'country' => 'choose',
 				'state' => 'choose',
 				'city' => 'choose',
-				'login' => TRUE
+				'login' => FALSE
 			)
 		);
 
@@ -81,7 +86,7 @@ class User extends MY_Controller
 		}
 
 		if ($this->verify_min_level(9))  {
-			$tmp['data']['login'] = FALSE;
+			$tmp['data']['login'] = TRUE;
 		}
 		
 		$this->generate_page($tmp);
