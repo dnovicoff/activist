@@ -69,7 +69,8 @@ class User extends MY_Controller
         			'title' => ucfirst('Campaign Search'), // Capitalize the first letter
 				'country' => 'choose',
 				'state' => 'choose',
-				'city' => 'choose'
+				'city' => 'choose',
+				'login' => TRUE
 			)
 		);
 
@@ -77,6 +78,10 @@ class User extends MY_Controller
                 	// Whoops, we don't have a page for that!
 			log_message('ERROR', 'Activist Error '.$page);
                 	show_404();
+		}
+
+		if ($this->verify_min_level(9))  {
+			$tmp['data']['login'] = FALSE;
 		}
 		
 		$this->generate_page($tmp);
