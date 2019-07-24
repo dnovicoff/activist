@@ -1,5 +1,9 @@
 
 
 <div class="container">
-	A listing of campaigns from a form searching for national / state / city
+	<?php
+		if (isset($national) && is_array($national))  {
+			var_dump($national);
+		}
+	?>
 </div>

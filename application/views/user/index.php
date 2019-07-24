@@ -1,7 +1,10 @@
 
 <div class="container">
 	<div class="smallcol">
-		Pertitent info regarding user lookups for campaigns.
+		Search types<br />
+		<a href="/cam/location">Location</a><br />
+		<a href="/cam/National">National</a><br >
+		<a href="/cam/current">Current</a><br />
 	</div>
 	<div class="largecol">
 		<?php
