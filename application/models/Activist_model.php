@@ -352,8 +352,21 @@ class Activist_model extends CI_Model {
 		return FALSE;
 	}
 
-	public function get_campaigns($country_id = NULL, $state_id = NULL, $city_id = NULL)  {
+	public function get_campaigns($country_id = FALSE, $state_id = NULL, $city_id = NULL)  {
+		if ($country_id !== FALSE && is_numeric($country_id)
+			&& $state_id === FALSE && $city_id === FALSE)  {
+			$query = $this->db->select('*')
+				->from('campaign')
+				->where('country_id', $country_id)
+				->get();
 
+			$errors = $this->db->error();
+			if ($errors['code'] !== 0)  {
+				return 'Error: ['.implode(", ", $this->db->error()).']';
+			}
+		}
+
+		return FALSE;
 	}
 
 	public function insert_user($user = FALSE)  {
