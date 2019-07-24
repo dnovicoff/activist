@@ -172,19 +172,24 @@ class Forms {
 
 		if ($level > 0)  {
 			$cam_rules[] =  [
-				[
-					'field' => 'title',
-					'label' => 'title',
-					'rules' => 'trim|required|alpha_numeric_spaces',
-					'errors' => [
-					]
-				],  [
-					'field' => 'cam_text',
-					'label' => 'cam_text',
-					'rules' => 'trim|required|regex_match[/^[a-zA-Z0-9\s\.\?!\']+$/]',
-					'errors' => [
-						'regex_match' => 'Only alpha numeric, spaces, and punctuation characters are allowed'
-					]
+				'field' => 'title',
+				'label' => 'title',
+				'rules' =>  [
+					'trim',
+					'required',
+					'alpha_numeric_spaces',
+					'min_length[4]'
+				],
+				'errors' => [
+				]
+			];
+
+			$cam_rules[] =  [
+				'field' => 'cam_text',
+				'label' => 'cam_text',
+				'rules' => 'trim|required|regex_match[/^[a-zA-Z0-9\s\.\?!\']+$/]',
+				'errors' => [
+					'regex_match' => 'Only alpha numeric, spaces, and punctuation characters are allowed'
 				]
 			];
 
@@ -194,7 +199,12 @@ class Forms {
 					'label' => 'state_id',
 					'rules' =>  [
 						'trim',
-						'integer'
+						'integer',  [
+							'state_verify',
+							function ($state)  {
+
+							}
+						]
 					],
 					'errors' =>  [
 					]
@@ -206,9 +216,12 @@ class Forms {
 						'label' => 'city',
 						'rules' =>  [
 							'trim',
-							'regex_match[(w+)]',  [
+							'regex_match[/^\w+$/]',  [
 								'city_lookup',
-								[  $this->CI->activist_model 'city_lookup'  ]
+								function ($city)  {
+									return TRUE;
+								}
+								## [  $this->CI->activist_model, 'city_lookup'  ]
 							]
 						],
 						'errors' =>  [
@@ -340,7 +353,7 @@ class Forms {
 				$this->CI->form_validation->set_rules($this->get_auth_rules());
 				break; 
 			case 'cam':
-				$this->CI->form_validation->set_rules($this->get_cam_rules());
+				$this->CI->form_validation->set_rules($this->get_cam_rules($level));
 				break;
 			case 'cam_search':
 				$this->CI->form_validation->set_rules($this->get_cam_search_rules($level));
