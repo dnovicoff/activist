@@ -17,7 +17,7 @@
 			<div class="smallcol">
 			<?php
 				$uri = "/";
-				if (!$data['login'])  {
+				if ($data['login'])  {
 					$uri = "/admin";
 				}
 			?>
