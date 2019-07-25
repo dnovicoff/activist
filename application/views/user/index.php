@@ -23,7 +23,6 @@
 						break;
 				}
 				$output .= '<div class="graph_canvas">'.
-					$this->load->view('user/data', $data, TRUE).
 				'</div>';
 			}  else  {
 				$output = 'Probable a graph of current campaigns being signed.';

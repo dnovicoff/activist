@@ -10,6 +10,8 @@ class User extends MY_Controller
 		$this->load->helper('form_helper');
 		$this->load->library('user_agent');
 		$this->load->model('activist_model');
+
+		$this->is_logged_in();
 	}
 
 	private function generate_page($tmp = array())  {
@@ -29,18 +31,23 @@ class User extends MY_Controller
 	}
 
 	public function detail($cam_id = FALSE)  {
+		$tmp = array(
+			'data' => array(
+				'title' => ' campaign detail.'
+			)
+		);
+
 		if (is_numeric($cam_id))  {
 
 		}
 
-		$this->generate_page();
+		$this->generate_page($tmp);
 	}
 
 	public function show($country_id = FALSE, $state_id = FALSE, $city = FALSE)  {
 		$tmp = array(
 			'data' => array(
-				'title' => ' listings for activist campaigns',
-				'login' => FALSE
+				'title' => ' listings for activist campaigns'
 			)
 		);
 
@@ -62,14 +69,9 @@ class User extends MY_Controller
 				'country' => 'choose',
 				'state' => 'choose',
 				'city' => 'choose',
-				'countries' => $this->activist_model->get_countries(),
-				'login' => FALSE
+				'countries' => $this->activist_model->get_countries()
 			)
 		);
-
-		if ($this->verify_min_level(9))  {
-			$tmp['data']['login'] = TRUE;
-		}
 
 		if (strtolower($_SERVER['REQUEST_METHOD']) == 'post')  {
 			$this->load->library('forms');
@@ -113,8 +115,7 @@ class User extends MY_Controller
         {
 		$tmp = array(
 			'data' => array(
-        			'title' => ucfirst('Campaign Search'), // Capitalize the first letter
-				'login' => FALSE
+        			'title' => ucfirst('Campaign Search') // Capitalize the first letter
 			)
 		);
 
@@ -122,10 +123,6 @@ class User extends MY_Controller
                 	// Whoops, we don't have a page for that!
 			log_message('ERROR', 'Activist Error '.$page);
                 	show_404();
-		}
-
-		if ($this->verify_min_level(9))  {
-			$tmp['data']['login'] = TRUE;
 		}
 		
 		$this->generate_page($tmp);
