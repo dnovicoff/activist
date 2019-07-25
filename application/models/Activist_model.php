@@ -352,17 +352,42 @@ class Activist_model extends CI_Model {
 		return FALSE;
 	}
 
-	public function get_campaigns($country_id = FALSE, $state_id = NULL, $city_id = NULL)  {
-		if ($country_id !== FALSE && is_numeric($country_id)
-			&& $state_id === FALSE && $city_id === FALSE)  {
+	public function get_campaigns($country_id = FALSE, $state_id = FALSE, $city = FALSE)  {
+		if ($country_id !== FALSE && is_numeric($country_id))  {
+			$table_key = 0;
+			if (is_numeric($state_id))  {
+				$table_key = $state_id;
+			}
+			if (!is_bool($city))  {
+				$query = $this->db->select('*')
+					->from('city')
+					->join('city_state', 'city.city_id = city_state.city_id')
+					->join('state', 'city_state.state_id = state.state_id')
+					->join('country', 'state.country_id = country.country_id')
+					->where('country.country_id', $country_id)
+					->where('state.state_id', $state_id)
+					->where('city', strtoupper($city))
+					->get();
+
+				if ($query->num_rows() > 0)  {
+					$result = $query->result_array();
+					$table_key = $table_key.'-'.$result[0]['city_id'];
+				}
+			}
+
 			$query = $this->db->select('*')
 				->from('campaign')
 				->where('country_id', $country_id)
+				->where('table_key', $table_key)
 				->get();
 
 			$errors = $this->db->error();
 			if ($errors['code'] !== 0)  {
 				return 'Error: ['.implode(", ", $this->db->error()).']';
+			}
+
+			if ($query->num_rows() > 0)  {
+				return $query->result_array();
 			}
 		}
 
