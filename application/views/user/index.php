@@ -21,9 +21,10 @@
 					case 'detail':
 						$output = $this->load->view('user/data', $data, TRUE);
 						break;
+					case 'sign':
+						$output = 'Here comes another form';
+						break;
 				}
-				$output .= '<div class="graph_canvas">'.
-				'</div>';
 			}  else  {
 				$output = 'Probable a graph of current campaigns being signed.';
 			}
