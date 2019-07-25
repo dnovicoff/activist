@@ -60,6 +60,7 @@ $route['pass'] = 'door/pass';
 $route['recovery/(\d+)/(\w+)'] = 'door/recovery/$1/$2';
 $route['create'] = 'door/create';
 
+$route['cam/show/(\d+)/(\d+)/(\w+)'] = 'user/show/$1/$2/$3';
 $route['cam/search/(\d)'] = 'user/search/$1';
 $route['cam'] = 'user/index';
 

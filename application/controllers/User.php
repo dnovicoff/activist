@@ -14,7 +14,7 @@ class User extends MY_Controller
 
 	private function generate_page($tmp = array())  {
 		$tmp['data']['countries'] = $this->activist_model->get_countries();
-		if (intval($tmp['data']['country']))  {
+		if (is_numeric($tmp['data']['country']))  {
 			$tmp['data']['states'] = $this->activist_model->get_states($this->input->post('country'));
 		}
 
@@ -23,6 +23,21 @@ class User extends MY_Controller
         	$html .= $this->load->view('templates/footer', $tmp, TRUE);
 
 		echo $html;
+	}
+
+	public function show($country_id = FALSE, $state_id = FALSE, $city = FALSE)  {
+		$tmp = array(
+			'data' => array(
+				'title' => ' listings for activist campaigns',
+				'login' => FALSE
+			)
+		);
+
+		if (!is_bool($country_id) && is_numeric($country_id))  {
+			$tmp['data']['campaigns'] = $this->activist_model->get_campaigns($country_id);
+		}
+
+		$this->generate_page($tmp);
 	}
 
 	public function search($cam_id = NULL)  {

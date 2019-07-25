@@ -2,18 +2,20 @@
 <div class="container">
 	<div class="smallcol">
 		Search types<br />
-		<a href="/cam/location">Location</a><br />
-		<a href="/cam/National">National</a><br >
-		<a href="/cam/current">Current</a><br />
+		<a href="/user/search">Drill</a><br />
+		<a href="/user/national">National</a><br >
+		<a href="/user/current">Current</a><br />
 	</div>
 	<div class="largecol">
 		<?php
 			$output = '';
-			$page = $this->uri->segment(1);
+			$page = $this->uri->segment(2);
 			switch ($page)  {
 				case 'user':
-				case 'cam':
+				case 'search':
 					$output = $this->load->view('user/cam_search_form', $data, TRUE);
+					break;
+				case 'show':
 					break;
 			}
 			$output .= '<div class="graph_canvas">'.
