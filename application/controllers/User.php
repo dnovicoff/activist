@@ -56,11 +56,18 @@ class User extends MY_Controller
 
 			if ($this->forms->validate('cam_search', $level))  {
 				## National
-				$tmp['data']['national_campaigns'] = $this->activist_model->get_campaigns($this->input->post('country'));
-				if ($this->input->post('state') !== NULL)  {
+				$tmp['data']['national_campaigns'] = $this->activist_model->get_campaigns($tmp['data']['country']);
+				if (is_numeric($this->input->post('state')))  {
 					## States
-						$tmp['data']['state_campaigns'] = $this->activist_model
-							->get_campaigns($this->input->post('country'), $this->input->post('state'));
+					$tmp['data']['state_campaigns'] = $this->activist_model
+						->get_campaigns($this->input->post('country'), $tmp['data']['state']);
+
+					if ($this->input->post('city') !== NULL)  {
+						## City
+						$tmp['data']['city_campaigns'] = $this->activist_model
+							->get_campaigns($tmp['data']['country'], $tmp['data']['state'],
+							$tmp['data']['city']);
+					}
 				}
 			}
 		}
