@@ -17,7 +17,7 @@
 			<div class="smallcol">
 			<?php
 				$uri = "/";
-				if ($data['login'])  {
+				if (!empty($this->auth_role))  {
 					$uri = "/admin";
 				}
 			?>
