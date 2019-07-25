@@ -20,6 +20,14 @@ class User extends MY_Controller
 		echo $html;
 	}
 
+	public function sign($cam_id = FALSE)  {
+		if (is_numeric($cam_id))  {
+
+		}
+
+		$this->generate_page();
+	}
+
 	public function detail($cam_id = FALSE)  {
 		if (is_numeric($cam_id))  {
 

@@ -12,11 +12,14 @@
 			$page = $this->uri->segment(2);
 			if (!empty($page))  {
 				switch ($page)  {
-					case 'user':
 					case 'search':
 						$output = $this->load->view('user/cam_search_form', $data, TRUE);
 						break;
 					case 'show':
+						$output = $this->load->view('user/data', $data, TRUE);
+						break;
+					case 'detail':
+						$output = $this->load->view('user/data', $data, TRUE);
 						break;
 				}
 				$output .= '<div class="graph_canvas">'.
