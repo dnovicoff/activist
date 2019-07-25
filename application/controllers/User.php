@@ -38,7 +38,7 @@ class User extends MY_Controller
 		);
 
 		if (is_numeric($cam_id))  {
-
+			$tmp['data']['campaign'] = $this->activist_model->get_campaign($cam_id);
 		}
 
 		$this->generate_page($tmp);
@@ -66,6 +66,7 @@ class User extends MY_Controller
 		$tmp = array(
 			'data' => array(
         			'title' => ucfirst("Campaign search Results"), // Capitalize the first letter
+				'validated' => FALSE,
 				'country' => 'choose',
 				'state' => 'choose',
 				'city' => 'choose',
@@ -89,14 +90,17 @@ class User extends MY_Controller
 
 			if ($this->forms->validate('cam_search', $level))  {
 				## National
+				$tmp['data']['valid_national'] = TRUE;
 				$tmp['data']['national_campaigns'] = $this->activist_model->get_campaigns($tmp['data']['country']);
 				if (is_numeric($this->input->post('state')))  {
 					## States
+					$tmp['data']['valid_state'] = TRUE;
 					$tmp['data']['state_campaigns'] = $this->activist_model
 						->get_campaigns($this->input->post('country'), $tmp['data']['state']);
 
 					if ($this->input->post('city') !== NULL)  {
 						## City
+						$tmp['data']['valid_city'] = TRUE;
 						$tmp['data']['city_campaigns'] = $this->activist_model
 							->get_campaigns($tmp['data']['country'], $tmp['data']['state'],
 							$tmp['data']['city']);
