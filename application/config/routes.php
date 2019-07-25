@@ -53,18 +53,19 @@ $route['default_controller'] = 'door';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['creator'] = 'key_creator';
-
 $route['about'] = 'door/index';
 $route['pass'] = 'door/pass';
 $route['recovery/(\d+)/(\w+)'] = 'door/recovery/$1/$2';
 $route['create'] = 'door/create';
 
 $route['cam/show/(\d+)/(\d+)/(\w+)'] = 'user/show/$1/$2/$3';
-$route['cam/search/(\d)'] = 'user/search/$1';
+$route['cam/show/(\d+)/(\d+)'] = 'user/show/$1/$2';
+$route['cam/show/(\d+)'] = 'user/show/$1';
+
+$route['cam/search'] = 'user/search';
 $route['cam'] = 'user/index';
 
-$route['admin/cam/(select|insert|update|delete)/(\d?)'] = 'admin/cam/$1/$2';
+$route['admin/cam/(select|update|delete)/(\d)'] = 'admin/cam/$1/$2';
 $route['admin/cam'] = 'admin/cam';
 $route['admin'] = 'admin';
 
