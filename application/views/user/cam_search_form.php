@@ -117,7 +117,7 @@
 				$attributes = array(
 					'class' => ''
 				);
-				echo '<a href="/cam">Reset</a>';
+				echo '<a href="/user/search">Reset</a>';
 			?>
 			</td><td>
 			<?php

@@ -200,12 +200,8 @@ class Door extends MY_Controller
 		}
 		$tmp['data']['title'] = ucfirst('Welcome');
 		$tmp['data']['login'] = TRUE;
-		
-		// $this->is_logged_in();
-		if (!$this->verify_min_level(9))  {
-			$this->generate_page($tmp);
-		}  else  {
-			redirect('admin', 'refresh');
-		}
+
+		$this->is_logged_in();		
+		$this->generate_page($tmp);
 	}
 }

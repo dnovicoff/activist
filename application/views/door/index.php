@@ -5,7 +5,7 @@
 		if (!isset($on_hold_message))  {
 			$pages = array('create', 'pass', 'about', 'recovery');
 			$current = $this->uri->segment(1);
-			if (!in_array($current, $pages))  {
+			if (empty($this->auth_role))  {
 				$this->load->view('door/auth_form');
 			}  else  {
 				echo "Pertitent info";
