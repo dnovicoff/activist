@@ -10,17 +10,21 @@
 		<?php
 			$output = '';
 			$page = $this->uri->segment(2);
-			switch ($page)  {
-				case 'user':
-				case 'search':
-					$output = $this->load->view('user/cam_search_form', $data, TRUE);
-					break;
-				case 'show':
-					break;
+			if (!empty($page))  {
+				switch ($page)  {
+					case 'user':
+					case 'search':
+						$output = $this->load->view('user/cam_search_form', $data, TRUE);
+						break;
+					case 'show':
+						break;
+				}
+				$output .= '<div class="graph_canvas">'.
+					$this->load->view('user/data', $data, TRUE).
+				'</div>';
+			}  else  {
+				$output = 'Probable a graph of current campaigns being signed.';
 			}
-			$output .= '<div class="graph_canvas">'.
-				$this->load->view('user/data', $data, TRUE).
-			'</div>';
 
 			echo $output;
 		?>
