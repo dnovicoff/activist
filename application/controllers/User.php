@@ -13,16 +13,19 @@ class User extends MY_Controller
 	}
 
 	private function generate_page($tmp = array())  {
-		$tmp['data']['countries'] = $this->activist_model->get_countries();
-		if (is_numeric($tmp['data']['country']))  {
-			$tmp['data']['states'] = $this->activist_model->get_states($this->input->post('country'));
-		}
-
         	$html = $this->load->view('templates/header', $tmp, TRUE);
        		$html .= $this->load->view('user/index', $tmp, TRUE);
         	$html .= $this->load->view('templates/footer', $tmp, TRUE);
 
 		echo $html;
+	}
+
+	public function detail($cam_id = FALSE)  {
+		if (is_numeric($cam_id))  {
+
+		}
+
+		$this->generate_page();
 	}
 
 	public function show($country_id = FALSE, $state_id = FALSE, $city = FALSE)  {
@@ -33,20 +36,25 @@ class User extends MY_Controller
 			)
 		);
 
-		if (!is_bool($country_id) && is_numeric($country_id))  {
+		if (is_numeric($country_id) && is_bool($state_id) && is_bool($city))  {
 			$tmp['data']['campaigns'] = $this->activist_model->get_campaigns($country_id);
+		}  else if (is_numeric($country_id) && is_numeric($state_id) && is_bool($city))  {
+			$tmp['data']['campaigns'] = $this->activist_model->get_campaigns($country_id, $state_id);
+		}  else if (is_numeric($country_id) && is_numeric($state_id) && !empty($city))  {
+			$tmp['data']['campaigns'] = $this->activist_model->get_campaigns($country_id, $state_id, $city);
 		}
 
 		$this->generate_page($tmp);
 	}
 
-	public function search($cam_id = NULL)  {
+	public function search()  {
 		$tmp = array(
 			'data' => array(
         			'title' => ucfirst("Campaign search Results"), // Capitalize the first letter
 				'country' => 'choose',
 				'state' => 'choose',
 				'city' => 'choose',
+				'countries' => $this->activist_model->get_countries(),
 				'login' => FALSE
 			)
 		);
@@ -85,6 +93,9 @@ class User extends MY_Controller
 					}
 				}
 			}
+			if (is_numeric($this->input->post('country')))  {
+				$tmp['data']['states'] = $this->activist_model->get_states($this->input->post('country'));
+			}
 		}
 		
 		$this->generate_page($tmp);
@@ -95,9 +106,6 @@ class User extends MY_Controller
 		$tmp = array(
 			'data' => array(
         			'title' => ucfirst('Campaign Search'), // Capitalize the first letter
-				'country' => 'choose',
-				'state' => 'choose',
-				'city' => 'choose',
 				'login' => FALSE
 			)
 		);
