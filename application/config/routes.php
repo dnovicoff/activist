@@ -67,7 +67,7 @@ $route['cam'] = 'user/index';
 
 $route['cam/detail/(\d+)'] = 'user/detail/$1';
 
-$route['cam/sign/(\d+)'] = 'user/detail/$1';
+$route['cam/sign/(\d+)'] = 'user/sign/$1';
 
 $route['admin/cam/(select|update|delete)/(\d)'] = 'admin/cam/$1/$2';
 $route['admin/cam'] = 'admin/cam';

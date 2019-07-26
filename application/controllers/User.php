@@ -23,11 +23,24 @@ class User extends MY_Controller
 	}
 
 	public function sign($cam_id = FALSE)  {
-		if (is_numeric($cam_id))  {
+		$tmp = array(
+			'data' => array(
+				'title' => ' campaign signature',
+			)
+		);
 
+		if (is_numeric($cam_id))  {
+			$this->load->library('forms');
+			$tmp['data']['cam_id'] = $cam_id;
+
+			if ($this->forms->validate('cam_sign'))  {
+				if (is_numeric($this->input->post('state')))  {
+
+				}
+			}
 		}
 
-		$this->generate_page();
+		$this->generate_page($tmp);
 	}
 
 	public function detail($cam_id = FALSE)  {
