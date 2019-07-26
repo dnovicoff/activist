@@ -22,7 +22,7 @@
 						$output = $this->load->view('user/data', $data, TRUE);
 						break;
 					case 'sign':
-						$output = 'Here comes another form';
+						$output = $this->load->view('user/cam_sign_form', $data, TRUE);
 						break;
 				}
 			}  else  {
