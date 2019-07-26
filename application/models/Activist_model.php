@@ -396,9 +396,11 @@ class Activist_model extends CI_Model {
 
 	public function get_campaign($cam_id = FALSE)  {
 		if (is_numeric($cam_id))  {
+			$date = date('Y-m-d H-i-s');
 			$query = $this->db->select('*')
 				->from('campaign')
 				->where('cam_id', $cam_id)
+				->where('end_time >', $date)
 				->get();
 
 			$errors = $this->db->error();
