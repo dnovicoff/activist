@@ -43,6 +43,13 @@ input#cam_collapsable  {
 
 .graph_canvas  {
 	width: 100%;
+	height: 410px;
 	overflow-x: auto;
 	overflow-y: auto;
+}
+
+.graph  {
+	display: inline-block;
+	width: 100%;
+	height: 100%;
 }
