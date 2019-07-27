@@ -18,6 +18,15 @@
 		$rid = $cam_detail[0]['region_id'];
 		$sid = $cam_detail[0]['state_id'];
 		$city = $cam_detail[0]['city'];
+		/**
+		if ($cam_detail[0]['table_key'] !== 0)  {
+			$sid = $cam_detail[0]['table_key'];
+			if (preg_match('/(\d+)-(\d+)/', $matches, $cam_detail[0]['table_key']))  {
+				$sid = $matches[1];
+				$city = $matches[2];
+			}
+		}
+		**/
 		$table_key = $cam_detail[0]['table_key'];
 		$ttle = $cam_detail[0]['title'];
 		$txt = $cam_detail[0]['text'];

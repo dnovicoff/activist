@@ -13,9 +13,9 @@
 			}
 		}
 		if (isset($campaign))  {
-			$today = new DateTime();
+			$today = new DateTime('now', new DatetimeZone('UTC'));
 			$end = new DateTime($campaign[0]['end_time']);
-			$diff = $today->diff($end);
+			$diff = $end->diff($today);
 
 			$difference = $diff->format('%I:%S remaining.');
 			if ($diff->i != 0)  {
