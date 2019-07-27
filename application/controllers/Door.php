@@ -12,7 +12,7 @@ class Door extends MY_Controller
 	}
 
 	private function generate_page($tmp = array())  {
-		if ($tmp['data']['login'])  {
+		if (isset($tmp['data']['login']) && $tmp['data']['login'])  {
 			$this->setup_login_form();
 		}
 
@@ -28,7 +28,6 @@ class Door extends MY_Controller
 			show_404();
 
 		$tmp['data']['title'] = 'Password Recovery Stage 2';
-		$tmp['data']['login'] = FALSE;
 
 		if ($on_hold = $this->authentication->current_hold_status(TRUE))  {
 			$tmp['data']['disabled'] = 1;
@@ -69,8 +68,7 @@ class Door extends MY_Controller
 
 		$tmp = array(
 			"data" => array(
-        			"title" => ucfirst("Account reset"), // Capitalize the first letter
-				'login' => FALSE
+        			"title" => ucfirst("Account reset") // Capitalize the first letter
 			)
 		);
 
@@ -139,8 +137,7 @@ class Door extends MY_Controller
 
 		$tmp = array(
 			"data" => array(
-        			"title" => ucfirst("Create user"), // Capitalize the first letter
-				"login" => FALSE
+        			"title" => ucfirst("Create user") // Capitalize the first letter
 			)
 		);
 
