@@ -119,18 +119,18 @@ class Admin extends MY_Controller
 					case "select":
 					case "update":
 						$tmp['data']['cam_detail'] = $this->activist_model->get_campaign_data($this->auth_user_id, $cam_id);
-						if ($tmp['data']['cam_detail'][0]['table_key'] !== "0")  {
-							if (preg_match('/(\d{1,2})-(\d{1,5})/',
-								$tmp['data']['cam_detail'][0]['table_key'], $matches))  {
-								$tmp['data']['cam_detail'][0]['state_id'] = $matches[1];
-								$tmp['data']['cam_detail'][0]['city'] =
-									$this->activist_model->get_city($matches[1], $matches[2]);
-								$tmp['data']['cam_detail'][0]['city'] =
-									$tmp['data']['cam_detail'][0]['city'][0]['city'];
-							}  else  {
-								$tmp['data']['cam_detail'][0]['state_id'] = $tmp['data']['cam_detail'][0]['table_key'];
-								$tmp['data']['cam_detail'][0]['city'] = '';
-							}
+						if (preg_match('/(\d{1,2})-(\d{1,5})/', $tmp['data']['cam_detail'][0]['table_key'], $matches))  {
+							$tmp['data']['cam_detail'][0]['state_id'] = $matches[1];
+							$tmp['data']['cam_detail'][0]['city'] =
+								$this->activist_model->get_city($matches[1], $matches[2]);
+							$tmp['data']['cam_detail'][0]['city'] =
+								$tmp['data']['cam_detail'][0]['city'][0]['city'];
+						}  else if ($tmp['data']['cam_detail'][0]['table_key'] !== "0")  {
+							$tmp['data']['cam_detail'][0]['state_id'] = $tmp['data']['cam_detail'][0]['table_key'];
+							$tmp['data']['cam_detail'][0]['city'] = '';
+						}  else  {
+							$tmp['data']['cam_detail'][0]['state_id'] = '';
+							$tmp['data']['cam_detail'][0]['city'] = '';
 						}
 						$tmp['data']['states'] = $this->activist_model
 							->get_states($tmp['data']['cam_detail'][0]['country_id']);
