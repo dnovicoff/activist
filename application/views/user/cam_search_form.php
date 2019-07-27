@@ -132,7 +132,7 @@
 	<?php
 		if (isset($valid_national))  {
 			if (isset($national_campaigns) && is_array($national_campaigns))  {
-				$total = count($city_campaigns);
+				$total = count($national_campaigns);
 				echo '<a href="/cam/show/'.$country.'">'.$total.' national campaigns</a><br />';
 			}  else  {
 				echo 'No national campaigns to sign.<br />';
