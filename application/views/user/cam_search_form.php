@@ -141,7 +141,7 @@
 
 		if (isset($valid_state))  {
 			if (isset($state_campaigns) && is_array($state_campaigns))  {
-				$total = count($city_campaigns);
+				$total = count($state_campaigns);
 				echo '<a href="/cam/show/'.$country.'/'.$state.'">'.$total.' state campaigns</a><br />';
 			}  else  {
 				echo 'No state campaigns to sign.<br />';
