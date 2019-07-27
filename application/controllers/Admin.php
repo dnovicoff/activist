@@ -31,8 +31,7 @@ class Admin extends MY_Controller
 		$tmp = array(
 			'data' => array(
         			'title' => ucfirst("loc"), // Capitalize the first letter
-				'user_id' => $this->auth_user_id,
-				'login' => FALSE
+				'user_id' => $this->auth_user_id
 			)
 		);
 
@@ -57,7 +56,6 @@ class Admin extends MY_Controller
 			'data' => array(
         			'title' => ucfirst("Create Campaign"), // Capitalize the first letter
 				'user_id' => $this->auth_user_id,
-				'login' => FALSE,
 				'hidden_data' => array('status' => $status),
 				'countries' => $this->activist_model->get_countries(),
 				'regions' => $this->activist_model->get_regions()
@@ -83,25 +81,27 @@ class Admin extends MY_Controller
 				];
 
 				if ($this->input->post('title') !== NULL && $this->input->post('cam_text') !== NULL)  {
-					if ($this->input->post('state_id') !== NULL && is_numeric($this->input->post('state_id')))
-						$cam_data['state_id'] = $this->input->post('state_id');
+					if ($this->input->post('state_id') !== NULL && is_numeric($this->input->post('state_id')))  {
+						$cam_data['table_key'] = $this->input->post('state_id');
+					}
 
-					if (is_numeric($this->input->post('state_id')) && $this->input->post('city') !== NULL)
-						$cam_data['city'] = $this->input->post('city');
+					if (is_numeric($this->input->post('state_id')) && !empty($this->input->post('city')))
+						$cam_data['city'] = $this->activist_model->get_city($this->input->post('state_id'),
+							$this->input->post('city'));
 
 					$cam_data['title'] = $this->input->post('title');
 					$cam_data['text'] = $this->input->post('cam_text');
 
-					if ($this->input->post('cam_id') !== NULL && is_numeric($this->input->post('cam_id')))  {
-						$cam_data['cam_id'] = $this->input->post('cam_id');
+					if ($this->input->post('cam_id') !== NULL && is_numeric($this->input->post('cam_id'))
+						&& !is_null($cam_id) && $cam_id = $this->input->post('cam_id'))  {
+						$cam_data['cam_id'] = $cam_data['cam_id'] = $this->input->post('cam_id');
 					}
 
 					if (is_null($cam_method) && is_null($cam_id) && $status === "insert" &&
 						$status === $this->input->post('status'))  {
-						## $cam_id = $this->activist_model->insert_campaign($cam_data);
-						var_dump($cam_data);
-						var_dump($level);
-						exit();
+						$cam_id = $this->activist_model->insert_campaign($cam_data);
+						## var_dump($cam_data);
+						## exit();
 					}  else if ($cam_method === 'update' && $status === $this->input->post('status') && 							is_numeric($cam_id) && $cam_id === $this->input->post('cam_id'))  {
 						$this->activist_model->update_campaign($cam_data);
 						$status = 'select';
@@ -128,7 +128,8 @@ class Admin extends MY_Controller
 								$tmp['data']['cam_detail'][0]['city'] =
 									$tmp['data']['cam_detail'][0]['city'][0]['city'];
 							}  else  {
-								$tmp['data']['cam_detail'][0]['sid'] = $tmp['data']['cam_detail'][0]['table_key'];
+								$tmp['data']['cam_detail'][0]['state_id'] = $tmp['data']['cam_detail'][0]['table_key'];
+								$tmp['data']['cam_detail'][0]['city'] = '';
 							}
 						}
 						$tmp['data']['states'] = $this->activist_model
@@ -161,8 +162,7 @@ class Admin extends MY_Controller
 		$tmp = array(
 			'data' => array(
         			'title' => ucfirst($page), // Capitalize the first letter
-				'user_id' => $this->auth_user_id,
-				'login' => FALSE
+				'user_id' => $this->auth_user_id
 			)
 		);
 
