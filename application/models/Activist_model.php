@@ -399,6 +399,7 @@ class Activist_model extends CI_Model {
 			$date = date('Y-m-d H-i-s');
 			$query = $this->db->select('*')
 				->from('campaign')
+				->join('region', 'campaign.region_id = region.region_id')
 				->where('cam_id', $cam_id)
 				->where('end_time >', $date)
 				->get();
