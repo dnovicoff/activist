@@ -24,8 +24,7 @@
                 	<h3><a href="<?php echo $uri; ?>">Actifish</a></h3><br />
 			<?php
 				if (!empty($this->auth_role))  {
-					echo "Welcome ".$this->auth_username."<br />";
-					echo "ID: ".$this->auth_user_id;
+					echo '<a href="/admin/logout">logout</a><br />';
 				}
 			?>
 			</div>
