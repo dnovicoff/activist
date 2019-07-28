@@ -14,8 +14,12 @@
 			echo '</div>';
 		}
 		if (isset($campaign))  {
+			$background = '';
+			if (isset($bgimage))  {
+				$background = $bgimage.'_gray_opaque.jpg';
+			}
 	?>
-		<div class="graph" style="background-image: url('/img/unitedstates_opaque.png'); background-size: 100% 100%">
+		<div class="graph" style="background-image: url('<?php echo $background; ?>'); background-size: cover;">
 	<?php
 			$today = new DateTime('now', new DatetimeZone('america/chicago'));
 			$end = new DateTime($campaign[0]['end_time'], new DatetimeZone('america/chicago'));
