@@ -16,10 +16,10 @@
 		if (isset($campaign))  {
 			$background = '';
 			if (isset($bgimage))  {
-				$background = $bgimage.'_gray_opaque.jpg';
+				$background = '/img/'.$bgimage.'_gray_opacity.jpg';
 			}
 	?>
-		<div class="graph" style="background-image: url('<?php echo $background; ?>'); background-size: cover;">
+			<div class="graph" style="background-image: url('<?php echo $background; ?>'); background-size: cover;">
 	<?php
 			$today = new DateTime('now', new DatetimeZone('america/chicago'));
 			$end = new DateTime($campaign[0]['end_time'], new DatetimeZone('america/chicago'));
