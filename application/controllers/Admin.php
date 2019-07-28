@@ -65,8 +65,6 @@ class Admin extends MY_Controller
 		$this->load->library('forms');
 		if ($this->require_role('admin'))  {
 			if ($this->input->post('state_id') !== NULL)
-				$level = 1;
-			if ($this->input->post('state_id') !== NULL && is_numeric($this->input->post('state_id')))
 				$level = 2;
 			if ($this->input->post('city') !== NULL && !empty($this->input->post('city')))
 				$level = 3;
@@ -100,8 +98,6 @@ class Admin extends MY_Controller
 					if (is_null($cam_method) && is_null($cam_id) && $status === "insert" &&
 						$status === $this->input->post('status'))  {
 						$cam_id = $this->activist_model->insert_campaign($cam_data);
-						## var_dump($cam_data);
-						## exit();
 					}  else if ($cam_method === 'update' && $status === $this->input->post('status') && 							is_numeric($cam_id) && $cam_id === $this->input->post('cam_id'))  {
 						$this->activist_model->update_campaign($cam_data);
 						$status = 'select';
