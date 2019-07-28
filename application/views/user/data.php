@@ -14,10 +14,11 @@
 			echo '</div>';
 		}
 		if (isset($campaign))  {
-			echo '<div class="graph_canvas" style="background-image: '.
-				'url("/img/illinois_gray_opacity.jpg"); background-size: 100% 100%;">';
-			$today = new DateTime('now', new DatetimeZone('UTC'));
-			$end = new DateTime($campaign[0]['end_time']);
+	?>
+		<div class="graph" style="background-image: url('/img/unitedstates_opaque.png'); background-size: 100% 100%">
+	<?php
+			$today = new DateTime('now', new DatetimeZone('america/chicago'));
+			$end = new DateTime($campaign[0]['end_time'], new DatetimeZone('america/chicago'));
 			$diff = $end->diff($today);
 
 			$difference = $diff->format('%I:%S remaining.');
@@ -36,6 +37,7 @@
 
 			echo 'Valid until '.$campaign[0]['end_time'].'<br />'.
 				$difference.'<br /><br />'.
+				$campaign[0]['region_name'].' campaign<br />'.
 				$campaign[0]['title'].'<br /><br />'.
 				$campaign[0]['text'].'<br />'.
 				'<a href="/cam/sign/'.$campaign[0]['cam_id'].'">Sign</a>';
