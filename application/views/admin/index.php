@@ -42,7 +42,6 @@
 		<a href="/admin">Data</a><br />
 		<a href="/admin/loc">Create Location</a><br />
 		<a href="/admin/cam">Create Campaign</a><br />
-		<a href="/admin/logout">Logout</a><br />
 	</div>
 	<div class="largecol">
 		<?php
