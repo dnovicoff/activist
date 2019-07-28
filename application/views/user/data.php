@@ -16,7 +16,7 @@
 		if (isset($campaign))  {
 			$background = '';
 			if (isset($bgimage))  {
-				$background = '/img/'.$bgimage.'_gray_opacity.jpg';
+				$background = '/img/'.strtolower($bgimage).'_gray_opacity.jpg';
 			}
 	?>
 			<div class="graph" style="background-image: url('<?php echo $background; ?>'); background-size: cover;">
@@ -39,9 +39,14 @@
 				$difference = $diff->format('%y years ').$difference;
 			}
 
+			$state = '';
+			if (isset($bgimage))  {
+				$state = $bgimage.' campaign<br />';
+			}
 			echo 'Valid until '.$campaign[0]['end_time'].'<br />'.
 				$difference.'<br /><br />'.
 				$campaign[0]['region_name'].' campaign<br />'.
+				$state.
 				$campaign[0]['title'].'<br /><br />'.
 				$campaign[0]['text'].'<br />'.
 				'<a href="/cam/sign/'.$campaign[0]['cam_id'].'">Sign</a>';
