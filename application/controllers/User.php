@@ -22,6 +22,19 @@ class User extends MY_Controller
 		echo $html;
 	}
 
+	public function testform($cam_id = FALSE)  {
+		if (is_numeric($cam_id))  {
+			$this->load->library('forms');
+			if ($this->forms->validate('cam_sign'))  {
+					echo 'Validated';
+			}  else  {
+				echo form_error('validate_state_id');
+			}
+			echo "Here";
+		}
+		echo "Here";
+	}
+
 	public function sign($cam_id = FALSE)  {
 		$tmp = array(
 			'data' => array(
