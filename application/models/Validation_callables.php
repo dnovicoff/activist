@@ -149,65 +149,67 @@ class Validation_callables extends MY_Model {
 				$error = 'Connecticut ID 9 numeric';
 				break;
 			case 'delaware':
-				$regex = '';
-				$error = '';
+				$regex = '^\d{1,7}$';
+				$error = 'Delaware ID 1 to 7 numeric';
 				break;
 			case 'districtofcolumbia':
+				$regex = '';  ## Need rules
+				$error = '';
 				break;
 			case 'florida':
-				$regex = '[a-zA-Z]{1}\d{12}';
-				$error = 'Florida ID 1 alpha 12 numeric';
+				$regex = '^[a-zA-Z]{1}\d{12}$';
+				$error = 'Florida ID 1 letter 12 numeric';
 				break;
 			case 'georgia':
-				$regex = '\d{7,9}';
+				$regex = '^\d{7,9}$';  ## validate number of numeric
 				$error = 'Georgia ID 7 - 9 numeric';
 				break;
 			case 'hawaii':
-				$regex = '[H0-9]{1}\d{8}';
-				$error = 'Hawaii ID 9 numeric or H + 9 numeric';
+				$regex = '^[H0-9]{1}\d{8}$';
+				$error = 'Hawaii ID 9 numeric or H + 8 numeric';
 				break;
 			case 'idaho':
-				$regex = '[a-zA-Z0-9]{2}\d{6}[a-zA-Z0-9]{1}';
+				$regex = '^[a-zA-Z0-9]{2}\d{6}[a-zA-Z0-9]{1}$';
 				$error = 'Idaho ID 2 letters + 6 numeric + 1 letter or 9 numeric';
 				break;
 			case 'illinois':
-				$regex = '[a-zA-Z]{1}\d{11}';
+				$regex = '^[a-zA-Z]{1}\d{11}$';
 				$error = 'Illinois ID 1 letter + 11 numeric';
 				break;
 			case 'indiana':
-				$regex = '[a-zA-Z0-9]{1}\d{9}';
-				$error = 'Indiana ID 1 letter + 9 numeric or 9 numeric';
+				$regex = '^[a-zA-Z0-9]{1}\d{9}$';
+				$error = 'Indiana ID 10 numeric or 1 letter + 9 numeric';
 				break;
 			case 'iowa':
-				$regex = '\d{3}[a-zA-Z]{2}\d{4}';
-				$error = 'Iowa ID 3 numeric + 2 letters + 4 numeric';
+				$regex = '^\d{3}[a-zA-Z0-9]{2}\d{4}$';
+				$error = 'Iowa ID 9 numeric or 3 numeric + 2 letters + 4 numeric';
 				break;
 			case 'kansas':
-				$regex = '[K0-9]{1}\d{8}';
+				$regex = '^[K0-9]{1}\d{8}$';
 				$error = 'Kansas ID 9 numeric or K + 8 numeric';
 				break;
 			case 'kentucky':
-				$regex = '[a-zA-Z]{1}\d{8}';
+				$regex = '^[a-zA-Z]{1}\d{8}$';
 				$error = 'Kentucky ID 1 letter + 8 numeric';
 				break;
 			case 'louisiana':
-				$regex = '\d{9}';
+				$regex = '^\d{9}$';
 				$error = 'Louisiana ID 9 numeric';
 				break;
 			case 'maine':
-				$regex = '\d{7}';
+				$regex = '^\d{7}$';
 				$error = 'Maine ID 7 numeric';
 				break;
 			case 'maryland':
-				$regex = '[a-zA-Z]{1}\d{12}';
+				$regex = '^[a-zA-Z]{1}\d{12}$';
 				$error = 'Maryland ID 1 letter + 12 numeric';
 				break;
 			case 'massachusetts':
-				$regex = '[S0-9]{1}\d{8}';
+				$regex = '^[S0-9]{1}\d{8}$';
 				$error = 'Massachusetts ID S + 8 numeric or 9 numeric';
 				break;
 			case 'michigan':
-				$regex = '[a-zA-Z]{1}\d{12}';
+				$regex = '^[a-zA-Z]{1}\d{12}$';
 				$error = 'Michigan ID 1 letter + 12 numeric';
 				break;
 			case 'minnesota':
