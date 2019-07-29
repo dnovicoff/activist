@@ -53,7 +53,7 @@ class User extends MY_Controller
 		if (is_numeric($cam_id))  {
 			$tmp['data']['campaign'] = $this->activist_model->get_campaign($cam_id);
 			if (preg_match('/^0$/', $tmp['data']['campaign'][0]['table_key']))  {
-				$tmp['data']['bgimage'] = strtolower(preg_replace('/\s/', '', $tmp['data']['campaign'][0]['country_name']));
+				$tmp['data']['bgimage'] = $tmp['data']['campaign'][0]['country_name'];
 			}  else if (preg_match('/\d{1,2}/', $tmp['data']['campaign'][0]['table_key']))  {
 				$state = $this->activist_model->get_state_name($tmp['data']['campaign'][0]['table_key']);
 				$tmp['data']['bgimage'] = $state;

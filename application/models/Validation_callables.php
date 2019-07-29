@@ -118,6 +118,118 @@ class Validation_callables extends MY_Model {
 		return FALSE;
 	}
 
+	public function _validate_state_id($state, $state_id_no)  {
+		switch ($state)  {
+			case 'alabama':
+				$regex = '';
+				$error = '';
+				break;
+			case 'alaska':
+				break;
+			case 'arizona':
+				break;
+			case 'arkansas':
+				break;
+			case 'california':
+				break;
+			case 'colorado':
+				break;
+			case 'connecticut':
+				break;
+			case 'delaware':
+				break;
+			case 'districtofcolumbia':
+				break;
+			case 'florida':
+				$regex = '[a-zA-Z]{1}\d{12}';
+				$error = 'Florida identification<br />1 alpha 12 numeric';
+				break;
+			case 'georga':
+				break;
+			case 'hawaii':
+				break;
+			case 'idaho':
+				break;
+			case 'illinois':
+				break;
+			case 'indiana':
+				break;
+			case 'iowa':
+				break;
+			case 'kansas':
+				break;
+			case 'maine':
+				break;
+			case 'maryland':
+				break;
+			case 'massachusetts':
+				break;
+			case 'michigan':
+				break;
+			case 'minnesota':
+				break;
+			case 'mississippi':
+				break;
+			case 'missouri':
+				break;
+			case 'montana':
+				break;
+			case 'nebraska':
+				break;
+			case 'nevada':
+				break;
+			case 'newhamshire':
+				break;
+			case 'newjersey':
+				break;
+			case 'newmexico':
+				break;
+			case 'newyork':
+				break;
+			case 'northcarolina':
+				break;
+			case 'ohio':
+				break;
+			case 'oklahoma':
+				break;
+			case 'oregon':
+				break;
+			case 'pennsylvania':
+				break;
+			case 'rhodeisland':
+				break;
+			case 'southcarolina':
+				break;
+			case 'southdakoda':
+				break;
+			case 'tennessee':
+				break;
+			case 'texas':
+				break;
+			case 'utah':
+				break
+			case 'vermont':
+				break;
+			case 'virginia':
+				break;
+			case 'washington':
+				break;
+			case 'westvirginia':
+				break;
+			case 'wisconsin':
+				break;
+			case 'wyoming':
+				break;
+		}
+
+		if (preg_match('/'.$pattern.'/i', $state_id_no))  {
+			return TRUE;
+		}
+		$this->form_validation->set_message('validate_state_id', $error);
+
+		return FALSE;
+	}
+
 }
 
 /* End of file Validaton_callables.php */

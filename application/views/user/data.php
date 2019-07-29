@@ -16,10 +16,11 @@
 		if (isset($campaign))  {
 			$background = '';
 			if (isset($bgimage))  {
-				$background = '/img/'.strtolower($bgimage).'_gray_opacity.jpg';
+				$background = preg_replace('/\s/', '', $bgimage);
+				$background = '/img/'.strtolower($background).'_gray_opacity.jpg';
 			}
 	?>
-			<div class="graph" style="background-image: url('<?php echo $background; ?>'); background-size: cover;">
+			<div class="graph" style="background-image: url('<?php echo $background; ?>'); background-size: cover; height: 550px;">
 	<?php
 			$today = new DateTime('now', new DatetimeZone('america/chicago'));
 			$end = new DateTime($campaign[0]['end_time'], new DatetimeZone('america/chicago'));
@@ -41,7 +42,7 @@
 
 			$state = '';
 			if (isset($bgimage))  {
-				$state = $bgimage.' campaign<br />';
+				$state = $campaign[0]['region_name'].' of '.$bgimage.'<br />';
 			}
 			echo 'Valid until '.$campaign[0]['end_time'].'<br />'.
 				$difference.'<br /><br />'.
