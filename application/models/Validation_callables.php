@@ -145,7 +145,7 @@ class Validation_callables extends MY_Model {
 				$error = '';
 				break;
 			case 'connecticut':
-				$regex '\d{9}';
+				$regex = '\d{9}';
 				$error = 'Connecticut ID 9 numeric';
 				break;
 			case 'delaware':
@@ -209,7 +209,7 @@ class Validation_callables extends MY_Model {
 				$error = 'Michigan ID 1 letter + 12 numeric';
 				break;
 			case 'minnesota':
-				$regex = '[a-zA-Z]{1}\d{12}'
+				$regex = '[a-zA-Z]{1}\d{12}';
 				$error = 'Minnesota 1 letter + 12 numeric';
 				break;
 			case 'mississippi':
@@ -294,7 +294,7 @@ class Validation_callables extends MY_Model {
 			case 'utah':
 				$regex = '\d{4,9}';
 				$error = 'Utah ID 4 to 9 numeric';
-				break
+				break;
 			case 'vermont':
 				$regex = '\d{7}[a-zA-Z0-9]{1}';
 				$error = 'Vermont ID 8 numeric or 7 numeric + 1 letter';
