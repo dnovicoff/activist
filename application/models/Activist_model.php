@@ -60,6 +60,9 @@ class Activist_model extends CI_Model {
 		return FALSE;
 	}
 
+	## chack if this function is only called from a form rule
+	## Same with get state
+	## Can these two functions be one
 	public function get_country($country_id = FALSE)  {
 		if ($country_id !== FALSE)  {
 			$query = $this->db->select("*")
@@ -75,6 +78,7 @@ class Activist_model extends CI_Model {
 		return FALSE;
 	}
 
+	## See above notes
 	public function get_state($state_id = FALSE)  {
 		if ($state_id !== FALSE)  {
 			$query = $this->db->select('*')
@@ -90,6 +94,26 @@ class Activist_model extends CI_Model {
 		return FALSE;
 	}
 
+	## Change to a general get_data_where function
+	## Have to make the same for city
+	public function get_state_name($state_id = FALSE)  {
+		if ($state_id !== FALSE)  {
+			$query = $this->db->select('*')
+				->from('state')
+				->where('state_id', $state_id)
+				->get();
+
+			if ($query->num_rows() > 0)  {
+				$result = $query->result_array();
+				return $result[0]['state_name'];
+			}
+		}
+
+		return FALSE;
+	}
+
+	## Can this function be a general get_data call
+	## Same with get countries
 	public function get_regions()  {
 		$query = $this->db->select("*")->from('region')
 			->get();
@@ -106,6 +130,7 @@ class Activist_model extends CI_Model {
 		return FALSE;
 	}
 
+	## See above notes
 	public function get_countries()  {
 		$query = $this->db->select('*')->from('country')
 			->get();
@@ -375,10 +400,12 @@ class Activist_model extends CI_Model {
 				}
 			}
 
+			$date = date('Y-m-d H-i-s');
 			$query = $this->db->select('*')
 				->from('campaign')
 				->where('country_id', $country_id)
 				->where('table_key', $table_key)
+				->where('end_time >', $date)
 				->get();
 
 			$errors = $this->db->error();
@@ -400,6 +427,7 @@ class Activist_model extends CI_Model {
 			$query = $this->db->select('*')
 				->from('campaign')
 				->join('region', 'campaign.region_id = region.region_id')
+				->join('country', 'campaign.country_id = country.country_id')
 				->where('cam_id', $cam_id)
 				->where('end_time >', $date)
 				->get();
