@@ -332,6 +332,30 @@ class Forms {
 		return $cam_search_rules;
 	}
 
+	private function get_cam_sign_rules()  {
+		$cam_sign_rules =  [
+			'field' => 'id',
+			'label' => 'id',
+			'rules' =>  [
+				'trim',
+				'required',  [
+					'validate_state_id',
+					function ($id)  {
+						if ($this->CI->validation_callables($this->CI->input->post('state'), $id))  {
+							return TRUE;
+						}
+
+						return FALSE;
+					}
+				]
+			],
+			'errors' =>  [
+			]
+		];
+
+		return $cam_sign_rules;
+	}
+
 	private function get_choose_pass_rules()  {
 		$choose_pass_rules = [
 			[
@@ -385,6 +409,9 @@ class Forms {
 				break;
 			case 'cam_search':
 				$this->CI->form_validation->set_rules($this->get_cam_search_rules($level));
+				break;
+			case 'cam_sign':
+				$this->CI->form_validation->set_rules($this->get_cam_sign_rules());
 				break;
 		}
 
