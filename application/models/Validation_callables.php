@@ -121,34 +121,36 @@ class Validation_callables extends MY_Model {
 	public function _validate_state_id($state, $state_id_no)  {
 		switch ($state)  {
 			case 'alabama':
-				$regex = '[a-zA-Z0-9]{1}\d{6}';
+				$regex = '^[a-zA-Z0-9]{1}\d{6}$';
 				$error = 'Alabama ID 7 numeric or 1 letter + 6 numeric';
 				break;
 			case 'alaska':
-				$regex = '\d{7}';
+				$regex = '^\d{7}$';
 				$error = 'Alaska ID 7 numeric';
 				break;
 			case 'arizona':
-				$regex = '[ABDY0-9]{1}\d{8}';
-				$error = 'Arizona ID (A, B, D, or Y) + 8 numeric';
+				$regex = '^[ABDY0-9]{1}\d{8}$';
+				$error = 'Arizona ID SSN, or (A, B, D, or Y) + 8 numeric';
 				break;
 			case 'arkansas':
-				$regex = '\d{9}';
+				$regex = '^\d{9}$'; ## Test form input for zero entry
 				$error = 'Arkansas ID 8 numeric with 0 in front or 9 numeric';
 				break;
 			case 'california':
-				$regex = '[a-zA-Z]{1}\d{7}';
+				$regex = '^[a-zA-Z]{1}\d{7}$';
 				$error = 'California ID 1 letter + 7 numeric';
 				break;
 			case 'colorado':
-				$regex = '';
+				$regex = '';  ## No rules yet
 				$error = '';
 				break;
 			case 'connecticut':
-				$regex = '\d{9}';
+				$regex = '^\d{9}$';
 				$error = 'Connecticut ID 9 numeric';
 				break;
 			case 'delaware':
+				$regex = '';
+				$error = '';
 				break;
 			case 'districtofcolumbia':
 				break;
