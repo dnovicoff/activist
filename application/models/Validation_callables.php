@@ -320,8 +320,8 @@ class Validation_callables extends MY_Model {
 				$error = 'Wyoming ID 9 numeric';
 				break;
 		}
-
-		if (preg_match('/'.$pattern.'/i', $state_id_no))  {
+		
+		if (preg_match('/'.$regex.'/i', $state_id_no))  {
 			return TRUE;
 		}
 		$this->form_validation->set_message('validate_state_id', $error);
