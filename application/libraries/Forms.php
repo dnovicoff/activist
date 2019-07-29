@@ -334,25 +334,26 @@ class Forms {
 
 	private function get_cam_sign_rules()  {
 		$cam_sign_rules =  [
-			'field' => 'id',
-			'label' => 'id',
-			'rules' =>  [
-				'trim',
-				'required',  [
-					'validate_state_id',
-					function ($id)  {
-						if ($this->CI->validation_callables($this->CI->input->post('state'), $id))  {
-							return TRUE;
-						}
+			[
+				'field' => 'id',
+				'label' => 'id',
+				'rules' =>  [
+					'trim',
+					'required',  [
+						'validate_state_id',
+						function ($id)  {
+							if ($this->CI->validation_callables->_validate_state_id($this->CI->input->post('state'), $id))
+								return TRUE;
 
-						return FALSE;
-					}
+							return FALSE;
+						}
+					]
+				],
+				'errors' =>  [
 				]
-			],
-			'errors' =>  [
 			]
 		];
-
+		
 		return $cam_sign_rules;
 	}
 
