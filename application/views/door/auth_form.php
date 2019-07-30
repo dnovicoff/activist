@@ -26,7 +26,7 @@
 				$data = array(
 					'name' => 'login_string',
 					'id' => 'login_string',
-					'value' => set_value('login_string'),
+					'value' => htmlspecialchars_decode(set_value('login_string'), ENT_QUOTES),
 					'class' => '',
 					'placeholder' => ''
 				);

@@ -91,7 +91,7 @@
 						$data = array(
 							'name' => 'city',
 							'id' => '',
-							'value' => set_value('city'),
+							'value' => htmlspecialchars_decode(set_value('city'), ENT_QUOTES),
 							'class' => '',
 							'placeholder' => 'type city name'
 						);
