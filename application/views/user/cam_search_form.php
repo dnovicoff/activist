@@ -1,7 +1,12 @@
 
 
 <div class="container">
-	<?php echo form_open('user/search'); ?>
+	<?php
+		$attributes = array(
+			'accept-charset' => 'ISO-8859-1'
+		);
+	?>
+	<?php echo form_open('user/search', $attributes); ?>
 		<table width="100%">
 			<tr><td>
 			<?php
