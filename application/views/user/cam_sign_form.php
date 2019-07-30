@@ -1,7 +1,12 @@
 
 
 <div class="container">
-	<?php echo form_open('user/sign/'.$cam_id); ?>
+	<?php
+		$attributes = array(
+			'accept-charset' => 'ISO-8859-1'
+		);
+	?>
+	<?php echo form_open('user/sign/'.$cam_id, $attributes); ?>
 		<div class="row">
 			<div class="col">
 			<?php
@@ -13,12 +18,10 @@
 			</div>
 			<div class="col">
 			<?php
-				$val = html_entity_decode(set_value('fname'), ENT_HTML401, ini_get("default_charset") );
-				var_dump($val);
 				$data = array(
 					'name' => 'fname',
 					'id' => '',
-					'value' => set_value('fname', $val, TRUE),
+					'value' => htmlspecialchars_decode(set_value('fname'), ENT_QUOTES),
 					'class' => '',
 					'placeholder' => ''
 				);
@@ -47,7 +50,7 @@
 				$data = array(
 					'name' => 'lname',
 					'id' => '',
-					'value' => set_value('lname'),
+					'value' => htmlspecialchars_decode(set_value('lname'), ENT_QUOTES),
 					'class' => '',
 					'placeholder' => ''
 				);
@@ -76,7 +79,7 @@
 				$data = array(
 					'name' => 'addr',
 					'id' => '',
-					'value' => set_value('addr'),
+					'value' => htmlspecialchars_decode(set_value('addr'), ENT_QUOTES),
 					'class' => '',
 					'placeholder' => ''
 				);
@@ -106,7 +109,7 @@
 					'type' => 'text',
 					'name' => 'city',
 					'id' => '',
-					'value' => set_value('city'),
+					'value' => htmlspecialchars_decode(set_value('city'), ENT_QUOTES),
 					'class' => '',
 					'placeholder' => ''
 				);
@@ -136,7 +139,7 @@
 					'type' => 'text',
 					'name' => 'state',
 					'id' => '',
-					'value' => set_value('state'),
+					'value' => htmlspecialchars_decode(set_value('state'), ENT_QUOTES),
 					'class' => '',
 					'placeholder' => ''
 				);
@@ -166,7 +169,7 @@
 					'type' => 'text',
 					'name' => 'zip',
 					'id' => '',
-					'value' => set_value('zip'),
+					'value' => htmlspecialchars_decode(set_value('zip'), ENT_QUOTES),
 					'class' => '',
 					'placeholder' => ''
 				);
@@ -196,7 +199,7 @@
 					'type' => 'text',
 					'name' => 'id',
 					'id' => '',
-					'value' => set_value('id'),
+					'value' => htmlspecialchars_decode(set_value('id'), ENT_QUOTES),
 					'class' => '',
 					'placeholder' => ''
 				);
