@@ -57,8 +57,11 @@
 			$show_form = 1;
 		}
 		if (isset($show_form))  {
+			$attributes = array(
+				'accept-charset' => 'ISO-8859-1'
+			);
 	?>
-			<?php echo form_open('pass'); ?>
+			<?php echo form_open('pass', $attributes); ?>
 				<table width="100%">
 					<tr><td>
 					<?php
