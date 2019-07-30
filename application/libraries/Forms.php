@@ -339,7 +339,8 @@ class Forms {
 				'label' => 'lname',
 				'rules' =>  [
 					'trim',
-					'required'
+					'required',
+					'alpha'
 				],
 				'errors' =>  [
 				]
@@ -348,7 +349,8 @@ class Forms {
 				'label' => 'lname',
 				'rules' =>  [
 					'trim',
-					'required'
+					'required',
+					'alpha'
 				],
 				'errors' =>  [
 				]
@@ -358,7 +360,7 @@ class Forms {
 				'rules' =>  [
 					'trim',
 					'required',
-					'regex_match[/^[a-zA-Z0-9\.]$/]'
+					'regex_match[/[a-zA-Z0-9]/]'
 				],
 				'errors' =>  [
 				]
@@ -368,7 +370,7 @@ class Forms {
 				'rules' =>  [
 					'trim',
 					'required',
-					'regex_match[/\w+/]'
+					'regex_match[/[a-zA-Z0-9\-\.#\']/]'
 				],
 				'errors' =>  [
 				]
@@ -377,7 +379,8 @@ class Forms {
 				'label' => 'state',
 				'rules' =>  [
 					'trim',
-					'require'
+					'required',
+					'regex_match[/[a-zA-Z\s]/]'
 				],
 				'error' =>  [
 				]
@@ -386,7 +389,8 @@ class Forms {
 				'label' => 'zip',
 				'rules' =>  [
 					'trim',
-					'required'
+					'required',
+					'regex_match[/^\d{5}$/]'
 				],
 				'errors' =>  [
 				]

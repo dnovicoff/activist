@@ -13,10 +13,12 @@
 			</div>
 			<div class="col">
 			<?php
+				$val = html_entity_decode(set_value('fname'), ENT_HTML401, ini_get("default_charset") );
+				var_dump($val);
 				$data = array(
 					'name' => 'fname',
 					'id' => '',
-					'value' => set_value('fname'),
+					'value' => set_value('fname', $val, TRUE),
 					'class' => '',
 					'placeholder' => ''
 				);
@@ -104,7 +106,7 @@
 					'type' => 'text',
 					'name' => 'city',
 					'id' => '',
-					'value' => '',
+					'value' => set_value('city'),
 					'class' => '',
 					'placeholder' => ''
 				);
@@ -134,7 +136,7 @@
 					'type' => 'text',
 					'name' => 'state',
 					'id' => '',
-					'value' => '',
+					'value' => set_value('state'),
 					'class' => '',
 					'placeholder' => ''
 				);
@@ -164,14 +166,14 @@
 					'type' => 'text',
 					'name' => 'zip',
 					'id' => '',
-					'value' => '',
+					'value' => set_value('zip'),
 					'class' => '',
 					'placeholder' => ''
 				);
 				echo form_input($data);
 			?>
 			</div>
-			<div class="col">
+			<div class="col" style="color: red; font-size: 70%; padding-left: 4px;">
 			<?php
 				if (!empty(form_error('zip')))  {
 					echo form_error('zip');
@@ -181,10 +183,32 @@
 		</div>
 		<div class="row">
 			<div class="col">
+			<?php
+				$attributes = array(
+					'class' => ''
+				);
+				echo 'Drivers License: ';
+			?>
 			</div>
 			<div class="col">
+			<?php
+				$data = array(
+					'type' => 'text',
+					'name' => 'id',
+					'id' => '',
+					'value' => set_value('id'),
+					'class' => '',
+					'placeholder' => ''
+				);
+				echo form_input($data);
+			?>
 			</div>
-			<div class="col">
+			<div class="col" style="color: red; font-size: 70%; padding-left: 4px;">
+			<?php
+				if (!empty(form_error('id')))  {
+					echo form_error('id');
+				}
+			?>
 			</div>
 		</div>
 		<div class="row">
