@@ -153,8 +153,12 @@ class Validation_callables extends MY_Model {
 				$error = 'Delaware ID 1 to 7 numeric';
 				break;
 			case 'districtofcolumbia':
-				$regex = '';  ## Need rules
-				$error = '';
+				if (strlen($state_id_no) === 7)  {
+					$regex = '^\d{7}$';
+				}  else  {
+					$regex = '^\d{9}$';
+				}
+				$error = 'District of Columbia 7 or 9 numeric';
 				break;
 			case 'florida':
 				$regex = '^[a-zA-Z]{1}\d{12}$';
@@ -322,9 +326,13 @@ class Validation_callables extends MY_Model {
 				$regex = '^[a-zA-Z0-9]{1}\d{8}$';
 				$error = 'Virginia ID 9 numeric or 1 letter + 8 numeric';
 				break;
-			case 'washington': ## Double check rule for asterisk placement
-				$regex = '^[a-zA-Z\*]{7}\d{3}[a-zA-Z0-9]{2}$';
-				$error = 'Washington ID 7 letters or astericks ';
+			case 'washington':
+				if (strlen($state_id_no) === 12)  {
+					$regex = '^[a-zA-Z]{1,5}[\*]{0,4}[a-zA-Z\*]{1}[a-zA-Z]{1}\d{3}[a-zA-Z0-9]{2}$';
+				}  else  {
+					$regex = '^\d{12}$';
+				}
+				$error = 'Washington ID incorrect format';
 				break;
 			case 'westvirginia':
 				$regex = '^[a-zA-Z0-9]{7}$';
