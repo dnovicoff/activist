@@ -73,9 +73,12 @@ if ($showform == 1)  {
 			}
 		}
 
+		$attributes = array(
+			'accept-charset' => 'ISO-8859-1'
+		);
 		?>
 			<div id="form">
-				<?php echo form_open(); ?>
+				<?php echo form_open('recovery', $attributes); ?>
 					<div class="row">
 						<div class="col">
 						<?php

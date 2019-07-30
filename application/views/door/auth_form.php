@@ -9,9 +9,12 @@
 				</div>
 			';
 		}
-	?>
 
-	<?php echo form_open($login_url); ?>
+		$attributes = array(
+			'accept-charset' => 'ISO-8859-1'
+		);
+	?>
+	<?php echo form_open($login_url, $attributes); ?>
 		<table width="100%">
 			<tr>
 			<?php

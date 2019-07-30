@@ -4,8 +4,8 @@
 			<div class="smallcol">
 				<font size="2">
 				Activist Central<br />
-				1014 Burlington avenue<br />
-				Lisle IL, 60532
+				**** ********** avenue<br />
+				***** **, *****
 				</font><br />
 			</div>
 			<div class="largecol">

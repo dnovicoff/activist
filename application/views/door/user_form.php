@@ -1,7 +1,12 @@
 
 
 <div class="container">
-	<?php echo form_open('create'); ?>
+	<?php
+		$attributes = array(
+			'accept-charset' => 'ISO-8859-1'
+		);
+	?>
+	<?php echo form_open('create', $attributes); ?>
 		<div class="row">
 			<div class="col">
 			<?php
