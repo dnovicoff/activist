@@ -119,6 +119,8 @@ class Validation_callables extends MY_Model {
 	}
 
 	public function _validate_state_id($state, $state_id_no)  {
+		$regex = '';
+		$error = '';
 		switch ($state)  {
 			case 'alabama':
 				$regex = '^[a-zA-Z0-9]{1}\d{6}$';
@@ -352,8 +354,12 @@ class Validation_callables extends MY_Model {
 				break;
 		}
 		
-		if (preg_match('/'.$regex.'/i', $state_id_no))  {
-			return TRUE;
+		if (!empty($regex))  {
+			if (preg_match('/'.$regex.'/i', $state_id_no))  {
+				return TRUE;
+			}
+		}  else  {
+			$error = 'Please provide a valid state';
 		}
 		$this->form_validation->set_message('validate_state_id', $error);
 
