@@ -25,7 +25,7 @@ class User extends MY_Controller
 	public function testform($cam_id = FALSE)  {
 		if (is_numeric($cam_id))  {
 			$this->load->library('forms');
-			if ($this->forms->validate('cam_sign'))  {
+			if ($this->forms->validate('cam_id_test'))  {
 				echo 'Validated';
 			}  else  {
 				echo form_error('id');
@@ -36,7 +36,7 @@ class User extends MY_Controller
 	public function sign($cam_id = FALSE)  {
 		$tmp = array(
 			'data' => array(
-				'title' => ' campaign signature',
+				'title' => ' campaign signature'
 			)
 		);
 
@@ -45,9 +45,8 @@ class User extends MY_Controller
 			$tmp['data']['cam_id'] = $cam_id;
 
 			if ($this->forms->validate('cam_sign'))  {
-				if (is_numeric($this->input->post('state')))  {
-
-				}
+				echo "Here";
+				exit();
 			}
 		}
 
