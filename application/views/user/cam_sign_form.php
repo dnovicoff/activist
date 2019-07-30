@@ -95,14 +95,14 @@
 				$attributes = array(
 					'class' => ''
 				);
-				echo form_label("Confirm Password", "password", $attributes);
+				echo 'City: ';
 			?>
 			</div>
 			<div class="col">
 			<?php
 				$data = array(
-					'type' => 'password',
-					'name' => 'confirmpassword',
+					'type' => 'text',
+					'name' => 'city',
 					'id' => '',
 					'value' => '',
 					'class' => '',
@@ -113,10 +113,78 @@
 			</div>
 			<div class="col" style="color: red; font-size: 70%; padding-left: 4px;">
 			<?php
-				if (!empty(form_error('confirmpassword')))  {
-					echo form_error('confirmpassword');
+				if (!empty(form_error('city')))  {
+					echo form_error('city');
 				}
 			?>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+			<?php
+				$attributes = array(
+					'class' => ''
+				);
+				echo 'State: ';
+			?>
+			</div>
+			<div class="col">
+			<?php
+				$data = array(
+					'type' => 'text',
+					'name' => 'state',
+					'id' => '',
+					'value' => '',
+					'class' => '',
+					'placeholder' => ''
+				);
+				echo form_input($data);
+			?>
+			</div>
+			<div class="col" style="color: red; font-size: 70%; padding-left: 4px;">
+			<?php
+				if (!empty(form_error('state')))  {
+					echo form_error('state');
+				}
+			?>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+			<?php
+				$attributes = array(
+					'class' => ''
+				);
+				echo 'Zip: ';
+			?>
+			</div>
+			<div class="col">
+			<?php
+				$data = array(
+					'type' => 'text',
+					'name' => 'zip',
+					'id' => '',
+					'value' => '',
+					'class' => '',
+					'placeholder' => ''
+				);
+				echo form_input($data);
+			?>
+			</div>
+			<div class="col">
+			<?php
+				if (!empty(form_error('zip')))  {
+					echo form_error('zip');
+				}
+			?>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+			</div>
+			<div class="col">
+			</div>
+			<div class="col">
 			</div>
 		</div>
 		<div class="row">

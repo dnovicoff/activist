@@ -141,8 +141,12 @@ class Validation_callables extends MY_Model {
 				$error = 'California ID 1 letter + 7 numeric';
 				break;
 			case 'colorado':
-				$regex = '';  ## No rules yet
-				$error = '';
+				if (strlen($state_id_no) === 9)  {
+					$regex = '^\d{9}$';
+				}  else  {
+					$regex = '^[a-zA-Z]{1}\d{0,6}$';
+				}
+				$error = 'Colorado ID 9 numeric or 1 letter + up to 6 numeric';
 				break;
 			case 'connecticut':
 				$regex = '^\d{9}$';
