@@ -41,6 +41,17 @@ class User extends MY_Controller
 		);
 
 		if (is_numeric($cam_id))  {
+			$cam_data = $this->activist_model->get_campaign($cam_id);
+			if (isset($cam_data) && is_array($cam_data))  {
+				if ($cam_data[0]['region_name'] == 'National')  {
+					$tmp['data']['logo'] = strtolower($cam_data[0]['country_name']);
+				}  else if ($cam_data[0]['region_name'] == 'State')  {
+					$tmp['data']['logo'] = strtolower($this->activist_model->get_state_name($cam_data[0]['table_key']));
+				}  else  {
+				}
+				$tmp['data']['logo'] = preg_replace('/\s/', '', $tmp['data']['logo']);
+			}
+
 			$this->load->library('forms');
 			$tmp['data']['cam_id'] = $cam_id;
 
