@@ -16,7 +16,7 @@
 				$data = array(
 					'name' => 'email',
 					'id' => '',
-					'value' => set_value('email'),
+					'value' => htmlspecialchars_decode(set_value('email'), ENT_QUOTES),
 					'class' => '',
 					'placeholder' => ''
 				);
@@ -45,7 +45,7 @@
 				$data = array(
 					'name' => 'confirmemail',
 					'id' => '',
-					'value' => set_value('confirmemail'),
+					'value' => htmlspecialchars_decode(set_value('confirmemail'), ENT_QUOTES),
 					'class' => '',
 					'placeholder' => ''
 				);
