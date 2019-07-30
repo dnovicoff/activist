@@ -335,6 +335,62 @@ class Forms {
 	private function get_cam_sign_rules()  {
 		$cam_sign_rules =  [
 			[
+				'field' => 'fname',
+				'label' => 'lname',
+				'rules' =>  [
+					'trim',
+					'required'
+				],
+				'errors' =>  [
+				]
+			],  [
+				'field' => 'lname',
+				'label' => 'lname',
+				'rules' =>  [
+					'trim',
+					'required'
+				],
+				'errors' =>  [
+				]
+			],  [
+				'field' => 'addr',
+				'label' => 'addr',
+				'rules' =>  [
+					'trim',
+					'required',
+					'regex_match[/^[a-zA-Z0-9\.]$/]'
+				],
+				'errors' =>  [
+				]
+			],  [
+				'field' => 'city',
+				'label' => 'city',
+				'rules' =>  [
+					'trim',
+					'required',
+					'regex_match[/\w+/]'
+				],
+				'errors' =>  [
+				]
+			],  [
+				'field' => 'state',
+				'label' => 'state',
+				'rules' =>  [
+					'trim',
+					'require'
+				],
+				'error' =>  [
+				]
+			],  [
+				'field' => 'zip',
+				'label' => 'zip',
+				'rules' =>  [
+					'trim',
+					'required'
+				],
+				'errors' =>  [
+				]
+			],  [
 				'field' => 'id',
 				'label' => 'id',
 				'rules' =>  [
@@ -387,13 +443,9 @@ class Forms {
 		return $choose_pass_rules;
 	}
 
-	private function validate_form($rule, $level)
-	{
-		$inputs = array();
+	private function validate_form($rule, $level)  {
 		switch ($rule)  {
 			case "user":
-				$inputs['email'] = $this->CI->input->post('email');
-				$inputs['pass'] = password_hash($this->CI->input->post('password'), PASSWORD_DEFAULT);
 				$this->CI->form_validation->set_rules($this->get_user_rules());
 				break;
 			case "pass":
@@ -417,14 +469,6 @@ class Forms {
 		}
 
     		if ($this->CI->form_validation->run() !== FALSE)  {
-			switch ($rule)  {
-				case "user":
-					break;
-				case "pass":
-					break;
-				case "auth":
-					break;
-			}
 			return TRUE;
 		}
 
