@@ -6,6 +6,10 @@
 			'accept-charset' => 'ISO-8859-1'
 		);
 	?>
+	<div class="row">
+		<img src="/img/thankyou_text.jpg" height="40" width="200">
+		<img src="/img/<?php echo $logo; ?>_thumb.jpg" height="40" width="40">
+	</div>
 	<?php echo form_open('user/sign/'.$cam_id, $attributes); ?>
 		<div class="row">
 			<div class="col">
