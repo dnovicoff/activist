@@ -187,7 +187,7 @@ class Door extends MY_Controller
 		}
 
 		if ($this->require_role('admin'))  {
-			redirect('admin', 'refresh');
+			redirect('/admin', 'refresh');
 		}  else  {
 			$this->page_prep($tmp);
 		}
