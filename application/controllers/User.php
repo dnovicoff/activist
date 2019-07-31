@@ -14,14 +14,6 @@ class User extends MY_Controller
 		$this->is_logged_in();
 	}
 
-	private function generate_page($tmp = array())  {
-        	$html = $this->load->view('templates/header', $tmp, TRUE);
-       		$html .= $this->load->view('user/index', $tmp, TRUE);
-        	$html .= $this->load->view('templates/footer', $tmp, TRUE);
-
-		echo $html;
-	}
-
 	public function testform($cam_id = FALSE)  {
 		if (is_numeric($cam_id))  {
 			$this->load->library('forms');
@@ -61,7 +53,7 @@ class User extends MY_Controller
 			}
 		}
 
-		$this->generate_page($tmp);
+		$this->generate_page('user', $tmp);
 	}
 
 	public function detail($cam_id = FALSE)  {
@@ -83,7 +75,7 @@ class User extends MY_Controller
 			}
 		}
 
-		$this->generate_page($tmp);
+		$this->generate_page('user', $tmp);
 	}
 
 	public function show($country_id = FALSE, $state_id = FALSE, $city = FALSE)  {
@@ -101,7 +93,7 @@ class User extends MY_Controller
 			$tmp['data']['campaigns'] = $this->activist_model->get_campaigns($country_id, $state_id, $city);
 		}
 
-		$this->generate_page($tmp);
+		$this->generate_page('user', $tmp);
 	}
 
 	public function search()  {
@@ -154,7 +146,7 @@ class User extends MY_Controller
 			}
 		}
 		
-		$this->generate_page($tmp);
+		$this->generate_page('user', $tmp);
 	}
 
         public function index($page = 'index')
@@ -171,6 +163,6 @@ class User extends MY_Controller
                 	show_404();
 		}
 		
-		$this->generate_page($tmp);
+		$this->generate_page('user', $tmp);
 	}
 }
