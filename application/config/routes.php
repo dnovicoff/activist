@@ -73,6 +73,7 @@ $route['cam/sign/(\d+)'] = 'user/sign/$1';
 ## or comment out for production
 $route['cam/testform/(\d+)'] = 'user/testform/$1';
 
+$route['admin/group'] = 'admin/group';
 $route['admin/cam/(select|update|delete)/(\d)'] = 'admin/cam/$1/$2';
 $route['admin/cam'] = 'admin/cam';
 $route['admin'] = 'admin';
