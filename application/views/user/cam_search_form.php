@@ -129,7 +129,7 @@
 				$attributes = array(
 					'class' => 'btn'
 				);
-				echo form_submit("submit", "Submit", $attributes);
+				echo form_submit("submit", "Submit");
 			?>
 			</td></tr>
 		</table>
