@@ -14,6 +14,17 @@ class Admin extends MY_Controller
 		$this->is_logged_in();
 	}
 
+	private function page_prep($tmp = array())  {
+		$tmp['data']['links'] = array(
+			'/admin' => 'Data',
+			'/admin/group' => 'Groupings',
+			'/admin/loc' => 'Create Location',
+			'/admin/cam' => 'Create Campaign'
+		);
+
+		$this->generate_page('admin', $tmp);
+	}
+
 	public function group()  {
 		$tmp = array(
 			'data' => array(
@@ -25,7 +36,7 @@ class Admin extends MY_Controller
 		);
 
 		if ($this->require_role('admin'))  {		
-			$this->generate_page('admin', $tmp);
+			$this->page_prep($tmp);
 		}  else  {
 			redirect($this->input->server.'/login', 'refresh');
 		}
@@ -40,7 +51,7 @@ class Admin extends MY_Controller
 		);
 
 		if ($this->require_role('admin'))  {
-			$this->generate_page('admin', $tmp);
+			$this->page_prep($tmp);
 		}  else  {
 			redirect($this->input->server.'/login', 'refresh');
 		}
@@ -140,7 +151,7 @@ class Admin extends MY_Controller
 				$tmp['data']['hidden_data'] = array('status' => $status, 'cam_id' => $cam_id);
 			}
 			$tmp['data']['level'] = $level;
-			$this->generate_page('admin', $tmp);
+			$this->page_prep($tmp);
 		}  else  {
 			redirect($this->input->server.'/login', 'refresh');
 		}
@@ -154,8 +165,7 @@ class Admin extends MY_Controller
 		redirect( site_url( LOGIN_PAGE . '?' . AUTH_LOGOUT_PARAM . '=1', $redirect_protocol ) );
 	}
 
-        public function index($page = 'index')
-        {
+        public function index($page = 'index')  {
 		$tmp = array(
 			'data' => array(
         			'title' => ucfirst($page), // Capitalize the first letter
@@ -170,7 +180,7 @@ class Admin extends MY_Controller
 		}
 		
 		if ($this->require_role('admin'))  {
-			$this->generate_page('admin', $tmp);
+			$this->page_prep($tmp);
 		}  else  {
 			redirect($this->input->server.'/login', 'refresh');
 		}
