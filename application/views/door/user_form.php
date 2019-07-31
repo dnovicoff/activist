@@ -1,6 +1,8 @@
 
 
 <div class="container">
+	By creating an account with Actifish you can create and store user data related to the things that matter to you.
+	We offer a means of bringing down the ratio of valid signatures.
 	<?php
 		$attributes = array(
 			'accept-charset' => 'ISO-8859-1'

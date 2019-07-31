@@ -188,7 +188,7 @@ class Door extends MY_Controller
 			}
 		}
 
-		if ($this->verify_min_level(9))  {
+		if ($this->require_role('admin'))  {
 			redirect('admin', 'refresh');
 		}  else  {
 			$this->generate_page($tmp);

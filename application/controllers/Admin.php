@@ -10,21 +10,33 @@ class Admin extends MY_Controller
 		$this->load->helper('form_helper');
 		$this->load->library('user_agent');
 		$this->load->model('activist_model');
+
+		$this->is_logged_in();
 	}
 
 	private function generate_page($tmp = array())  {
-		// $loc_data = $this->activist_model->get_location_data($tmp['data']['user_id']);
-		$loc_data = FALSE;
-		$cam_data = $this->activist_model->get_campaign_data($tmp['data']['user_id']);
-
-		$tmp['data']['loc_data'] = $loc_data;
-		$tmp['data']['cam_data'] = $cam_data;
-
         	$html = $this->load->view('templates/header', $tmp, TRUE);
        		$html .= $this->load->view('admin/index', $tmp, TRUE);
         	$html .= $this->load->view('templates/footer', $tmp, TRUE);
 
 		echo $html;
+	}
+
+	public function group()  {
+		$tmp = array(
+			'data' => array(
+				'title' => 'Campaign / Location groupings',
+				'user_id' => $this->auth_user_id,
+				'loc_data' => FALSE,  // $loc_data = $this->activist_model->get_location_data($tmp['data']['user_id']);
+				'cam_data' => $this->activist_model->get_campaign_data($this->auth_user_id)
+			)
+		);
+
+		if ($this->require_role('admin'))  {		
+			$this->generate_page($tmp);
+		}  else  {
+			redirect($this->input->server.'/login', 'refresh');
+		}
 	}
 
 	public function loc($loc_id = NULL)  {
@@ -35,11 +47,10 @@ class Admin extends MY_Controller
 			)
 		);
 
-		$this->is_logged_in();
 		if ($this->require_role('admin'))  {
 			$this->generate_page($tmp);
 		}  else  {
-			redirect($this->input->server, 'refresh');
+			redirect($this->input->server.'/login', 'refresh');
 		}
 	}
 
@@ -51,7 +62,6 @@ class Admin extends MY_Controller
 			show_404();
 		}
 
-		$this->is_logged_in();
 		$tmp = array(
 			'data' => array(
         			'title' => ucfirst("Create Campaign"), // Capitalize the first letter
@@ -140,7 +150,7 @@ class Admin extends MY_Controller
 			$tmp['data']['level'] = $level;
 			$this->generate_page($tmp);
 		}  else  {
-			redirect($this->input->server, 'refresh');
+			redirect($this->input->server.'/login', 'refresh');
 		}
 	}
 
@@ -154,7 +164,6 @@ class Admin extends MY_Controller
 
         public function index($page = 'index')
         {
-		$this->is_logged_in();
 		$tmp = array(
 			'data' => array(
         			'title' => ucfirst($page), // Capitalize the first letter
@@ -162,8 +171,7 @@ class Admin extends MY_Controller
 			)
 		);
 
-		if (!file_exists(APPPATH.'views/admin/index.php'))
-		{
+		if (!file_exists(APPPATH.'views/admin/index.php'))  {
                 	// Whoops, we don't have a page for that!
 			log_message('ERROR', 'Activist Error '.$page);
                 	show_404();
@@ -172,7 +180,7 @@ class Admin extends MY_Controller
 		if ($this->require_role('admin'))  {
 			$this->generate_page($tmp);
 		}  else  {
-			redirect($this->input->server, 'refresh');
+			redirect($this->input->server.'/login', 'refresh');
 		}
 	}
 }
