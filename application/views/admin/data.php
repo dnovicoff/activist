@@ -1,5 +1,5 @@
 
 
 <div class="container">
-	This is where the graphs will be shown
+	<img src="/img/unitedstates_map.jpg" height="327" width="488">	
 </div>
