@@ -2,10 +2,9 @@
 <div class="container">
 	<div class="smallcol">
 		<br /><br />
-		<a href="/admin">Data</a><br />
-		<a href="/admin/group">Groupings</a><br />
-		<a href="/admin/loc">Create Location</a><br />
-		<a href="/admin/cam">Create Campaign</a><br />
+	<?php
+		$this->load->view('gen/collapsible', $data);
+	?>
 	</div>
 	<div class="largecol">
 		<?php
