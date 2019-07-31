@@ -14,14 +14,6 @@ class Admin extends MY_Controller
 		$this->is_logged_in();
 	}
 
-	private function generate_page($tmp = array())  {
-        	$html = $this->load->view('templates/header', $tmp, TRUE);
-       		$html .= $this->load->view('admin/index', $tmp, TRUE);
-        	$html .= $this->load->view('templates/footer', $tmp, TRUE);
-
-		echo $html;
-	}
-
 	public function group()  {
 		$tmp = array(
 			'data' => array(
@@ -33,7 +25,7 @@ class Admin extends MY_Controller
 		);
 
 		if ($this->require_role('admin'))  {		
-			$this->generate_page($tmp);
+			$this->generate_page('admin', $tmp);
 		}  else  {
 			redirect($this->input->server.'/login', 'refresh');
 		}
@@ -48,7 +40,7 @@ class Admin extends MY_Controller
 		);
 
 		if ($this->require_role('admin'))  {
-			$this->generate_page($tmp);
+			$this->generate_page('admin', $tmp);
 		}  else  {
 			redirect($this->input->server.'/login', 'refresh');
 		}
@@ -148,7 +140,7 @@ class Admin extends MY_Controller
 				$tmp['data']['hidden_data'] = array('status' => $status, 'cam_id' => $cam_id);
 			}
 			$tmp['data']['level'] = $level;
-			$this->generate_page($tmp);
+			$this->generate_page('admin', $tmp);
 		}  else  {
 			redirect($this->input->server.'/login', 'refresh');
 		}
@@ -178,7 +170,7 @@ class Admin extends MY_Controller
 		}
 		
 		if ($this->require_role('admin'))  {
-			$this->generate_page($tmp);
+			$this->generate_page('admin', $tmp);
 		}  else  {
 			redirect($this->input->server.'/login', 'refresh');
 		}
