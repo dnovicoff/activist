@@ -24,6 +24,18 @@ class MY_Controller extends Auth_Controller
 	{
 		parent::__construct();
 	}
+
+	protected function generate_page($controller = '', $tmp = array())  {
+		if (isset($tmp['data']['login']) && $tmp['data']['login'])  {
+			$this->setup_login_form();
+		}
+
+        	$html = $this->load->view('templates/header', $tmp, TRUE);
+       		$html .= $this->load->view($controller.'/index', $tmp, TRUE);
+        	$html .= $this->load->view('templates/footer', $tmp, TRUE);
+
+		echo $html;
+	}
 }
 
 /* End of file MY_Controller.php */
