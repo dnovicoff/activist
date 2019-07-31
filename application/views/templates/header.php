@@ -13,25 +13,28 @@
                 <title>Activism</title>
         </head>
         <body>
-		<div class="container" style="background: linear-gradient(blue, 10%, white);}">
-			<div class="smallcol">
-			<?php
-				$uri = "/";
-				if (!empty($this->auth_role))  {
-					$uri = "/admin";
-				}
-			?>
-                	<h3><a href="<?php echo $uri; ?>">Actifish</a></h3><br />
-			<?php
-				if (!empty($this->auth_role))  {
-					echo '<a href="/admin/logout">logout</a><br />';
-				}
-			?>
-			</div>
-			<div class="largecol">
-			Activism made simple
-			</div>
-			<div class="smallcol">
+		<div class="container">
+			<div class="head">
+				<div class="smallcol">
+				<?php
+					$uri = "/";
+					if (!empty($this->auth_role))  {
+						$uri = "/admin";
+					}
+				?>
+                		<a href="<?php echo $uri; ?>">Actifish</a>
+				<br />
+				<?php
+					if (!empty($this->auth_role))  {
+						echo '<a href="/admin/logout">logout</a><br />';
+					}
+				?>
+				</div>
+				<div class="largecol">
+				Activism made simple
+				</div>
+				<div class="smallcol">
+				</div>
 			</div>
 		</div>
 

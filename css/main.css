@@ -5,7 +5,12 @@
         outline: 0;
 }
 
-input[type=submit], input[type=reset]  {
+body  {
+	background-color: transparent;
+	font-size: 12px;
+}
+
+input[type=button], input[type=submit], input[type=reset]  {
 	color: white;
 	font-size: 12px;
 	font-family: helvetica;
@@ -19,7 +24,7 @@ input[type=submit], input[type=reset]  {
 	padding: 4px 10px;
 }
 
-input[type=submit]:hover, input[type=reset]:hover  {
+input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
 	color: black;
 	background-color: white;
 	transition-duration: .2s;
@@ -55,30 +60,6 @@ input[type=password]  {
 	box-shadow: -2px 2px 1px rgba(0,0,0,0.2);
 }
 
-body .container  {
-	clear: both;
-	width: 100%;
-	/** width: 100vw;  **/
-
-	overflow: hidden;
-	font-size: 12px;
-	word-wrap: break-word;
-}
-
-body .container .largecol  {
-	font-size: inherit;
-	float: left;
-	clear: right;
-	width: 60%;
-}
-
-body .container .smallcol  {
-	font-size: inherit;
-	float: left;
-	clear: right;
-	width: 19%;
-}
-
 textarea  {
 	width: 100%;
 	height: 150px;
@@ -102,6 +83,39 @@ select  {
 	box-shadow: -2px 2px 1px rgba(0,0,0,0.2);
 }
 
+body .container  {
+	clear: both;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	font-size: inherit;
+	background-color: inherit;
+	word-wrap: break-word;
+}
+
+body .container .head  {
+	width: inherit;
+	height: inherit;
+	overflow: inherit;
+	font-size: 22px;
+	background-image: linear-gradient(to bottom, blue, 10%, white);
+}
+
+body .container .largecol  {
+	background-color: inherit;
+	font-size: inherit;
+	float: left;
+	clear: right;
+	width: 60%;
+}
+
+body .container .smallcol  {
+	background-color: inherit;
+	font-size: inherit;
+	float: left;
+	clear: right;
+	width: 19%;
+}
 
 .row  {
 	clear: both;
