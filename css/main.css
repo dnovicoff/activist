@@ -101,6 +101,36 @@ body .container .head  {
 	background-image: linear-gradient(to bottom, blue, 10%, white);
 }
 
+body .container .foot  {
+	width: inherit;
+	height: inherit;
+	overflow: inherit;
+	font-size: inherit;
+}
+
+.collapsible-menu {
+	background-color: rgb(255, 255, 255);
+	padding: 0px 5px;
+}
+.collapsible-menu ul {
+	list-style-type: none;
+	padding: 0;
+}
+.collapsible-menu a {
+	display:block;
+	padding: 5px;
+	text-decoration: none;
+}
+.collapsible-menu label {
+	font-family: 'Sedgwick Ave Display', cursive;
+	font-size: 16px;
+	display: inline;
+	cursor: pointer;
+	background: url(/img/hamburger_menu.png) no-repeat left;
+	padding: 5px 0 5px 25px;
+}
+
+
 body .container .largecol  {
 	background-color: inherit;
 	font-size: inherit;
@@ -114,8 +144,23 @@ body .container .smallcol  {
 	font-size: inherit;
 	float: left;
 	clear: right;
-	width: 19%;
+	width: 20%;
 }
+
+.menu-content  {
+	max-height: 100%;
+	overflow: hidden;
+	font-family: 'Oswald', sans-serif; 
+	padding: 0 0 0 15px;
+}
+input:checked ~ .menu-content {
+	max-height: 0;
+}
+
+input#searchtypes  {
+	display: none;
+}
+
 
 .row  {
 	clear: both;
