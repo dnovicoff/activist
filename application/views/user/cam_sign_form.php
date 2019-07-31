@@ -224,7 +224,7 @@
 				$attributes = array(
 					'class' => 'btn'
 				);
-				echo form_reset("reset", "Reset", $attributes);
+				echo form_reset("reset", "Reset");
 			?>
 			</div>
 			<div class="col">
@@ -232,7 +232,7 @@
 				$attributes = array(
 					'class' => 'btn'
 				);
-				echo form_submit("submit", "Submit", $attributes);
+				echo form_submit("submit", "Submit");
 			?>
 			</div>
 			<div class="col">
