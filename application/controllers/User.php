@@ -14,6 +14,17 @@ class User extends MY_Controller
 		$this->is_logged_in();
 	}
 
+	private function page_prep($tmp = array())  {
+		$tmp['data']['links'] =  array(
+			'/cam' => 'Active',
+			'/cam/search' => 'Drill',
+			'/cam/national' => 'National',
+			'/cam/current' => 'Current'
+		);
+
+		$this->generate_page('user', $tmp);
+	}
+
 	public function testform($cam_id = FALSE)  {
 		if (is_numeric($cam_id))  {
 			$this->load->library('forms');
@@ -53,7 +64,7 @@ class User extends MY_Controller
 			}
 		}
 
-		$this->generate_page('user', $tmp);
+		$this->page_prep($tmp);
 	}
 
 	public function detail($cam_id = FALSE)  {
@@ -75,7 +86,7 @@ class User extends MY_Controller
 			}
 		}
 
-		$this->generate_page('user', $tmp);
+		$this->page_prep($tmp);
 	}
 
 	public function show($country_id = FALSE, $state_id = FALSE, $city = FALSE)  {
@@ -93,7 +104,7 @@ class User extends MY_Controller
 			$tmp['data']['campaigns'] = $this->activist_model->get_campaigns($country_id, $state_id, $city);
 		}
 
-		$this->generate_page('user', $tmp);
+		$this->page_prep($tmp);
 	}
 
 	public function search()  {
@@ -146,11 +157,10 @@ class User extends MY_Controller
 			}
 		}
 		
-		$this->generate_page('user', $tmp);
+		$this->page_prep($tmp);
 	}
 
-        public function index($page = 'index')
-        {
+        public function index($page = 'index')  {
 		$tmp = array(
 			'data' => array(
         			'title' => ucfirst('Campaign Search') // Capitalize the first letter
@@ -163,6 +173,6 @@ class User extends MY_Controller
                 	show_404();
 		}
 		
-		$this->generate_page('user', $tmp);
+		$this->page_prep($tmp);
 	}
 }

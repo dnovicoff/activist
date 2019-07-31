@@ -1,15 +1,13 @@
 
 <div class="container">
 	<div class="smallcol">
+	<br /><br />
 	<?php
 		$pages = array('create', 'pass', 'about', 'recovery', 'login');
 		$current = $this->uri->segment(1);
 		if (!isset($on_hold_message))  {
 			if (is_null($this->auth_role) && !in_array($current, $pages))  {
-				echo '<br /><br />';
-				echo '<a href="/login">Login</a><br />';
-				echo '<a href="/pass/">Password</a><br />';
-				echo '<a href="/create/">New User</a><br />';
+				$this->load->view('gen/collapsible', $data);
 			}  else  {
 				echo "Pertitent info";
 			}

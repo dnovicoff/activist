@@ -13,6 +13,16 @@ class Door extends MY_Controller
 		$this->is_Logged_in();
 	}
 
+	private function page_prep($tmp = array())  {
+		$tmp['data']['links'] = array(
+			'/login' => 'Login',
+			'/pass' => 'Password',
+			'/create' => 'New User'
+		);
+
+		$this->generate_page('door', $tmp);
+	}
+
 	public function recovery($user_id = '', $recovery_code = '')  {
 		if ($this->uri->uri_string() == 'door/recovery')
 			show_404();
@@ -49,7 +59,7 @@ class Door extends MY_Controller
 			}
 		}
 		
-		$this->generate_page('door', $tmp);
+		$this->page_prep($tmp);
 	}
 
 	public function pass()  {
@@ -116,7 +126,7 @@ class Door extends MY_Controller
 			}
 		}
 
-		$this->generate_page('door', $tmp);
+		$this->page_prep($tmp);
 	}
 
 	public function create()  {
@@ -151,7 +161,7 @@ class Door extends MY_Controller
 			}
 		}
 
-		$this->generate_page('door', $tmp);
+		$this->page_prep($tmp);
 	}
 
 	public function login()  {
@@ -179,7 +189,7 @@ class Door extends MY_Controller
 		if ($this->require_role('admin'))  {
 			redirect('admin', 'refresh');
 		}  else  {
-			$this->generate_page('door', $tmp);
+			$this->page_prep($tmp);
 		}
 	}
 
@@ -191,6 +201,6 @@ class Door extends MY_Controller
 		}
 		$tmp['data']['title'] = ucfirst('Welcome');
 	
-		$this->generate_page('door', $tmp);
+		$this->page_prep($tmp);
 	}
 }
