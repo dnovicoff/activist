@@ -85,6 +85,4 @@
 			</tr>
 		</table>
 	<?php  echo form_close(); ?>
-	<a href="/pass/">Password</a><br />
-	<a href="/create/">New User</a><br />
 </div>

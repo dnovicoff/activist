@@ -9,6 +9,8 @@ class Door extends MY_Controller
 		$this->load->helper('url');
 		$this->load->helper('form_helper');
 		$this->load->library('user_agent');
+
+		$this->is_Logged_in();
 	}
 
 	private function generate_page($tmp = array())  {
@@ -186,7 +188,11 @@ class Door extends MY_Controller
 			}
 		}
 
-		$this->generate_page($tmp);
+		if ($this->verify_min_level(9))  {
+			redirect('admin', 'refresh');
+		}  else  {
+			$this->generate_page($tmp);
+		}
 	}
 
         public function index($page = 'index')  {
@@ -196,9 +202,7 @@ class Door extends MY_Controller
                 	show_404();
 		}
 		$tmp['data']['title'] = ucfirst('Welcome');
-		$tmp['data']['login'] = TRUE;
-
-		$this->is_logged_in();		
+	
 		$this->generate_page($tmp);
 	}
 }

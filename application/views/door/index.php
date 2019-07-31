@@ -2,11 +2,13 @@
 <div class="container">
 	<div class="smallcol">
 	<?php
+		$pages = array('create', 'pass', 'about', 'recovery', 'login');
+		$current = $this->uri->segment(1);
 		if (!isset($on_hold_message))  {
-			$pages = array('create', 'pass', 'about', 'recovery');
-			$current = $this->uri->segment(1);
 			if (is_null($this->auth_role) && !in_array($current, $pages))  {
-				$this->load->view('door/auth_form');
+				echo '<a href="/login">Login</a><br />';
+				echo '<a href="/pass/">Password</a><br />';
+				echo '<a href="/create/">New User</a><br />';
 			}  else  {
 				echo "Pertitent info";
 			}
@@ -31,8 +33,12 @@
 				case "recovery":
 					$this->load->view('door/choose_pass_form', $data);
 					break;
+				case "login":
+					$this->load->view('door/auth_form', $data);
+					break;
 				default:
-					echo "Introduction to actifish and a cool looking graphic.";
+					$this->load->view('door/intro', $data);
+					break;
 			}
 		}  else  {
 			echo '
