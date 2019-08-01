@@ -141,22 +141,26 @@ class Door extends MY_Controller
 			)
 		);
 
-		if ($this->forms->validate('user'))  {
-			if (strtolower($_SERVER['REQUEST_METHOD']) == 'post')  {
-				$user_data['email']      = $this->input->post('email');
-				$user_data['auth_level'] = 9;
-				$user_data['passwd']     = $this->authentication->hash_passwd($this->input->post('password'));
-				$user_data['user_id']    = $this->activist_model->get_unused_id();
-				$user_data['created_at'] = date('Y-m-d H:i:s');
+		if ($on_hold = $this->authentication->current_hold_status(TRUE))  {
+			$tmp['data']['disabled'] = 1;
+		}  else  {
+			if ($this->forms->validate('user'))  {
+				if (strtolower($_SERVER['REQUEST_METHOD']) == 'post')  {
+					$user_data['email']      = $this->input->post('email');
+					$user_data['auth_level'] = 9;
+					$user_data['passwd']     = $this->authentication->hash_passwd($this->input->post('password'));
+					$user_data['user_id']    = $this->activist_model->get_unused_id();
+					$user_data['created_at'] = date('Y-m-d H:i:s');
 
-				// If username is not used, it must be entered into the record as NULL
-				if (empty($user_data['username']))  {
-					$user_data['username'] = NULL;
-				}
+					// If username is not used, it must be entered into the record as NULL
+					if (empty($user_data['username']))  {
+						$user_data['username'] = NULL;
+					}
 
-				$id = $this->activist_model->insert_user($user_data);
-				if (is_numeric($id))  {
-					redirect('admin', 'refresh');
+					$id = $this->activist_model->insert_user($user_data);
+					if (is_numeric($id))  {
+						redirect('admin', 'refresh');
+					}
 				}
 			}
 		}
@@ -169,8 +173,6 @@ class Door extends MY_Controller
 		if ($this->uri->uri_string() == 'door/login')
 			show_404();
 
-		$this->load->library('forms');
-
 		$tmp = array(
 			"data" => array(
         			"title" => ucfirst("Authentication"), // Capitalize the first letter
@@ -178,6 +180,7 @@ class Door extends MY_Controller
 			)
 		);
 
+		$this->load->library('forms');
 		if ($this->forms->validate('auth'))  {
 			if( strtolower( $_SERVER['REQUEST_METHOD'] ) == 'post' )  {
 				if ($this->require_min_level(9))  {
