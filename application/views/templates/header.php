@@ -26,7 +26,11 @@
 				<br />
 				<?php
 					if (!empty($this->auth_role))  {
-						echo '<a href="/admin/logout">logout</a><br />';
+						echo '
+							<div style="font-size: 12px;">
+								<a href="/admin/logout">logout</a>
+							</div>
+						';
 					}
 				?>
 				</div>
