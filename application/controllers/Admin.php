@@ -25,6 +25,24 @@ class Admin extends MY_Controller
 		$this->generate_page('admin', $tmp);
 	}
 
+	public function data($cam_id = FALSE)  {
+		$tmp = array(
+			'data' => array(
+				'title' => 'Campaign data'
+			)
+		);
+
+		if ($this->require_role('admin'))  {
+			if (is_numeric($cam_id))  {
+
+			}
+		}  else  {
+			redirect($this->input->server.'/login', 'refresh');
+		}
+
+		$this->page_prep($tmp);
+	}
+
 	public function group()  {
 		$tmp = array(
 			'data' => array(

@@ -19,10 +19,11 @@
 				case 'group':
 					$this->load->view('admin/grouping', $data);
 					break;
+				case 'data':
+					$this->load->view('gen/cam_graph', $data);
+					break;
 				default:
-					echo '<div class="graph_canvas">'.
-						$this->load->view('admin/data', $data, TRUE).
-					'</div>';
+					$this->load->view('admin/data', $data);
 			}
 		?>
 	</div>
