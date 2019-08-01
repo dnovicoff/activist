@@ -15,19 +15,17 @@
 	font-size: 70%;
 	text-decoration: none;
 }
+.collapsable_content  {
+	font-family: 'oswald', sans-serif;
+	padding: 0 0 0 0px;
+	max-height: 0;
+	overflow: hidden;
+}
 .wrap_collapsable label  {
 	font-family: 'Sedgwick Ave Display', cursive;
 	/*  font-size: 56px;  */
 	/*  display: block;  */
 	cursor: pointer;
-}
-
-.collapsable_content  {
-	font-family: 'oswald', sans-serif;
-	padding: 0 0 0 0px;
-
-	max-height: 0;
-	overflow: hidden;
 }
 input:checked ~ .collapsable_content  {
 	max-height: 100%;
