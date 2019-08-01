@@ -5,14 +5,10 @@
 	<?php
 		$pages = array('create', 'pass', 'about', 'recovery', 'login');
 		$current = $this->uri->segment(1);
-		if (!isset($on_hold_message))  {
-			if (is_null($this->auth_role) && !in_array($current, $pages))  {
-				$this->load->view('gen/collapsible', $data);
-			}  else  {
-				echo "Pertitent info";
-			}
+		if (is_null($this->auth_role) && !in_array($current, $pages))  {
+			$this->load->view('gen/collapsible', $data);
 		}  else  {
-			echo "&nbsp;";
+			echo "Pertitent info";
 		}
 	?>
 	</div>
@@ -52,7 +48,7 @@
 						((int) config_item('seconds_on_hold') / 60) . ' minutes.
 					</p>
 					<p>
-						Please use the <a href="/examples/recover">Account Recovery</a> after ' .
+						Please use the <a href="/pass">Account Recovery</a> after ' .
 						((int) config_item('seconds_on_hold') / 60) . ' minutes has passed,<br />
 						or contact us if you require assistance gaining access to your account.
 					</p>
