@@ -27,7 +27,7 @@
 			if (isset($data['cam_data']))  {
 				if (is_array($data['cam_data']))  {
 					foreach ($data['cam_data'] as $row)  {
-						echo '<li><a href="/admin/cam/select/'.$row['cam_id'].'">'.$row['title'].'</a></li>';
+						echo '<li><a href="/admin/data/'.$row['cam_id'].'">'.$row['title'].'</a></li>';
 					}
 				}  else  {
 					echo $data['cam_data'];
