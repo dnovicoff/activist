@@ -7,6 +7,37 @@
 		$attributes = array(
 			'accept-charset' => 'ISO-8859-1'
 		);
+		if (isset($disabled))  {
+			echo '
+				<div style="border:1px solid red;">
+					Account Creation is Disabled.<br /><br />
+					If you have exceeded the maximum login attempts, or exceeded
+					the allowed number of password recovery attempts, account creation
+					will be temporarily disabled.
+					Please wait ' . ( (int) config_item('seconds_on_hold') / 60 ) . ' 
+					before attepting to create an account.
+				</div>
+			';
+		}  else if (isset($banned))  {
+			echo '
+				<div style="border:1px solid red;">
+				<p>
+					Account Locked.
+				</p>
+				<p>
+					You have attempted to use the our system using 
+					an email address that belongs to an account that has been 
+					purposely denied access to the authenticated areas of this website. 
+					If you feel this is an error, you may contact us  
+					to make an inquiry regarding the status of the account.
+				</p>
+			</div>
+			';
+		}  else  {
+			$showform = 1;
+		}
+
+		if (isset($showform))  {
 	?>
 	<?php echo form_open('create', $attributes); ?>
 		<div class="row">
@@ -148,4 +179,7 @@
 			</div>
 		</div>
 	<?php  echo form_close(); ?>
+	<?php
+		}
+	?>
 </div>
