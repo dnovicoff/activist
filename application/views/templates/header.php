@@ -10,7 +10,7 @@
 				echo '<link rel="stylesheet" type="text/css" href="'.base_url().'css/user.css">';
 			}
 		?>
-                <title>Activism</title>
+                <title><?php echo $data['title']; ?></title>
         </head>
         <body>
 		<div class="container">
