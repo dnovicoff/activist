@@ -11,8 +11,8 @@
 }
 .wrap_collapsable a  {
 	display: block;
-	padding: 10px;
-	font-size: 70%;
+	padding: 5px;
+	font-size: 12px;
 	text-decoration: none;
 }
 .collapsable_content  {
