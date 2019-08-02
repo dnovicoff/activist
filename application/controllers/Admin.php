@@ -21,6 +21,7 @@ class Admin extends MY_Controller
 			'/admin/loc' => 'Create Location',
 			'/admin/cam' => 'Create Campaign'
 		);
+		$tmp['data']['name'] = 'Controls';
 
 		$this->generate_page('admin', $tmp);
 	}
