@@ -9,7 +9,7 @@
 		);
 		if (isset($disabled))  {
 			echo '
-				<div style="border:1px solid red;">
+				<div style="border:1px solid red; width: 100%; height: 100%;">
 					Account Creation is Disabled.<br /><br />
 					If you have exceeded the maximum login attempts, or exceeded
 					the allowed number of password recovery attempts, account creation
@@ -20,7 +20,7 @@
 			';
 		}  else if (isset($banned))  {
 			echo '
-				<div style="border:1px solid red;">
+				<div style="border:1px solid red; width: 100%; height: 100%">
 				<p>
 					Account Locked.
 				</p>
