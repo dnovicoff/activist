@@ -22,7 +22,9 @@
 						$uri = "/admin";
 					}
 				?>
-                		<a href="<?php echo $uri; ?>">Actifish</a>
+                		<a href="<?php echo $uri; ?>">
+					<img src="/img/logo.png">
+				</a>
 				<br />
 				<?php
 					if (!empty($this->auth_role))  {
