@@ -15,8 +15,8 @@ input[type=button], input[type=submit], input[type=reset]  {
 	font-size: 12px;
 	font-family: helvetica;
 	text-decoration: none;
-	border: 2px solid white;
-	border-radius: 20px;
+	outline: 0px 0px 1px 1px solid black;
+	border-radius: 15px;
 	transition-duration: .2s;
 	-webkit-transition-duration: .2s;
 	moz-transition-duration: .2s;
