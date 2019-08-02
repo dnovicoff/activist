@@ -19,6 +19,7 @@ class Door extends MY_Controller
 			'/pass' => 'Password',
 			'/create' => 'New User'
 		);
+		$tmp['data']['name'] = 'Functions';
 
 		$this->generate_page('door', $tmp);
 	}
