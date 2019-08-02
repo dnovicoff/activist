@@ -2,7 +2,7 @@
 <div class="container">
 	<div class="collapsible-menu">
 		<input type="checkbox" id="searchtypes">
-		<label for="searchtypes">Search Types</label>
+		<label for="searchtypes"><?php echo $name; ?></label>
 		<div class="menu-content">
 			<ul>
 			<?php

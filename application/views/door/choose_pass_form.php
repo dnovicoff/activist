@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 ?>
 
+<div class="container">
 <?php
 $showform = 1;
 
@@ -52,15 +53,16 @@ if (isset($recovery_error))  {
 }
 if (isset($disabled))  {
 	echo '
-		<p>
+		<div style="border: 1px red;">
 			Account recovery is disabled.
-		</p>
+		<br /><br /><br />
 		<p>
 			You have exceeded the maximum login attempts or exceeded the 
 			allowed number of password recovery attempts. 
 			Please wait ' . ( (int) config_item('seconds_on_hold') / 60 ) . ' 
 			minutes, or contact us if you require assistance gaining access to your account.
 		</p>
+		</div>
 	';
 
 	$showform = 0;
@@ -160,5 +162,6 @@ if ($showform == 1)  {
 		<?php
 	}
 }
+echo '</div>';
 /* End of file choose_password_form.php */
 /* Location: /community_auth/views/examples/choose_password_form.php */

@@ -21,6 +21,7 @@ class User extends MY_Controller
 			'/cam/national' => 'National',
 			'/cam/current' => 'Current'
 		);
+		$tmp['data']['name'] = 'Search Types';
 
 		$this->generate_page('user', $tmp);
 	}
