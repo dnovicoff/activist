@@ -185,16 +185,13 @@ class Door extends MY_Controller
 		if ($this->forms->validate('auth'))  {
 			if( strtolower( $_SERVER['REQUEST_METHOD'] ) == 'post' )  {
 				if ($this->require_min_level(9))  {
-					redirect('admin', 'refresh');
+					
 				}
+				redirect('admin', 'refresh');
 			}
 		}
 
-		if ($this->require_role('admin'))  {
-			redirect('/admin', 'refresh');
-		}  else  {
-			$this->page_prep($tmp);
-		}
+		$this->page_prep($tmp);
 	}
 
         public function index($page = 'index')  {
