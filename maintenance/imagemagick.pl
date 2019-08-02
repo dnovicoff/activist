@@ -9,20 +9,35 @@ while (my $file = readdir $dh) {
 		$newfile = $new_file[0]."_thumb.jpg";
 		####
 		## Convert color image to grayscale
-		####
 		## $command = "convert ".$dir.$file." -set colorspace Gray -separate -average ".$dir.$newfile;
 		####
 		## Lighten grayed image watermark effect
-		####
 		## $command = "convert ".$dir.$file." -fill white -colorize 85% ".$dir.$newfile;
 		####
 		## Thummbnail state and country seals
+		## $command = "convert ".$dir.$file." -resize 40x40 ".$dir.$newfile;
 		####
-		$command = "convert ".$dir.$file." -resize 40x40 ".$dir.$newfile;
+		## Logo for actifish
+
+
 		#### $result = system($command);
-		print $command."\n";
+		## print $command."\n";
 		#### print $result."\n";
 	}
 }
+		$command = "convert -size 150x40 xc:transparent -font Candice -pointsize 46 ".
+			"-stroke black -strokewidth 4 -fill white ".
+			"-stroke black -annotate  +5+35 A  -stroke none -annotate  +5+35 A ".
+			"-stroke black -annotate  +35+35 c  -stroke none -annotate  +35+35 c ".
+			"-stroke black -annotate +55+35 t  -stroke none -annotate +55+35 t ".
+			"-stroke black -annotate +70+35 i  -stroke none -annotate +70+35 i ".
+			"-stroke black -annotate 180x180+95+5 f  -stroke none -annotate 180x180+95+5 f ".
+			"-stroke black -annotate +95+35 i  -stroke none -annotate +95+35 i ".
+			"-stroke black -annotate +105+35 s  -stroke none -annotate +105+35 s ".
+			"-stroke black -annotate +125+35 h  -stroke none -annotate +125+35 h ".
+			"logo.png";
+
+print $command."\n";
+$result = system($command);
 
 
