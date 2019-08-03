@@ -222,6 +222,36 @@
 			<div class="col">
 			<?php
 				$attributes = array(
+					'class' => ''
+				);
+				echo 'eMail: ';
+			?>
+			</div>
+			<div class="col">
+			<?php
+				$data = array(
+					'type' => 'text',
+					'name' => 'email',
+					'id' => '',
+					'value' => htmlspecialchars_decode(set_value('email'), ENT_QUOTES),
+					'class' => '',
+					'placeholder' => ''
+				);
+				echo form_input($data);
+			?>
+			</div>
+			<div class="col" style="color: red; font-size: 70%; padding-left: 4px;">
+			<?php
+				if (!empty(form_error('email')))  {
+					echo form_error('email');
+				}
+			?>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+			<?php
+				$attributes = array(
 					'class' => 'btn'
 				);
 				echo form_reset("reset", "Reset");
