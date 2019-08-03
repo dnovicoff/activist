@@ -52,6 +52,9 @@ class User extends MY_Controller
 				}  else if ($cam_data[0]['region_name'] == 'State')  {
 					$tmp['data']['logo'] = strtolower($this->activist_model->get_state_name($cam_data[0]['table_key']));
 				}  else  {
+					list($sid, $cid) = explode("-", $cam_data[0]['table_key']);
+					$city = $this->activist_model->get_city($sid, $cid);
+					$tmp['data']['logo'] = strtolower($city[0]['city']);
 				}
 				$tmp['data']['logo'] = preg_replace('/\s/', '', $tmp['data']['logo']);
 			}

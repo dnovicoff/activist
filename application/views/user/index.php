@@ -24,7 +24,7 @@
 				$output .= $this->load->view('user/cam_sign_form', $data, TRUE);
 				break;
 			default:
-				$output .= $this->load->view('user/cam_graph', $data, TRUE);
+				$output .= $this->load->view('gen/cam_graph', $data, TRUE);
 		}
 
 		echo $output;
