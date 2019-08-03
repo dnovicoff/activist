@@ -25,16 +25,16 @@ while (my $file = readdir $dh) {
 		#### print $result."\n";
 	}
 }
-		$command = "convert -size 150x40 xc:transparent -font Candice -pointsize 46 ".
+		$command = "convert -size 150x45 xc:transparent -font Candice -pointsize 46 ".
 			"-stroke black -strokewidth 4 -fill white ".
-			"-stroke black -annotate  +5+35 A  -stroke none -annotate  +5+35 A ".
-			"-stroke black -annotate  +35+35 c  -stroke none -annotate  +35+35 c ".
-			"-stroke black -annotate +55+35 t  -stroke none -annotate +55+35 t ".
-			"-stroke black -annotate +70+35 i  -stroke none -annotate +70+35 i ".
+			"-stroke black -annotate  +5+37 A  -stroke none -annotate  +5+37 A ".
+			"-stroke black -annotate  +35+37 c  -stroke none -annotate  +35+37 c ".
+			"-stroke black -annotate +55+37 t  -stroke none -annotate +55+37 t ".
+			"-stroke black -annotate +70+37 i  -stroke none -annotate +70+37 i ".
 			"-stroke black -annotate 180x180+95+5 f  -stroke none -annotate 180x180+95+5 f ".
-			"-stroke black -annotate +95+35 i  -stroke none -annotate +95+35 i ".
-			"-stroke black -annotate +105+35 s  -stroke none -annotate +105+35 s ".
-			"-stroke black -annotate +125+35 h  -stroke none -annotate +125+35 h ".
+			"-stroke black -annotate +95+37 i  -stroke none -annotate +95+37 i ".
+			"-stroke black -annotate +105+37 s  -stroke none -annotate +105+37 s ".
+			"-stroke black -annotate +125+37 h  -stroke none -annotate +125+37 h ".
 			"logo.png";
 
 print $command."\n";
