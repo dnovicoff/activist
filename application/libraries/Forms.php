@@ -411,6 +411,16 @@ class Forms {
 				],
 				'errors' =>  [
 				]
+			],  [
+				'field' => 'email',
+				'label' => 'email',
+				'rules' =>  [
+					'trim',
+					'required',
+					'valid_email'
+				],
+				'errors' =>  [
+				]
 			]
 		];
 		
