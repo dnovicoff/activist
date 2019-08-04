@@ -204,7 +204,7 @@ class Admin extends MY_Controller
 			$tmp['data']['cam_total'] = $this->activist_model->get_campaign_count($this->auth_user_id);
 			$tmp['data']['cam_current'] = $this->activist_model->get_campaign_count($this->auth_user_id, $date);
 			$tmp['data']['sign_avg'] = '';
-			$tmp['data']['cam_top'] = '';
+			$tmp['data']['cam_top'] = $this->activist_model->get_campaign_top($this->auth_user_id);
 
 			$this->page_prep($tmp);
 		}  else  {
