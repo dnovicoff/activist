@@ -123,12 +123,12 @@ CREATE TABLE `campaign` (
   `text` varchar(1000) DEFAULT NULL,
   `country_id` int(11) NOT NULL,
   `region_id` int(11) NOT NULL,
-  `table_key` int(11) NOT NULL,
+  `table_key` varchar(15) NOT NULL DEFAULT '0',
   PRIMARY KEY (`cam_id`),
   KEY `user_id` (`user_id`),
   KEY `country_id` (`country_id`),
   KEY `region_id` (`region_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -172,6 +172,7 @@ DROP TABLE IF EXISTS `city_state`;
 CREATE TABLE `city_state` (
   `state_id` int(11) NOT NULL,
   `city_id` int(11) NOT NULL,
+  `count` int(11) NOT NULL DEFAULT '0',
   KEY `state_id` (`state_id`),
   KEY `city_id` (`city_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -268,7 +269,7 @@ CREATE TABLE `ips_on_hold` (
   `ip_address` varchar(45) NOT NULL,
   `time` datetime NOT NULL,
   PRIMARY KEY (`ai`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -284,7 +285,7 @@ CREATE TABLE `login_errors` (
   `ip_address` varchar(45) NOT NULL,
   `time` datetime NOT NULL,
   PRIMARY KEY (`ai`)
-) ENGINE=MyISAM AUTO_INCREMENT=108 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=138 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -299,6 +300,32 @@ CREATE TABLE `region` (
   `region_name` varchar(30) NOT NULL,
   PRIMARY KEY (`region_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `signature`
+--
+
+DROP TABLE IF EXISTS `signature`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `signature` (
+  `signature_id` int(11) NOT NULL AUTO_INCREMENT,
+  `cam_id` int(11) NOT NULL,
+  `first_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
+  `address` varchar(200) NOT NULL,
+  `country_id` int(11) NOT NULL,
+  `state_id` int(11) NOT NULL,
+  `city_id` int(11) NOT NULL,
+  `zip_id` int(11) NOT NULL,
+  PRIMARY KEY (`signature_id`),
+  KEY `cam_id` (`cam_id`),
+  KEY `country_id` (`country_id`),
+  KEY `state_id` (`state_id`),
+  KEY `city_id` (`city_id`),
+  KEY `zip_id` (`zip_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -330,7 +357,7 @@ CREATE TABLE `username_or_email_on_hold` (
   `username_or_email` varchar(255) NOT NULL,
   `time` datetime NOT NULL,
   PRIMARY KEY (`ai`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -403,4 +430,4 @@ CREATE TABLE `zip` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-07-21 19:36:54
+-- Dump completed on 2019-08-04 11:47:36
