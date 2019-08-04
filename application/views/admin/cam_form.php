@@ -173,7 +173,7 @@
 						}
 					}
 				}
-				echo form_dropdown('region_id', $options, set_value('region_id', $rid), $js);
+				echo form_dropdown('region', $options, set_value('region_id', $rid), $js);
 			?>
 			</div>
 			<div class="col" style="color: red; font-size: 80%;">
