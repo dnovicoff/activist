@@ -498,11 +498,12 @@ class Activist_model extends CI_Model {
 
 	public function get_campaign_top($user_id = FALSE)  {
 		if (is_numeric($user_id))  {
-			$query = $this->db->select('campaign.title')
+			$query = $this->db->select('campaign.cam_id, campaign.title')
 				->from('campaign')
 				->where('user_id', $user_id)
-				->join('signature', 'campaign.cam_id = signature.cam_id', 'right')
+				->join('signature', 'campaign.cam_id = signature.cam_id', 'left')
 				->group_by('signature.cam_id', 'DESC')
+				->order_by('campaign.title', 'DESC')
 				->limit(1, 0)
 				->get();
 
