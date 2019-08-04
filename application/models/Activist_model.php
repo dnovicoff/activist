@@ -496,6 +496,29 @@ class Activist_model extends CI_Model {
 		return FALSE;
 	}
 
+	public function get_campaign_top($user_id = FALSE)  {
+		if (is_numeric($user_id))  {
+			$query = $this->db->select('campaign.title')
+				->from('campaign')
+				->where('user_id', $user_id)
+				->join('signature', 'campaign.cam_id = signature.cam_id', 'right')
+				->group_by('signature.cam_id', 'DESC')
+				->limit(1, 0)
+				->get();
+
+			$errors = $this->db->error();
+			if ($errors['code'] !== 0)  {
+				return 'Error: ['.implode(", ", $this->db->error()).']';
+			}
+
+			if ($query->num_rows() > 0)  {
+				return $query->result_array();
+			}
+		}
+
+		return FALSE;
+	}
+
 	public function insert_user($user = FALSE)  {
 		if ($user !== FALSE)  {
 			$this->db->set($user)
@@ -526,16 +549,22 @@ class Activist_model extends CI_Model {
 		return $random_unique_int;
 	}
 
-	public function get_location_data($id)  {
-		if (!is_null($id))  {
+	public function get_location_data($id = FALSE)  {
+		if (is_numeric($sid))  {
 			$this->db->select('*')->from('location')
 				->where('user_id =', $id)
 				->get();
+
+			$errors = $this->db->error();
+			if ($errors['code'] !== 0)  {
+				return 'Error: ['.implode(", ", $this->db->error()).']';
+			}
 
 			if ($query->num_rows() > 0)  {
 				return $query->result_array();
 			}
 		}
+
 		return FALSE;
 	}
 
