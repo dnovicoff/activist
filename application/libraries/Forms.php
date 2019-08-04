@@ -190,8 +190,8 @@ class Forms {
 				'rules' =>  [
 					'trim',
 					'required',
-					'regex_match[/^[a-zA-Z0-9\s\.\?!\']+$/]'
-				]
+					'regex_match[/^[a-zA-Z0-9\s\.\?!\',]+$/]'
+				],
 				'errors' => [
 					'regex_match' => 'Only alpha numeric, spaces, and punctuation characters are allowed'
 				]
@@ -207,11 +207,11 @@ class Forms {
 							'verify_state',
 							function ($state)  {
 								$cid = $this->CI->input->post('country_id');
-								$rid = $this->CI->input->post('region_id');
+								$rid = $this->CI->input->post('region');
 								$sid = $this->CI->input->post('state_id');
 
-								if (isset($cid) && isset($rid) && isset($cid))  {
-									$result = $this->CI->activist_model->verify_state($sid, $rid, $cid);
+								if (isset($cid) && isset($rid) && isset($sid))  {
+									$result = $this->CI->activist_model->verify_state($cid, $rid, $sid);
 									if (!is_bool($result))  {
 										$this->CI->form_validation->set_message('verify_state', $result);
 										return FALSE;
@@ -238,7 +238,7 @@ class Forms {
 								'verify_city',
 								function ($city)  {
 									$cid = $this->CI->input->post('country_id');
-									$rid = $this->CI->input->post('region_id');
+									$rid = $this->CI->input->post('region');
 									$sid = $this->CI->input->post('state_id');
 
 									if (isset($cid) && isset($rid) && isset($sid) && isset($city))  {
