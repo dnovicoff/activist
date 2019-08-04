@@ -157,8 +157,8 @@ class Forms {
 					'integer' => 'Please select a country'
 				]
 			],  [
-				'field' => 'region_id',
-				'label' => 'region_id',
+				'field' => 'region',
+				'label' => 'region',
 				'rules' =>  [
 					'trim',
 					'required',
@@ -187,7 +187,11 @@ class Forms {
 			$cam_rules[] =  [
 				'field' => 'cam_text',
 				'label' => 'cam_text',
-				'rules' => 'trim|required|regex_match[/^[a-zA-Z0-9\s\.\?!\']+$/]',
+				'rules' =>  [
+					'trim',
+					'required',
+					'regex_match[/^[a-zA-Z0-9\s\.\?!\']+$/]'
+				]
 				'errors' => [
 					'regex_match' => 'Only alpha numeric, spaces, and punctuation characters are allowed'
 				]
