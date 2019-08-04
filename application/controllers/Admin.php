@@ -96,7 +96,7 @@ class Admin extends MY_Controller
 
 		$this->load->library('forms');
 		if ($this->require_role('admin'))  {
-			if ($this->input->post('state_id') !== NULL)
+			if ($this->input->post('state_id') !== NULL && $this->input->post(''))
 				$level = 2;
 			if ($this->input->post('city') !== NULL && !empty($this->input->post('city')))
 				$level = 3;
