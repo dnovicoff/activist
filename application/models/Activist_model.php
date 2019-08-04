@@ -164,9 +164,9 @@ class Activist_model extends CI_Model {
 		return FALSE;
 	}
 
-	public function verify_state($sid = FALSE, $rid = FALSE, $cid = FALSE)  {
+	public function verify_state($cid = FALSE, $rid = FALSE, $sid = FALSE)  {
 		$count = 0;
-		if ($sid !== FALSE && $rid !== FALSE && $cid !== FALSE)  {
+		if ($cid !== FALSE && $rid !== FALSE && $sid !== FALSE)  {
 			$query = $this->db->select('*')
 				->from('region')
 				->where('region_id', $rid)
