@@ -200,6 +200,12 @@ class Admin extends MY_Controller
 		}
 		
 		if ($this->require_role('admin'))  {
+			$date = date('Y-m-d H-i-s');
+			$tmp['data']['cam_total'] = $this->activist_model->get_campaign_count($this->auth_user_id);
+			$tmp['data']['cam_current'] = $this->activist_model->get_campaign_count($this->auth_user_id, $date);
+			$tmp['data']['sign_avg'] = '';
+			$tmp['data']['cam_top'] = '';
+
 			$this->page_prep($tmp);
 		}  else  {
 			redirect($this->input->server.'/login', 'refresh');
