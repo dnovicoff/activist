@@ -445,6 +445,57 @@ class Activist_model extends CI_Model {
 		return FALSE;
 	}
 
+	public function get_campaign_count($user_id = FALSE, $date = FALSE)  {
+		if ($date === FALSE)  {
+			$date = '';
+		}
+		if ($user_id !== FALSE)  {
+			if (is_numeric($user_id))  {
+				$query = $this->db->select('count(*) as total')
+					->from('campaign')
+					->where('user_id', $user_id)
+					->where('end_time >', $date)
+					->get();
+
+				$errors = $this->db->error();
+				if ($errors['code'] !== 0)  {
+					return 'Error: ['.implode(", ", $this->db->error()).']';
+				}
+				
+				if ($query->num_rows() > 0)  {
+					return $query->result_array();
+				}
+			}
+		}
+
+		return FALSE;
+	}
+
+	public function get_campaign_sign_avg($user_id = FALSE, $cam_id = FALSE)  {
+		if ($user_id !== FALSE && $cam_id = FALSE)  {
+			if (is_numeric($user_id) && is_numeric($cam_id))  {
+				$query = $this->db->select('count(*)')
+					->from('signatures')
+					->join('campaign', 'campaign.cam_id = signatures.cam_id', 'right')
+					->where('campaign.cam_id', $user_id) 
+					->where('cam_id', $cam_id)
+					->group_by('cam_id')
+					->get();
+
+				$errors = $this->db->error();
+				if ($errors['code'] !== 0)  {
+					return 'Error: ['.implode(", ", $this->db->error()).']';
+				}
+
+				if ($query->num_rows() > 0)  {
+					return $query->result_array();
+				}
+			}
+		}
+
+		return FALSE;
+	}
+
 	public function insert_user($user = FALSE)  {
 		if ($user !== FALSE)  {
 			$this->db->set($user)
