@@ -128,11 +128,11 @@ class User extends MY_Controller
 
 			$level = 0;
 			$tmp['data']['country'] = (!is_null($this->input->post('country')) && is_numeric($this->input->post('country')) ? $this->input->post('country') : 'choose'); 
-			if ($this->input->post('state') !== NULL && is_numeric($this->input->post('state')))  {
+			if ($this->input->post('state') !== NULL)  {
 				$tmp['data']['state'] = $this->input->post('state');
 				$level++;
 			} 
-			if ($this->input->post('city') !== NULL && !empty($this->input->post('city')) && $level > 0)  {
+			if ($this->input->post('city') !== NULL && $level > 0)  {
 				$tmp['data']['city'] = $this->input->post('city');
 				$level++;
 			}

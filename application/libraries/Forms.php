@@ -306,6 +306,7 @@ class Forms {
 					'label' => 'city',
 					'rules' => [
 						'trim',
+						'required',
 						'min_length[3]',
 						'alpha_numeric_spaces',  [
 							'require_city',
