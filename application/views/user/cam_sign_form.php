@@ -75,6 +75,36 @@
 				$attributes = array(
 					'class' => ''
 				);
+				echo 'Country: ';
+			?>
+			</div>
+			<div class="col">
+			<?php
+				$data = array(
+					'name' => 'country',
+					'id' => '',
+					'value' => htmlspecialchars_decode(set_value('country'), ENT_QUOTES),
+					'class' => '',
+					'placeholder' => 'United States',
+					'disabled' => 'disabled'
+				);
+				echo form_input($data);
+			?>
+			</div>
+			<div class="col">
+			<?php
+				if (!empty(form_error('country')))  {
+					echo form_error('country');
+				}
+			?>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+			<?php
+				$attributes = array(
+					'class' => ''
+				);
 				echo 'Address: ';
 			?>
 			</div>
