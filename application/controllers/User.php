@@ -65,7 +65,20 @@ class User extends MY_Controller
 
 			if (strtolower($_SERVER['REQUEST_METHOD']) == 'post')  {
 				if ($this->forms->validate('cam_sign'))  {
-					var_dump($tmp);
+					$cam_data = [
+						'cam_id' => $cam_id,
+						'fname' => $this->input->post('fname'),
+						'lname' => $this->input->post('lname'),
+						'country' => 1,
+						'addr' => $this->input->post('addr'),
+						'city' => 1,
+						'state' => 1,
+						'zip' => $this->input->post('zip'),
+						'id' => $this->input->post('id'),
+						'email' => $this->input->post('email'),
+						'ip' => $this->input->ip_address()
+					];
+					var_dump($cam_data);
 					exit();
 				}
 			}
