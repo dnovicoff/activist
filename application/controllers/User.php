@@ -61,10 +61,13 @@ class User extends MY_Controller
 
 			$this->load->library('forms');
 			$tmp['data']['cam_id'] = $cam_id;
+			$tmp['data']['ip'] = $this->input->ip_address();
 
-			if ($this->forms->validate('cam_sign'))  {
-				echo "Here";
-				exit();
+			if (strtolower($_SERVER['REQUEST_METHOD']) == 'post')  {
+				if ($this->forms->validate('cam_sign'))  {
+					var_dump($tmp);
+					exit();
+				}
 			}
 		}
 
