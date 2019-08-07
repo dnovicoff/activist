@@ -520,10 +520,32 @@ class Activist_model extends CI_Model {
 		return FALSE;
 	}
 
+	public function sign_campaign($tmp = array())  {
+		if (!empty($tmp))  {
+			$this->db->query('LOCK TABLE signature');
+			$this->db->set($tmp)
+				->insert('signature');
+
+			$this->db->query('UNLOCK TABLES');
+
+			$errors = $this->db->error();
+			if ($errors['code'] !== 0)  {
+				return 'Error: ['.implode(", ", $this->db->error()).']';
+			}
+
+			return $this->db->insert_id();
+		}
+
+		return FALSE;
+	}
+
 	public function insert_user($user = FALSE)  {
 		if ($user !== FALSE)  {
+			$this->db->query('LOCK TABLE users');
 			$this->db->set($user)
 				->insert('users');
+
+			$this->db->query('UNLOCK TABLES');
 			
 			$errors = $this->db->error();
 			if ($errors['code'] !== 0)  {
