@@ -121,6 +121,8 @@ class Validation_callables extends MY_Model {
 	public function _validate_state_id($state, $state_id_no)  {
 		$regex = '';
 		$error = '';
+		
+		$state = preg_replace('/\s/', '', $state);
 		switch (strtolower($state))  {
 			case 'alabama':
 				$regex = '^[a-zA-Z0-9]{1}\d{6}$';
