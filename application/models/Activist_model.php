@@ -304,6 +304,7 @@ class Activist_model extends CI_Model {
 
 	public function update_campaign($cam_data)  {
 		if (isset($cam_data))  {
+			$this->db->query('LOCK TABLE campaign');
 			$this->db->set('start_time', $cam_data['start_time'])
 				->set('end_time', $cam_data['end_time'])
 				->set('title', $cam_data['title'])
@@ -312,6 +313,7 @@ class Activist_model extends CI_Model {
 				->where('user_id', $cam_data['user_id'])
 				->update('campaign');
 
+			$this->db->query('UNLOCK TABLES');
 			$errors = $this->db->error();
 			if ($errors['code'] !== 0)  {
 				return 'Error: ['.implode(", ", $this->db->error()).']';
@@ -526,6 +528,7 @@ class Activist_model extends CI_Model {
 			$this->db->set($tmp)
 				->insert('signature');
 
+			$insert_id = $this->db->insert_id();
 			$this->db->query('UNLOCK TABLES');
 
 			$errors = $this->db->error();
@@ -533,7 +536,7 @@ class Activist_model extends CI_Model {
 				return 'Error: ['.implode(", ", $this->db->error()).']';
 			}
 
-			return $this->db->insert_id();
+			return $insert_id;
 		}
 
 		return FALSE;
@@ -545,6 +548,7 @@ class Activist_model extends CI_Model {
 			$this->db->set($user)
 				->insert('users');
 
+			$insert_id = $this->db->insert_id();
 			$this->db->query('UNLOCK TABLES');
 			
 			$errors = $this->db->error();
@@ -552,7 +556,7 @@ class Activist_model extends CI_Model {
 				return 'Error: ['.implode(", ", $this->db->error()).']';
 			}
 
-			return $this->db->insert_id();
+			return $insert_id;
 		}
 
 		return FALSE;
